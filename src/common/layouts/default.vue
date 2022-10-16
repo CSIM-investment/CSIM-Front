@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <MobileNavigation />
   <RouterView />
   <Footer />
 </template>

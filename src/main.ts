@@ -4,6 +4,7 @@ import { setupLayouts } from 'virtual:generated-layouts';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import { ApolloClient, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './common/assets/styles/style.css';
 import { createUploadLink } from 'apollo-upload-client';
 import App from './App.vue';
@@ -37,6 +38,7 @@ const apolloClient = new ApolloClient({
 
 export const createApp = ViteSSG(App, { routes, base: import.meta.env.BASE_URL }, (ctx) => {
   ctx.app.provide(DefaultApolloClient, apolloClient);
+  ctx.app.component('font-awesome-icon', FontAwesomeIcon);
   // install all modules under `modules/`
   Object.values(import.meta.globEager('./common/modules/*.ts')).forEach((i) => i.install?.(ctx));
 });
