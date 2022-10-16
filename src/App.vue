@@ -7,5 +7,7 @@ useHead({
 </script>
 
 <template>
+  <Header />
   <RouterView />
+  <Footer />
 </template>
