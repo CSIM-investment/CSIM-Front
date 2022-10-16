@@ -1,3 +1,3 @@
 <template>
-  <div>header</div>
+  <div class="text-blue-300">header</div>
 </template>
