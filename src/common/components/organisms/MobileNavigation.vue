@@ -2,13 +2,15 @@
 import { faNewspaper, faWallet, faChartLine } from '@fortawesome/free-solid-svg-icons';
 </script>
 <template>
-  <div class="relative top-0 bg-white h-14 w-full flex">
-    <div class="flex justify-center">
-      <img class="" src="src/common/assets/logo.png" alt="" />
+  <div class="relative top-0 bg-white h-14 w-full flex justify-between bg-main-secondary">
+    <div class="flex justify-center p-2">
+      <img class="" src="src/common/assets/images/CSIM.svg" alt="" />
     </div>
-    <div>
-      <div>Michael Smith</div>
-      <div></div>
+    <div class="flex justify-center items-center text-white p-2">
+      <div><span class="text-sm">Michael Smith</span></div>
+      <div class="ml-2">
+        <img src="src/common/assets/images/user.png" alt="" />
+      </div>
     </div>
   </div>
   <div
