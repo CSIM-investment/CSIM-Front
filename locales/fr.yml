@@ -1,1 +1,9 @@
 home: ceci est traduit
+auth:
+  description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+login:
+  title: Connexion
+  subtitle: "printing and typesetting industry. Lorem Ipsum"
+signin:
+  title: Inscription
+  subtitle: printing and typesetting industry. Lorem Ipsum

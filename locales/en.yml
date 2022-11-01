@@ -1,1 +1,9 @@
 home: it's translated
+auth:
+  description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+login:
+  title: Connection
+  subtitle: printing and typesetting industry. Lorem Ipsum
+signin:
+  title: Inscription
+  subtitle: printing and typesetting industry. Lorem Ipsum
