@@ -4,8 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
 @import "components/index";
 
 :root {
-    --primary-color: red;
+  --primary-color: red;
 }

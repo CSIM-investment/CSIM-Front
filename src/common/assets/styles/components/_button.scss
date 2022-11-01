@@ -1,11 +1,11 @@
 @layer components {
-  .button-landing-page {
-    justify-content: center;
-    text-align:center;
+  .button {
+    display: block;
     border: none;
+    text-align: center;
     outline: none;
     box-shadow: none;
-    @apply h-16 bg-primary rounded-md text-white text-xl p-3 ;
+    @apply h-16 bg-primary rounded-md text-white text-xl p-3 w-full ;
 
     &:enabled:hover, &:enabled:active {
       @apply bg-primary-light
@@ -13,6 +13,10 @@
 
     &:focus {
       box-shadow: none;
+    }
+
+    &:focus-visible {
+      @apply outline-grey-darker
     }
   }
 }

@@ -26,22 +26,24 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
-      white: '#FFFFFF',
-      black: '#000000',
-      grey: '#F4F7F9',
-      red: '#DF2040',
-      green: '#40BF6A',
       primary: {
         disabled: '#EAD7C5',
         light: '#D7B492',
         DEFAULT: '#CA9A6F',
       },
-      main: {
-        primary: '#CA9A6F',
-        secondary: '#1F074D',
+      secondary: '#1F074D',
+      error: '#B83E51',
+      success: '#8EB83E',
+      warning: '#FFC300',
+      info: '#3EB8A5',
+      white: '#fff',
+      grey: {
+        light: '#EDEDED',
+        DEFAULT: '#D9D9D9',
+        dark: '#A299B5',
+        darker: '#6A5E5E',
       },
     },
-    extend: {},
   },
   variants: {},
   plugins: [],
