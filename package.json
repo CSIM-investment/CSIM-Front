@@ -3,12 +3,13 @@
   "packageManager": "pnpm@6.32.3",
   "scripts": {
     "build": "vite build",
-    "dev": "cp .env.local .env && pnpm gql-generate --watch & vite --port 4000 --open",
+    "dev": "cp .env.local .env && concurrently \"pnpm generate-gql-watch\" \"vite --port 4000 --open\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
     "typecheck": "vue-tsc --noEmit",
-    "gql-generate": "graphql-codegen --require dotenv/config --config codegen.yml"
+    "generate-gql": "graphql-codegen --require dotenv/config --config codegen.yml",
+    "generate-gql-watch": "graphql-codegen --require dotenv/config --config codegen.yml --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-vue": "^2.3.4",
     "@vue/test-utils": "^2.1.0",
     "autoprefixer": "^10.4.12",
+    "concurrently": "^7.5.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.25.0",
     "graphql-tag": "^2.12.6",
