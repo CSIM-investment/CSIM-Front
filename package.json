@@ -3,7 +3,7 @@
   "packageManager": "pnpm@6.32.3",
   "scripts": {
     "build": "vite build",
-    "dev": "cp .env.local .env && concurrently \"pnpm generate-gql-watch\" \"vite --port 4000 --open\"",
+    "dev": "concurrently \"pnpm generate-gql-watch\" \"vite --port 4000 --open\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview-https": "serve dist",
