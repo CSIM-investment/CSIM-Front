@@ -1,0 +1,11 @@
+schema: ${VITE_GRAPHQL_URL}
+documents: 'src/**/graphql/**/*.gql'
+ignoreNoDocuments: true
+generates:
+  src/common/generated/graphql.ts:
+    plugins: [typescript, typescript-operations, typescript-vue-apollo]
+    config:
+      vueApolloComposableImportFrom: '@vue/apollo-composable'
+      vueCompositionApiImportFrom: vue
+require:
+  - ts-node/register
