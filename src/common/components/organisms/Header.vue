@@ -2,7 +2,7 @@
 import { faNewspaper, faWallet, faChartLine } from '@fortawesome/free-solid-svg-icons';
 </script>
 <template>
-  <div class="relative top-0 bg-white h-16 w-full flex justify-between bg-main-secondary">
+  <div class="relative top-0 h-16 w-full flex justify-between bg-main-secondary">
     <RouterLink to="#" class="flex justify-center p-2 md:ml-8">
       <img src="src/common/assets/images/CSIM.svg" alt="csim-logo" />
     </RouterLink>
