@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 useHead({
-  title: 'App title',
+  title: 'CSIM',
   meta: [{ name: 'description', content: 'App title' }],
 })
 </script>
