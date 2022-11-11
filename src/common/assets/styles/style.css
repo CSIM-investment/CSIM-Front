@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.router-link-active {
+    color: #CA9A6F;
+}
