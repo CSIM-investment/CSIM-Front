@@ -9,13 +9,13 @@ import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-
     <div class="flex justify-center items-center text-white p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
         <RouterLink class="py-4 px-6 hover:text-main-primary" to="market">
-          market
+          Market
         </RouterLink>
         <RouterLink class="py-4 px-6 hover:text-main-primary" to="exchange">
-          exchange
+          Exchange
         </RouterLink>
         <RouterLink class="py-4 px-6 hover:text-main-primary" to="wallet">
-          wallet
+          Wallet
         </RouterLink>
       </div>
       <div class="flex flex-col text-xs">
@@ -30,19 +30,19 @@ import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-
   <div
     class="flex justify-around bg-main-secondary text-white text-center absolute z-50 w-full bottom-0 text-xl cursor-pointer md:hidden"
   >
-    <RouterLink to="#" class="w-1/3 py-3 hover:text-main-primary group">
+    <RouterLink to="market" class="w-1/3 py-3 hover:text-main-primary group">
       <div class="max-w-fit mx-auto">
         <font-awesome-icon :icon="faNewspaper" />
         <hr class="invisible group-hover:visible">
       </div>
     </RouterLink>
-    <RouterLink to="#" class="w-1/3 py-3 hover:text-main-primary group">
+    <RouterLink to="exchange" class="w-1/3 py-3 hover:text-main-primary group">
       <div class="max-w-fit mx-auto">
         <font-awesome-icon :icon="faWallet" />
         <hr class="invisible group-hover:visible">
       </div>
     </RouterLink>
-    <RouterLink to="#" class="w-1/3 py-3 hover:text-main-primary group">
+    <RouterLink to="wallet" class="w-1/3 py-3 hover:text-main-primary group">
       <div class="max-w-fit mx-auto">
         <font-awesome-icon :icon="faChartLine" />
         <hr class="invisible group-hover:visible">
