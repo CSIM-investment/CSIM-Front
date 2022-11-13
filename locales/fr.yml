@@ -1,9 +1,31 @@
 home: ceci est traduit
+loading: Chargement
 auth:
   description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 login:
   title: Connexion
   subtitle: "printing and typesetting industry. Lorem Ipsum"
-signin:
+register:
   title: Inscription
   subtitle: printing and typesetting industry. Lorem Ipsum
+  submit: Créer votre compte
+  next: Suivant
+  back: Retour
+  placeholders:
+    firstName: Prénom
+    lastName: Nom
+    email: Email
+    password: Mots de passe
+    confirmPassword: Retapez votre mot de passe
+  loginRedirection:
+    wording: Déja un compte ?
+    link: Connectez-vous.
+confirm:
+  title: Confirmation d'email
+  subtitle: Un code de confirmation vous a été envoyé à votre adresse email.
+  submit: Confirmer votre compte
+validators:
+  required: Ce champ est requit
+  email: L'email est invalide
+  sameAsPassword: Les mots de passes ne correspondent pas
+  minLength: Il doit comporter {length} caractères au minimum.

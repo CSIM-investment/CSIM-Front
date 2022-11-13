@@ -5,7 +5,8 @@
     text-align: center;
     outline: none;
     box-shadow: none;
-    @apply h-16 bg-primary rounded-md text-white text-xl p-3 w-full ;
+    max-width: 275px;
+    @apply h-16 bg-primary rounded-md text-white text-xl p-3 w-full;
 
     &:enabled:hover, &:enabled:active {
       @apply bg-primary-light
