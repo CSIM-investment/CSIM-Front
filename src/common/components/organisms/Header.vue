@@ -2,11 +2,11 @@
 import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-icons'
 </script>
 <template>
-  <div class="relative top-0 h-16 w-full flex justify-between bg-main-secondary">
-    <RouterLink to="/" class="flex justify-center p-2 md:ml-8">
-      <img src="src/common/assets/images/CSIM.svg" alt="csim-logo">
+  <div class="relative top-0 h-16 w-full flex justify-between">
+    <RouterLink to="#" class="flex justify-center p-2 md:ml-8">
+      <img src="src/common/assets/images/CSIM.svg" alt="csim-logo" />
     </RouterLink>
-    <div class="flex justify-center items-center text-white p-2 md:mr-8">
+    <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
         <RouterLink class="py-4 px-6 hover:text-main-primary" to="market">
           Market
@@ -28,8 +28,7 @@ import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-
     </div>
   </div>
   <div
-    class="flex justify-around bg-main-secondary text-white text-center fixed z-50 w-full bottom-0 text-xl cursor-pointer md:hidden"
-  >
+    class="flex justify-around bg-main-secondary text-white text-center fixed z-50 w-full bottom-0 text-xl cursor-pointer md:hidden">
     <RouterLink to="market" class="w-1/3 py-3 hover:text-main-primary group">
       <div class="max-w-fit mx-auto">
         <font-awesome-icon :icon="faNewspaper" />
