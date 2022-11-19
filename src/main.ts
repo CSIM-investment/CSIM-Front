@@ -1,13 +1,15 @@
-import { ViteSSG } from 'vite-ssg';
-import generatedRoutes from 'virtual:generated-pages';
-import { setupLayouts } from 'virtual:generated-layouts';
-import { DefaultApolloClient } from '@vue/apollo-composable';
-import { ApolloClient, InMemoryCache } from '@apollo/client/core';
-import { setContext } from '@apollo/client/link/context';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import './common/assets/styles/style.css';
-import { createUploadLink } from 'apollo-upload-client';
-import App from './App.vue';
+import { ViteSSG } from 'vite-ssg'
+import generatedRoutes from 'virtual:generated-pages'
+import { setupLayouts } from 'virtual:generated-layouts'
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+import { setContext } from '@apollo/client/link/context'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import './common/assets/styles/style.css'
+import { createUploadLink } from 'apollo-upload-client'
+import { createPinia } from 'pinia'
+import PrimeVue from 'primevue/config'
+import App from './App.vue'
 
 const routes = setupLayouts(generatedRoutes)
 const cache = new InMemoryCache({
@@ -37,8 +39,10 @@ const apolloClient = new ApolloClient({
 })
 
 export const createApp = ViteSSG(App, { routes, base: import.meta.env.BASE_URL }, (ctx) => {
-  ctx.app.provide(DefaultApolloClient, apolloClient);
-  ctx.app.component('font-awesome-icon', FontAwesomeIcon);
+  ctx.app.provide(DefaultApolloClient, apolloClient)
+  ctx.app.component('font-awesome-icon', FontAwesomeIcon)
+  ctx.app.use(createPinia())
+  ctx.app.use(PrimeVue)
   // install all modules under `modules/`
   Object.values(import.meta.globEager('./common/modules/*.ts')).forEach(i => i.install?.(ctx))
 })
