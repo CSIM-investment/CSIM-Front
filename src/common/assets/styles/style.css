@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background: #F4F7F9;
+}
+
 .router-link-active {
     color: #CA9A6F;
 }
