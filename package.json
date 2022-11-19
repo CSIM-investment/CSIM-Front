@@ -22,6 +22,7 @@
     "apollo-upload-client": "^17.0.0",
     "graphql": "15.8.0",
     "nprogress": "^0.2.0",
+    "pinia": "^2.0.24",
     "vue": "^3.2.40",
     "vue-demi": "^0.12.5",
     "vue-i18n": "^9.2.2",
