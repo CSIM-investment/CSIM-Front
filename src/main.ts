@@ -9,6 +9,8 @@ import './common/assets/styles/style.css'
 import { createUploadLink } from 'apollo-upload-client'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
+import 'primevue/resources/themes/tailwind-light/theme.css'
+import 'primeicons/primeicons.css'
 import App from './App.vue'
 
 const routes = setupLayouts(generatedRoutes)

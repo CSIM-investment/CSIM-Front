@@ -10,9 +10,18 @@ const cryptos = cryptoStore.getCryptos
 
 <template>
   <div>
-    <DataTable :value="cryptos">
+    <DataTable
+      :value="cryptos" :paginator="true" :rows="10"
+      responsive-layout="scroll"
+      paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+    >
+      <Column>
+        <template #body="slotProps">
+          <img class="max-h-10" :src="slotProps.data.image" alt="">
+        </template>
+      </Column>
       <Column field="name" header="Nom" />
-      <Column field="symbol" header="symbol" />
+      <Column field="symbol" header="Symbol" />
     </DataTable>
   </div>
 </template>
