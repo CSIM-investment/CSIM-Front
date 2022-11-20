@@ -5,6 +5,8 @@ import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
 import Sidebar from 'primevue/sidebar'
 import Button from 'primevue/button'
+import Accordion from 'primevue/accordion'
+import AccordionTab from 'primevue/accordiontab'
 import { ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
@@ -121,6 +123,38 @@ const visibleRight = ref<boolean>(false)
         <h2 class="font-bold text-2xl">
           Filtres
         </h2>
+        <div class="my-4">
+          <Accordion class="accordion-custom">
+            <AccordionTab>
+              <template #header>
+                <i class="pi pi-dollar mr-2" />
+                <span>Market Cap</span>
+              </template>
+              <div />
+            </AccordionTab>
+            <AccordionTab>
+              <template #header>
+                <i class="pi pi-dollar mr-2" />
+                <span>Changement (24h)</span>
+              </template>
+              <div />
+            </AccordionTab>
+            <AccordionTab>
+              <template #header>
+                <i class="pi pi-dollar mr-2" />
+                <span>Prix de change (24h)</span>
+              </template>
+              <div />
+            </AccordionTab>
+            <AccordionTab>
+              <template #header>
+                <i class="pi pi-dollar mr-2" />
+                <span>Rang</span>
+              </template>
+              <div />
+            </AccordionTab>
+          </Accordion>
+        </div>
       </div>
     </Sidebar>
   </div>
