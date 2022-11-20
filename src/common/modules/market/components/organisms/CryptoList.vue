@@ -52,8 +52,9 @@ const columnIsSelected = (col: string): boolean => {
       :row-hover="true"
       :rows="10"
       filter-display="menu"
-      paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
       :global-filter-fields="['name', 'symbol']"
+      :rows-per-page-options="[10, 25, 50]"
       responsive-layout="scroll"
     >
       <template #header>
