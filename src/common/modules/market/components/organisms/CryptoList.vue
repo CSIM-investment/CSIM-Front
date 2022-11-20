@@ -7,7 +7,8 @@ import Sidebar from 'primevue/sidebar'
 import Button from 'primevue/button'
 import Accordion from 'primevue/accordion'
 import AccordionTab from 'primevue/accordiontab'
-import { ref } from 'vue'
+import InputNumber from 'primevue/inputnumber'
+import { computed, ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
@@ -18,14 +19,6 @@ const cryptos = cryptoStore.getCryptos
 
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: {
-    operator: FilterOperator.AND,
-    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-  },
-  symbol: {
-    operator: FilterOperator.AND,
-    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-  },
 })
 
 const columns = ref<any>([
@@ -47,13 +40,35 @@ const columnIsSelected = (col: string): boolean => {
 }
 
 const visibleRight = ref<boolean>(false)
+
+const minPrice = ref<any>(null)
+const maxPrice = ref<any>(null)
+
+const cryptosFiltered = computed(() => {
+  let _cryptos = cryptos
+  if (minPrice.value)
+    _cryptos = _cryptos.filter(crypto => crypto.price > minPrice.value)
+  if (maxPrice.value)
+    _cryptos = _cryptos.filter(crypto => crypto.price < maxPrice.value)
+
+  return _cryptos
+})
+
+const resetPriceFilter = () => {
+  minPrice.value = null
+  maxPrice.value = null
+}
+
+const resetFilters = () => {
+  resetPriceFilter()
+}
 </script>
 
 <template>
   <div>
     <DataTable
       v-model:filters="filters"
-      :value="cryptos"
+      :value="cryptosFiltered"
       :paginator="true"
       :row-hover="true"
       :rows="10"
@@ -118,7 +133,7 @@ const visibleRight = ref<boolean>(false)
         </template>
       </Column>
     </DataTable>
-    <Sidebar v-model:visible="visibleRight" class="z-10" position="right">
+    <Sidebar v-model:visible="visibleRight" class="p-sidebar-md h-100" position="right">
       <div>
         <h2 class="font-bold text-2xl">
           Filtres
@@ -128,9 +143,13 @@ const visibleRight = ref<boolean>(false)
             <AccordionTab>
               <template #header>
                 <i class="pi pi-dollar mr-2" />
-                <span>Market Cap</span>
+                <span>Prix</span>
               </template>
-              <div />
+              <div class="flex flex-wrap justify-around">
+                <InputNumber v-model="minPrice" placeholder="min" mode="currency" currency="USD" locale="en-US" />
+                <InputNumber v-model="maxPrice" placeholder="max" mode="currency" currency="USD" locale="en-US" />
+                <Button icon="pi pi-refresh" class="p-button-rounded p-button-text p-button-plain" @click="resetPriceFilter" />
+              </div>
             </AccordionTab>
             <AccordionTab>
               <template #header>
@@ -142,19 +161,18 @@ const visibleRight = ref<boolean>(false)
             <AccordionTab>
               <template #header>
                 <i class="pi pi-dollar mr-2" />
-                <span>Prix de change (24h)</span>
-              </template>
-              <div />
-            </AccordionTab>
-            <AccordionTab>
-              <template #header>
-                <i class="pi pi-dollar mr-2" />
-                <span>Rang</span>
+                <span>Market Cap</span>
               </template>
               <div />
             </AccordionTab>
           </Accordion>
         </div>
+      </div>
+      <div class="flex flex-wrap justify-end">
+        <Button
+          label="Annuler les filtres" background class="p-button-outlined"
+          icon="pi pi-refresh" icon-pos="left" @click="resetFilters()"
+        />
       </div>
     </Sidebar>
   </div>
