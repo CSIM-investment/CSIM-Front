@@ -22,4 +22,12 @@ export const format = {
       day: 'numeric',
     })
   },
+
+  percentage: (value: number | string) => {
+    return `${value}%`
+  },
+
+  cap: (value: number | string) => {
+    return `#${value}`
+  },
 }

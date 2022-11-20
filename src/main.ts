@@ -10,6 +10,7 @@ import { createUploadLink } from 'apollo-upload-client'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/tailwind-light/theme.css'
+import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import App from './App.vue'
 

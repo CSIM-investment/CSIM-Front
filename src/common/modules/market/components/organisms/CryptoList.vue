@@ -2,6 +2,7 @@
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
+import MultiSelect from 'primevue/multiselect'
 import { ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
@@ -22,6 +23,24 @@ const filters = ref({
     constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
   },
 })
+
+const columns = ref<any>([
+  { field: 'icon', header: 'Icône' },
+  { field: 'name', header: 'Nom' },
+  { field: 'symbol', header: 'Symbole' },
+  { field: 'price', header: 'Prix' },
+  { field: 'marketCap', header: 'Market Cap' },
+  { field: 'changes', header: 'Changement 24h' },
+])
+
+const selectedColumns = ref<any>(columns.value)
+const onToggle = (val: any) => {
+  selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
+}
+
+const columnIsSelected = (col: string): boolean => {
+  return selectedColumns.value.some((column: { field: string }) => column.field === col)
+}
 </script>
 
 <template>
@@ -38,11 +57,23 @@ const filters = ref({
       responsive-layout="scroll"
     >
       <template #header>
-        <div>
-          <span>
-            <i class="pi pi-search mr-4" />
-            <InputText v-model="filters['global'].value" placeholder="Rechercher" />
-          </span>
+        <div class="flex flex-wrap">
+          <div class="m-2">
+            <span>
+              <i class="pi pi-search mr-4" />
+              <InputText v-model="filters['global'].value" placeholder="Rechercher" />
+            </span>
+          </div>
+          <div class="m-2">
+            <MultiSelect
+              class="w-64"
+              :model-value="selectedColumns"
+              :options="columns"
+              option-label="header"
+              placeholder="Colonnes"
+              @update:model-value="onToggle"
+            />
+          </div>
         </div>
       </template>
       <Column header-style="width: 3rem">
@@ -52,30 +83,36 @@ const filters = ref({
           </div>
         </template>
       </Column>
-      <Column header-style="width: 7rem">
+      <Column v-if="columnIsSelected('icon')" header-style="width: 7rem">
         <template #body="{data}">
           <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
         </template>
       </Column>
-      <Column field="name" header="Nom" />
-      <Column field="symbol" header="Symbole" />
-      <Column field="price" header="Prix">
+      <Column v-if="columnIsSelected('name')" field="name" header="Nom" />
+      <Column v-if="columnIsSelected('symbol')" field="symbol" header="Symbole" />
+      <Column v-if="columnIsSelected('price')" field="price" sortable header="Prix">
         <template #body="{data}">
           {{ format.dollarPrice(data.price) }}
         </template>
       </Column>
-      <Column field="marketCap" header="Market Cap">
+      <Column v-if="columnIsSelected('marketCap')" field="marketCap" sortable header="Market Cap">
         <template #body="{data}">
-          {{ '#' + data.marketCap }}
+          {{ format.cap(data.marketCap) }}
         </template>
       </Column>
-      <Column field="changes" header="Changement 24h">
+      <Column v-if="columnIsSelected('changes')" field="changes" sortable header="Changement 24h">
         <template #body="{data}">
           <div :class="data.changes >= 0 ? 'text-green' : 'text-red'">
-            {{ data.changes + '%' }}
+            {{ format.percentage(data.changes) }}
           </div>
         </template>
       </Column>
     </DataTable>
   </div>
 </template>
+
+<style scoped lang='scss'>
+  ::v-deep(.p-paginator) {
+    justify-content: end;
+  }
+</style>
