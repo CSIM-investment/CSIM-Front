@@ -28,7 +28,7 @@ import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-
     </div>
   </div>
   <div
-    class="flex justify-around bg-main-secondary text-white text-center absolute z-50 w-full bottom-0 text-xl cursor-pointer md:hidden"
+    class="flex justify-around bg-main-secondary text-white text-center fixed z-50 w-full bottom-0 text-xl cursor-pointer md:hidden"
   >
     <RouterLink to="market" class="w-1/3 py-3 hover:text-main-primary group">
       <div class="max-w-fit mx-auto">

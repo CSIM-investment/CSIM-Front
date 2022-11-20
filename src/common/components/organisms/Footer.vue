@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-main-secondary absolute z-0 bottom-0 w-full flex justify-around md:justify-between pb-14 md:pb-0"
+    class="bg-main-secondary fixed z-0 bottom-0 w-full flex justify-around md:justify-between pb-14 md:pb-0"
   >
     <div class="w-24 md:w-60">
       <RouterLink to="/">
