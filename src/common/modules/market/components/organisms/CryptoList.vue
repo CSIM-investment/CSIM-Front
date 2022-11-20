@@ -3,6 +3,8 @@ import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
 import MultiSelect from 'primevue/multiselect'
+import Sidebar from 'primevue/sidebar'
+import Button from 'primevue/button'
 import { ref } from 'vue'
 import { FilterMatchMode, FilterOperator } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
@@ -41,6 +43,8 @@ const onToggle = (val: any) => {
 const columnIsSelected = (col: string): boolean => {
   return selectedColumns.value.some((column: { field: string }) => column.field === col)
 }
+
+const visibleRight = ref<boolean>(false)
 </script>
 
 <template>
@@ -64,6 +68,9 @@ const columnIsSelected = (col: string): boolean => {
               <i class="pi pi-search mr-4" />
               <InputText v-model="filters['global'].value" placeholder="Rechercher" />
             </span>
+          </div>
+          <div class="m-2">
+            <Button label="Filtres" class="p-button-outlined" icon="pi pi-filter" @click="visibleRight = true" />
           </div>
           <div class="m-2">
             <MultiSelect
@@ -109,6 +116,13 @@ const columnIsSelected = (col: string): boolean => {
         </template>
       </Column>
     </DataTable>
+    <Sidebar v-model:visible="visibleRight" class="z-10" position="right">
+      <div>
+        <h2 class="font-bold text-2xl">
+          Filtres
+        </h2>
+      </div>
+    </Sidebar>
   </div>
 </template>
 
