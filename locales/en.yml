@@ -5,3 +5,9 @@ header:
   wallet: Wallet
   welcome: Welcome
 footer:
+  company: Company
+  about: 'About us'
+  contact: 'Contact us'
+  gtcu: GTCU
+  cookies: Cookies
+  terms: 'Terms and Privacy'

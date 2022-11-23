@@ -4,3 +4,10 @@ header:
   exchange: Echange
   wallet: Portefeuille
   welcome: Bienvenue
+footer:
+  company: Entreprise
+  about: 'Qui sommes-nous ?'
+  contact: 'Nous contacter'
+  gtcu: CGU
+  cookies: Cookies
+  terms: 'Données et sécurité'

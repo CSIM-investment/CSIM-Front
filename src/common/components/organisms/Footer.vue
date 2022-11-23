@@ -1,3 +1,6 @@
+<script lang="ts" setup>
+const { t } = useI18n()
+</script>
 <template>
   <div class="w-full flex justify-around md:justify-between pb-14 md:pb-0">
     <div class="w-24 md:w-60">
@@ -8,27 +11,27 @@
     <div class="flex justify-around text-black justify-center text-white text-xs md:text-sm mt-8 w-2/3 md:w-1/2">
       <div class="flex flex-col">
         <h3 class="font-bold">
-          Company
+          {{ t('footer.company') }}
         </h3>
         <RouterLink class="mt-2" to="#">
-          About us
+          {{ t('footer.about') }}
         </RouterLink>
         <RouterLink class="mt-2" to="#">
-          Contact us
+          {{ t('footer.contact') }}
         </RouterLink>
       </div>
       <div class="flex flex-col">
         <h3 class="font-bold">
-          Company
+          {{ t('footer.company') }}
         </h3>
         <RouterLink class="mt-2" to="#">
-          CGU
+          {{ t('footer.gtcu') }}
         </RouterLink>
         <RouterLink class="mt-2" to="#">
-          Cookies
+          {{ t('footer.cookies') }}
         </RouterLink>
         <RouterLink class="mt-2" to="#">
-          Terms and Privacy
+          {{ t('footer.terms') }}
         </RouterLink>
       </div>
     </div>
