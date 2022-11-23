@@ -108,7 +108,7 @@ function AmountColor(data: any) {
             <div class="flex align-middle items-center">
               <font-awesome-icon class="mr-2" :class="AmountColor(data.changement)" icon="fa-solid fa-caret-up" />
               <span :class="AmountColor(data.changement)"> {{ data.changement.symbole }} {{
-                  data.changement.amount
+                data.changement.amount
               }}</span>
             </div>
           </template>
@@ -153,7 +153,8 @@ function AmountColor(data: any) {
     </div>
     <div class="w-full flex flex-col justify-center connect-container">
       <div
-        class="md:text-2xl xl:text-3xl sm:text-xl xs:text-xl mt-10 text-center font-bold text-white xs:mr-5 xs:ml-5 self-center">
+        class="md:text-2xl xl:text-3xl sm:text-xl xs:text-xl mt-10 text-center font-bold text-white xs:mr-5 xs:ml-5 self-center"
+      >
         Commencez à investir dans les cryptomonnaies maintenant !
       </div>
       <Button class="mb-10 button-landing-page self-center xl:w-1/6 sm:w-1/2 mt-15 font-bold mb-4 mt-10" type="submit">

@@ -12,9 +12,9 @@ import PrimeVue from 'primevue/config'
 import './common/assets/styles/tailwindPrimevue.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
-import App from './App.vue'
 import { faBitcoinSign, faCaretUp, faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import App from './App.vue'
 
 const routes = setupLayouts(generatedRoutes)
 const cache = new InMemoryCache({
