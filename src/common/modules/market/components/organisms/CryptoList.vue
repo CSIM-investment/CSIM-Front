@@ -11,6 +11,7 @@ import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'
 import { computed, ref, watch } from 'vue'
 import { FilterMatchMode } from 'primevue/api'
+import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
 import type { Crypto } from '~/interfaces/crypto.interface'
@@ -173,6 +174,16 @@ const resetFilters = (): void => {
             />
           </div>
         </div>
+      </template>
+      <template #empty>
+        <div class="text-center">
+          <font-awesome-icon class="mr-1" :icon="faBitcoinSign" />
+          {{ isFavorite ? "Vous n'avez aucun favori" : 'Aucune cryptomonnaies trouvée' }}
+        </div>
+      </template>
+      <template #loading>
+        <font-awesome-icon class="mr-1" :icon="faHourglass" />
+        Chargement...
       </template>
       <Column header-style="width: 3rem">
         <template #body="{data}">
