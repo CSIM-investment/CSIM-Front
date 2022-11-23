@@ -64,6 +64,8 @@ const minPrice = ref<any>(null)
 const maxPrice = ref<any>(null)
 const minCap = ref<any>(null)
 const maxCap = ref<any>(null)
+const minChanges = ref<any>(null)
+const maxChanges = ref<any>(null)
 
 const cryptosFiltered = computed(() => {
   let _cryptos = cryptos
@@ -75,6 +77,10 @@ const cryptosFiltered = computed(() => {
     _cryptos = _cryptos.filter(crypto => crypto.marketCap >= minCap.value)
   if (maxCap.value)
     _cryptos = _cryptos.filter(crypto => crypto.marketCap <= maxCap.value)
+  if (minChanges.value)
+    _cryptos = _cryptos.filter(crypto => crypto.changes >= minChanges.value)
+  if (maxChanges.value)
+    _cryptos = _cryptos.filter(crypto => crypto.changes <= maxChanges.value)
 
   return _cryptos
 })
@@ -93,9 +99,15 @@ const resetCapFilter = () => {
   maxCap.value = null
 }
 
+const resetChangesFilter = () => {
+  minChanges.value = null
+  maxChanges.value = null
+}
+
 const resetFilters = () => {
   resetPriceFilter()
   resetCapFilter()
+  resetChangesFilter()
 }
 </script>
 
@@ -252,7 +264,7 @@ const resetFilters = () => {
             </AccordionTab>
             <AccordionTab>
               <template #header>
-                <i class="pi pi-dollar mr-2" />
+                <i class="pi pi-flag mr-2" />
                 <span>Market Cap</span>
               </template>
               <div class="flex flex-wrap justify-around">
@@ -272,6 +284,35 @@ const resetFilters = () => {
                   icon="pi pi-refresh"
                   class="p-button-rounded p-button-text p-button-plain"
                   @click="resetCapFilter"
+                />
+              </div>
+            </AccordionTab>
+            <AccordionTab>
+              <template #header>
+                <i class="pi pi-sort-alt mr-2" />
+                <span>Changement 24h</span>
+              </template>
+              <div class="flex flex-wrap justify-around">
+                <InputNumber
+                  v-model="minChanges"
+                  class="my-2 lg:my-auto"
+                  placeholder="min"
+                  mode="decimal"
+                  :min-fraction-digits="2"
+                  suffix="%"
+                />
+                <InputNumber
+                  v-model="maxChanges"
+                  class="my-2 lg:my-auto"
+                  placeholder="max"
+                  mode="decimal"
+                  :min-fraction-digits="2"
+                  suffix="%"
+                />
+                <Button
+                  icon="pi pi-refresh"
+                  class="p-button-rounded p-button-text p-button-plain"
+                  @click="resetChangesFilter"
                 />
               </div>
             </AccordionTab>
