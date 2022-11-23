@@ -1,0 +1,18 @@
+@layer components {
+  .button-landing-page {
+    justify-content: center;
+    text-align:center;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    @apply h-16 bg-primary rounded-md text-white text-xl p-3 ;
+
+    &:enabled:hover, &:enabled:active {
+      @apply bg-primary-light
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

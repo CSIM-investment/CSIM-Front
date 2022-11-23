@@ -5,13 +5,15 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { setContext } from '@apollo/client/link/context'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import './common/assets/styles/style.css'
+import './common/assets/styles/style.scss'
 import { createUploadLink } from 'apollo-upload-client'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import './common/assets/styles/tailwindPrimevue.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
+import { faBitcoinSign, faCaretUp, faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import App from './App.vue'
 
 const routes = setupLayouts(generatedRoutes)
@@ -40,7 +42,7 @@ const apolloClient = new ApolloClient({
   uri,
   defaultOptions: { mutate: { errorPolicy: 'all' } },
 })
-
+library.add(faUserSecret, faBitcoinSign, faCaretUp)
 export const createApp = ViteSSG(App, { routes, base: import.meta.env.BASE_URL }, (ctx) => {
   ctx.app.provide(DefaultApolloClient, apolloClient)
   ctx.app.component('font-awesome-icon', FontAwesomeIcon)
