@@ -8,7 +8,8 @@ import Button from 'primevue/button'
 import Accordion from 'primevue/accordion'
 import AccordionTab from 'primevue/accordiontab'
 import InputNumber from 'primevue/inputnumber'
-import { computed, ref } from 'vue'
+import Message from 'primevue/message'
+import { computed, ref, watch } from 'vue'
 import { FilterMatchMode, FilterOperator } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
@@ -36,22 +37,50 @@ const onToggle = (val: any) => {
 }
 
 const columnIsSelected = (col: string): boolean => {
-  return selectedColumns.value.some((column: { field: string }) => column.field === col)
+  return selectedColumns.value.some(
+    (column: { field: string }) => column.field === col,
+  )
+}
+
+const messages = ref<Array<any>>([])
+const messageLife = ref<number>(4000)
+const messageId = ref<number>(0)
+const addMessages = () => {
+  messages.value = [
+    {
+      severity: 'success',
+      content: 'Filtres appliqués',
+      id: messageId.value++,
+    },
+  ]
+  setTimeout(() => {
+    messages.value = []
+  }, messageLife.value + 500)
 }
 
 const visibleRight = ref<boolean>(false)
 
 const minPrice = ref<any>(null)
 const maxPrice = ref<any>(null)
+const minCap = ref<any>(null)
+const maxCap = ref<any>(null)
 
 const cryptosFiltered = computed(() => {
   let _cryptos = cryptos
   if (minPrice.value)
-    _cryptos = _cryptos.filter(crypto => crypto.price > minPrice.value)
+    _cryptos = _cryptos.filter(crypto => crypto.price >= minPrice.value)
   if (maxPrice.value)
-    _cryptos = _cryptos.filter(crypto => crypto.price < maxPrice.value)
+    _cryptos = _cryptos.filter(crypto => crypto.price <= maxPrice.value)
+  if (minCap.value)
+    _cryptos = _cryptos.filter(crypto => crypto.marketCap >= minCap.value)
+  if (maxCap.value)
+    _cryptos = _cryptos.filter(crypto => crypto.marketCap <= maxCap.value)
 
   return _cryptos
+})
+
+watch(cryptosFiltered, () => {
+  addMessages()
 })
 
 const resetPriceFilter = () => {
@@ -59,8 +88,14 @@ const resetPriceFilter = () => {
   maxPrice.value = null
 }
 
+const resetCapFilter = () => {
+  minCap.value = null
+  maxCap.value = null
+}
+
 const resetFilters = () => {
   resetPriceFilter()
+  resetCapFilter()
 }
 </script>
 
@@ -83,11 +118,19 @@ const resetFilters = () => {
           <div class="m-2">
             <span>
               <i class="pi pi-search mr-4" />
-              <InputText v-model="filters['global'].value" placeholder="Rechercher" />
+              <InputText
+                v-model="filters['global'].value"
+                placeholder="Rechercher"
+              />
             </span>
           </div>
           <div class="m-2">
-            <Button label="Filtres" class="p-button-outlined" icon="pi pi-filter" @click="visibleRight = true" />
+            <Button
+              label="Filtres"
+              class="p-button-outlined"
+              icon="pi pi-filter"
+              @click="visibleRight = true"
+            />
           </div>
           <div class="m-2">
             <MultiSelect
@@ -109,32 +152,70 @@ const resetFilters = () => {
         </template>
       </Column>
       <Column v-if="columnIsSelected('icon')" header-style="width: 7rem">
-        <template #body="{data}">
+        <template #body="{ data }">
           <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
         </template>
       </Column>
       <Column v-if="columnIsSelected('name')" field="name" header="Nom" />
-      <Column v-if="columnIsSelected('symbol')" field="symbol" header="Symbole" />
-      <Column v-if="columnIsSelected('price')" field="price" sortable header="Prix">
-        <template #body="{data}">
+      <Column
+        v-if="columnIsSelected('symbol')"
+        field="symbol"
+        header="Symbole"
+      />
+      <Column
+        v-if="columnIsSelected('price')"
+        field="price"
+        sortable
+        header="Prix"
+      >
+        <template #body="{ data }">
           {{ format.dollarPrice(data.price) }}
         </template>
       </Column>
-      <Column v-if="columnIsSelected('marketCap')" field="marketCap" sortable header="Market Cap">
-        <template #body="{data}">
+      <Column
+        v-if="columnIsSelected('marketCap')"
+        field="marketCap"
+        sortable
+        header="Market Cap"
+      >
+        <template #body="{ data }">
           {{ format.cap(data.marketCap) }}
         </template>
       </Column>
-      <Column v-if="columnIsSelected('changes')" field="changes" sortable header="Changement 24h">
-        <template #body="{data}">
+      <Column
+        v-if="columnIsSelected('changes')"
+        field="changes"
+        sortable
+        header="Changement 24h"
+      >
+        <template #body="{ data }">
           <div :class="data.changes >= 0 ? 'text-green' : 'text-red'">
             {{ format.percentage(data.changes) }}
           </div>
         </template>
       </Column>
     </DataTable>
-    <Sidebar v-model:visible="visibleRight" class="p-sidebar-md h-100" position="right">
-      <div>
+    <Sidebar
+      v-model:visible="visibleRight"
+      class="p-sidebar-md h-100"
+      position="right"
+    >
+      <template #header>
+        <div class="absolute left-4 top-0">
+          <transition-group name="p-message" tag="div">
+            <Message
+              v-for="msg of messages"
+              :key="msg.id"
+              :life="messageLife"
+              :sticky="false"
+              :severity="msg.severity"
+            >
+              {{ msg.content }}
+            </Message>
+          </transition-group>
+        </div>
+      </template>
+      <div class="mt-8">
         <h2 class="font-bold text-2xl">
           Filtres
         </h2>
@@ -146,40 +227,73 @@ const resetFilters = () => {
                 <span>Prix</span>
               </template>
               <div class="flex flex-wrap justify-around">
-                <InputNumber v-model="minPrice" placeholder="min" mode="currency" currency="USD" locale="en-US" />
-                <InputNumber v-model="maxPrice" placeholder="max" mode="currency" currency="USD" locale="en-US" />
-                <Button icon="pi pi-refresh" class="p-button-rounded p-button-text p-button-plain" @click="resetPriceFilter" />
+                <InputNumber
+                  v-model="minPrice"
+                  class="my-2 lg:my-auto"
+                  placeholder="min"
+                  mode="currency"
+                  currency="USD"
+                  locale="en-US"
+                />
+                <InputNumber
+                  v-model="maxPrice"
+                  class="my-2 lg:my-auto"
+                  placeholder="max"
+                  mode="currency"
+                  currency="USD"
+                  locale="en-US"
+                />
+                <Button
+                  icon="pi pi-refresh"
+                  class="p-button-rounded p-button-text p-button-plain"
+                  @click="resetPriceFilter"
+                />
               </div>
-            </AccordionTab>
-            <AccordionTab>
-              <template #header>
-                <i class="pi pi-dollar mr-2" />
-                <span>Changement (24h)</span>
-              </template>
-              <div />
             </AccordionTab>
             <AccordionTab>
               <template #header>
                 <i class="pi pi-dollar mr-2" />
                 <span>Market Cap</span>
               </template>
-              <div />
+              <div class="flex flex-wrap justify-around">
+                <InputNumber
+                  v-model="minCap"
+                  class="my-2 lg:my-auto"
+                  placeholder="min"
+                  :min="1"
+                />
+                <InputNumber
+                  v-model="maxCap"
+                  class="my-2 lg:my-auto"
+                  placeholder="max"
+                  :min="1"
+                />
+                <Button
+                  icon="pi pi-refresh"
+                  class="p-button-rounded p-button-text p-button-plain"
+                  @click="resetCapFilter"
+                />
+              </div>
             </AccordionTab>
           </Accordion>
         </div>
       </div>
       <div class="flex flex-wrap justify-end">
         <Button
-          label="Annuler les filtres" background class="p-button-outlined"
-          icon="pi pi-refresh" icon-pos="left" @click="resetFilters()"
+          label="Annuler les filtres"
+          background
+          class="p-button-outlined"
+          icon="pi pi-refresh"
+          icon-pos="left"
+          @click="resetFilters()"
         />
       </div>
     </Sidebar>
   </div>
 </template>
 
-<style scoped lang='scss'>
-  ::v-deep(.p-paginator) {
-    justify-content: end;
-  }
+<style scoped lang="scss">
+::v-deep(.p-paginator) {
+  justify-content: end;
+}
 </style>
