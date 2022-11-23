@@ -10,7 +10,7 @@ import AccordionTab from 'primevue/accordiontab'
 import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'
 import { computed, ref, watch } from 'vue'
-import { FilterMatchMode, FilterOperator } from 'primevue/api'
+import { FilterMatchMode } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
 
