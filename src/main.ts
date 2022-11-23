@@ -43,7 +43,8 @@ const apolloClient = new ApolloClient({
 })
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons'
-library.add(faUserSecret, faBitcoinSign)
+import {faCaretUp} from '@fortawesome/free-solid-svg-icons'
+library.add(faUserSecret, faBitcoinSign, faCaretUp)
 export const createApp = ViteSSG(App, { routes, base: import.meta.env.BASE_URL }, (ctx) => {
   ctx.app.provide(DefaultApolloClient, apolloClient)
   ctx.app.component('font-awesome-icon', FontAwesomeIcon)

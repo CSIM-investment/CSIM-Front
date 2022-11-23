@@ -15,11 +15,11 @@ import Button from 'primevue/button';
 // import Chip from 'primevue/chip';
 // import Chips from 'primevue/chips';
 // import ColorPicker from 'primevue/colorpicker';
-// import Column from 'primevue/column';
+import Column from 'primevue/column';
 // import ConfirmDialog from 'primevue/confirmdialog';
 // import ConfirmPopup from 'primevue/confirmpopup';
 // import ContextMenu from 'primevue/contextmenu';
-// import DataTable from 'primevue/datatable';
+import DataTable from 'primevue/datatable';
 // import DataView from 'primevue/dataview';
 // import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions';
 // import Dialog from 'primevue/dialog';
@@ -75,10 +75,13 @@ import Password from 'primevue/password';
 // import Tree from 'primevue/tree';
 // import TreeTable from 'primevue/treetable';
 // import TriStateCheckbox from 'primevue/tristatecheckbox';
+import Image from 'primevue/image';
+
+
 
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
-
+import 'primevue/resources/themes/tailwind-light/theme.css';
 import PrimeVue from 'primevue/config';
 
 // directives
@@ -120,11 +123,11 @@ export const install: UserModule = ({ app, isClient }) => {
     // app.component('Chip', Chip);
     // app.component('Chips', Chips);
     // app.component('ColorPicker', ColorPicker);
-    // app.component('Column', Column);
+    app.component('Column', Column);
     // app.component('ConfirmDialog', ConfirmDialog);
     // app.component('ConfirmPopup', ConfirmPopup);
     // app.component('ContextMenu', ContextMenu);
-    // app.component('DataTable', DataTable);
+    app.component('DataTable', DataTable);
     // app.component('DataView', DataView);
     // app.component('DataViewLayoutOptions', DataViewLayoutOptions);
     // app.component('Dialog', Dialog);
@@ -180,6 +183,7 @@ export const install: UserModule = ({ app, isClient }) => {
     // app.component('Tree', Tree);
     // app.component('TreeTable', TreeTable);
     // app.component('TriStateCheckbox', TriStateCheckbox);
+    app.component('Image', Image);
 
     app.use(PrimeVue, { ripple: true });
     //
