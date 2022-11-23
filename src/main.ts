@@ -13,6 +13,7 @@ import './common/assets/styles/tailwindPrimevue.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import App from './App.vue'
+import { faBitcoinSign, faCaretUp, faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 const routes = setupLayouts(generatedRoutes)
@@ -41,9 +42,6 @@ const apolloClient = new ApolloClient({
   uri,
   defaultOptions: { mutate: { errorPolicy: 'all' } },
 })
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { faBitcoinSign } from '@fortawesome/free-solid-svg-icons'
-import {faCaretUp} from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret, faBitcoinSign, faCaretUp)
 export const createApp = ViteSSG(App, { routes, base: import.meta.env.BASE_URL }, (ctx) => {
   ctx.app.provide(DefaultApolloClient, apolloClient)

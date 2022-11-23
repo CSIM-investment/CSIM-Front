@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-icons'
 </script>
 <template>
   <div class="relative top-0 h-16 w-full flex justify-between">
     <RouterLink to="#" class="flex justify-center p-2 md:ml-8">
-      <img src="/src/common/assets/images/CSIM.svg" alt="csim-logo" />
+      <img src="/src/common/assets/images/CSIM.svg" alt="csim-logo">
     </RouterLink>
     <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
@@ -23,7 +22,7 @@ import { faChartLine, faNewspaper, faWallet } from '@fortawesome/free-solid-svg-
         <span class="text-xs font-bold">Michael Smith</span>
       </div>
       <div class="ml-2">
-        <img src="/src/common/assets/images/user.png" alt="user-photo" />
+        <img src="/src/common/assets/images/user.png" alt="user-photo">
       </div>
     </div>
   </div>
