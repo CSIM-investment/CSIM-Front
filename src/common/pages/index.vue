@@ -71,15 +71,15 @@ function AmountColor(data: any) {
       </div>
       <div class="mt-10 mb-10 flex justify-center">
         <div class="flex items-center pr-10">
-          <img src="/public/bitcoin.png" class="mr-3" width="40px" height="40px">
+          <img src="/public/bitcoin.png" alt="bitcoin-logo" class="mr-3" width="40px" height="40px">
           <span> Bitcoin </span>
         </div>
         <div class="flex items-center pr-10">
-          <img src="/public/etherium.png" class="mr-3" width="40px" height="40px">
+          <img src="/public/etherium.png" alt="etherium-logo" class="mr-3" width="40px" height="40px">
           <span> Etherium </span>
         </div>
         <div class="flex items-center">
-          <img src="/public/litecoin.png" class="mr-3" width="40px" height="40px">
+          <img src="/public/litecoin.png" alt="litecoin-logo" class="mr-3" width="40px" height="40px">
           <span> Litecoin </span>
         </div>
       </div>
@@ -120,7 +120,7 @@ function AmountColor(data: any) {
     </div>
     <div class="xl:flex-row md:flex-row sm:flex-row flex xs:flex-col card-container justify-around mb-10">
       <div class="card-pres flex-col flex xl:w-1/4 xs:w-full xs:mt-7 mt-8 justify-evenly rounded-lg">
-        <img class="gif mt-7 mb-7" src="/src/common/assets/images/bitcoin.svg" width="50%" height="50%">
+        <img class="gif mt-7 mb-7" alt="bitcoin-logo" src="/src/common/assets/images/bitcoin.svg" width="50%" height="50%">
         <div class="mt-7 mr-5 ml-5">
           <span class="font-bold">Regarder les cryptomonaie avec CSIM market</span>
           <p class="mt-7 paragraphe">
@@ -138,10 +138,10 @@ function AmountColor(data: any) {
             crypto.
           </p>
         </div>
-        <img class="gif" src="/src/common/assets/images/window.svg" width="50%" height="50%">
+        <img class="gif" alt="window-svg" src="/src/common/assets/images/window.svg" width="50%" height="50%">
       </div>
       <div class="card-pres xl:w-1/4 xs:w-full flex flex-col mt-8 justify-evenly rounded-lg">
-        <img class="gif mt-7 mb-5" src="/src/common/assets/images/dashboard.svg" width="50%" height="50%">
+        <img class="gif mt-7 mb-5" alt="dashboard-svg" src="/src/common/assets/images/dashboard.svg" width="50%" height="50%">
         <div class="mb-5 mr-5 ml-5">
           <span class="font-bold">Rester maître de votre wallet avec CSIM</span>
           <p class=" mt-7 space-x-2 paragraphe text-justify font-medium">
