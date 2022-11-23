@@ -5,9 +5,10 @@ export const useCryptoStore = defineStore({
   id: 'crypto',
   state: () => ({
     cryptos: [] as Array<Crypto>,
+    favorites: [] as Array<Crypto>,
   }),
   actions: {
-    setCryptos() {
+    setCryptos(): void {
       this.cryptos = [
         {
           id: 1,
@@ -29,10 +30,23 @@ export const useCryptoStore = defineStore({
         },
       ]
     },
+    setFavorite(crypto: Crypto): void {
+      if (this.favorites.includes(crypto)) {
+        const index = this.favorites.indexOf(crypto)
+        if (index !== -1)
+          this.favorites.splice(index, 1)
+      }
+      else {
+        this.favorites = [...this.favorites, crypto]
+      }
+    },
   },
   getters: {
     getCryptos(): Array<Crypto> {
       return this.cryptos
+    },
+    getFavorites(): Array<Crypto> {
+      return this.favorites
     },
   },
 })

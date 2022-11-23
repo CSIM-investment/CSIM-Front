@@ -13,6 +13,7 @@ import { computed, ref, watch } from 'vue'
 import { FilterMatchMode } from 'primevue/api'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
+import type { Crypto } from '~/interfaces/crypto.interface'
 
 const cryptoStore = useCryptoStore()
 cryptoStore.setCryptos()
@@ -32,7 +33,7 @@ const columns = ref<any>([
 ])
 
 const selectedColumns = ref<any>(columns.value)
-const onToggle = (val: any) => {
+const onToggle = (val: any): void => {
   selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
 }
 
@@ -45,7 +46,7 @@ const columnIsSelected = (col: string): boolean => {
 const messages = ref<Array<any>>([])
 const messageLife = ref<number>(4000)
 const messageId = ref<number>(0)
-const addMessages = () => {
+const addMessages = (): void => {
   messages.value = [
     {
       severity: 'success',
@@ -53,7 +54,7 @@ const addMessages = () => {
       id: messageId.value++,
     },
   ]
-  setTimeout(() => {
+  setTimeout((): void => {
     messages.value = []
   }, messageLife.value + 500)
 }
@@ -67,8 +68,17 @@ const maxCap = ref<any>(null)
 const minChanges = ref<any>(null)
 const maxChanges = ref<any>(null)
 
-const cryptosFiltered = computed(() => {
+const displayFavorites = ref<boolean>(false)
+const isFavorite = (crypto: Crypto): boolean => {
+  return cryptoStore.getFavorites.includes(crypto)
+}
+
+const cryptosFiltered = computed((): Array<Crypto> => {
   let _cryptos = cryptos
+
+  if (displayFavorites.value)
+    _cryptos = cryptoStore.getFavorites
+
   if (minPrice.value)
     _cryptos = _cryptos.filter(crypto => crypto.price >= minPrice.value)
   if (maxPrice.value)
@@ -85,26 +95,26 @@ const cryptosFiltered = computed(() => {
   return _cryptos
 })
 
-watch(cryptosFiltered, () => {
+watch(cryptosFiltered, (): void => {
   addMessages()
 })
 
-const resetPriceFilter = () => {
+const resetPriceFilter = (): void => {
   minPrice.value = null
   maxPrice.value = null
 }
 
-const resetCapFilter = () => {
+const resetCapFilter = (): void => {
   minCap.value = null
   maxCap.value = null
 }
 
-const resetChangesFilter = () => {
+const resetChangesFilter = (): void => {
   minChanges.value = null
   maxChanges.value = null
 }
 
-const resetFilters = () => {
+const resetFilters = (): void => {
   resetPriceFilter()
   resetCapFilter()
   resetChangesFilter()
@@ -145,6 +155,14 @@ const resetFilters = () => {
             />
           </div>
           <div class="m-2">
+            <Button
+              label="Favoris"
+              :class="displayFavorites ? '' : 'p-button-outlined'"
+              icon="pi pi-star-fill"
+              @click="displayFavorites = !displayFavorites"
+            />
+          </div>
+          <div class="m-2">
             <MultiSelect
               class="w-64"
               :model-value="selectedColumns"
@@ -157,9 +175,9 @@ const resetFilters = () => {
         </div>
       </template>
       <Column header-style="width: 3rem">
-        <template #body>
-          <div class="cursor-pointer">
-            <i class="pi pi-star" />
+        <template #body="{data}">
+          <div class="cursor-pointer" @click="cryptoStore.setFavorite(data)">
+            <i class="pi text-main-primary" :class="displayFavorites || isFavorite(data) ? 'pi-star-fill' : 'pi-star'" />
           </div>
         </template>
       </Column>
