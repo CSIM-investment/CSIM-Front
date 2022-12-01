@@ -1,0 +1,8 @@
+fragment UserSession  on User {
+    status
+    id
+    role
+    email
+    firstName
+    lastName
+}
