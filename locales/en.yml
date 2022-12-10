@@ -6,11 +6,27 @@ header:
   welcome: Welcome
 footer:
   company: Company
-  about: 'About us'
-  contact: 'Contact us'
+  about: About us
+  contact: Contact us
   gtcu: GTCU
   cookies: Cookies
-  terms: 'Terms and Privacy'
+  terms: Terms and Privacy
 market:
-  list: 'List of cryptocurrencies'
-  description: 'A list of all cryptocurrencies'
+  list: List of cryptocurrencies
+  description: A list of all cryptocurrencies
+cryptoList:
+  icon: Icon
+  name: Name
+  symbol: Symbol
+  price: Price
+  marketCap: Market Cap
+  changes: 24h changes
+  filtersApplied: Filters applied
+  search: Search
+  filters: Filters
+  favorites: Favorites
+  columns: Columns
+  emptyFavorites: You have no favorites yet
+  emptyCryptos: No cryptocurrency found
+  loading: Loading...
+  resetFilters: Reset filters
