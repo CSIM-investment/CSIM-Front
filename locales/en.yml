@@ -11,3 +11,6 @@ footer:
   gtcu: GTCU
   cookies: Cookies
   terms: 'Terms and Privacy'
+market:
+  list: 'List of cryptocurrencies'
+  description: 'A list of all cryptocurrencies'
