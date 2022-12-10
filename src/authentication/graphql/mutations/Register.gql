@@ -1,0 +1,6 @@
+mutation Register($createUserInput: CreateUserInput!) {
+  register(createUserInput: $createUserInput) {
+    id
+    status
+  }
+}

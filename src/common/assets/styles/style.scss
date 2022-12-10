@@ -4,8 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
+@import "primevue/resources/primevue.css";
+@import 'primeicons/primeicons.css';
 @import "components/index";
 
 :root {
-    --primary-color: red;
+  --primary-color: red;
+}
+
+html, body {
+  height: 100vh;
 }

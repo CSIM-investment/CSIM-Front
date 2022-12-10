@@ -5,11 +5,18 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AuthLayout: typeof import('./authentication/components/organisms/AuthLayout.vue')['default']
+    CodeInput: typeof import('./authentication/components/organisms/CodeInput.vue')['default']
     CryptoList: typeof import('./common/modules/market/components/organisms/CryptoList.vue')['default']
+    CsimLogo: typeof import('./common/components/atoms/CsimLogo.vue')['default']
     Footer: typeof import('./common/components/organisms/Footer.vue')['default']
     Header: typeof import('./common/components/organisms/Header.vue')['default']
+    LoadingPage: typeof import('./common/components/organisms/LoadingPage.vue')['default']
+    PasswordInput: typeof import('./common/components/molecules/PasswordInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Spinner: typeof import('./common/components/molecules/Spinner.vue')['default']
+    TextInput: typeof import('./common/components/molecules/TextInput.vue')['default']
   }
 }
 
