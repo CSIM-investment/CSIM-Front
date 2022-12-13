@@ -45,6 +45,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      appearance: ['hover', 'focus'],
+    },
+  },
   plugins: [],
 }

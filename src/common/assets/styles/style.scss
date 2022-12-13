@@ -7,7 +7,8 @@
 @import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
 @import "primevue/resources/primevue.css";
 @import 'primeicons/primeicons.css';
-@import "components/index";
+
+@import "components";
 
 :root {
   --primary-color: red;
@@ -15,4 +16,12 @@
 
 html, body {
   height: 100vh;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button,
+input[type='number'] {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield !important;
 }

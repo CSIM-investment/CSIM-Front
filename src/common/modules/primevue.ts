@@ -9,7 +9,7 @@ import Button from 'primevue/button'
 // import Calendar from 'primevue/calendar'
 // import Card from 'primevue/card'
 // import Carousel from 'primevue/carousel'
-// import Chart from 'primevue/chart'
+import Chart from 'primevue/chart'
 // import Checkbox from 'primevue/checkbox'
 // import Chip from 'primevue/chip'
 // import Chips from 'primevue/chips'
@@ -68,8 +68,8 @@ import Password from 'primevue/password'
 // import Timeline from 'primevue/timeline'
 import Toast from 'primevue/toast'
 // import Toolbar from 'primevue/toolbar'
-// import TabView from 'primevue/tabview'
-// import TabPanel from 'primevue/tabpanel'
+import TabView from 'primevue/tabview'
+import TabPanel from 'primevue/tabpanel'
 // import ToggleButton from 'primevue/togglebutton'
 // import Tree from 'primevue/tree'
 // import TreeTable from 'primevue/treetable'
@@ -114,7 +114,7 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('Calendar', Calendar)
   // app.component('Card', Card)
   // app.component('Carousel', Carousel)
-  // app.component('Chart', Chart)
+  app.component('Chart', Chart)
   // app.component('Checkbox', Checkbox)
   // app.component('Chip', Chip)
   // app.component('Chips', Chips)
@@ -167,8 +167,8 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('SplitterPanel', SplitterPanel)
   // app.component('Steps', Steps)
   // app.component('TabMenu', TabMenu)
-  // app.component('TabView', TabView)
-  // app.component('TabPanel', TabPanel)
+  app.component('TabView', TabView)
+  app.component('TabPanel', TabPanel)
   // app.component('Tag', Tag)
   // app.component('Textarea', Textarea)
   // app.component('TieredMenu', TieredMenu)

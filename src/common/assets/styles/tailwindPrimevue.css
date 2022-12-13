@@ -1855,6 +1855,10 @@
 .p-button.p-button-sm .p-button-icon {
     font-size: 0.875rem;
 }
+.p-button.p-button-icon-only.p-button-rounded.p-button-sm {
+    height: 2rem;
+    width: 2rem;
+}
 .p-button.p-button-lg {
     font-size: 1.25rem;
     padding: 0.9375rem 1.25rem;
