@@ -1,12 +1,9 @@
 import { ref } from 'vue'
-
 import {
   AccountDocument,
-
 } from '~/common/generated/graphql'
-
+import { useApollo } from '~/common/modules/apollo'
 import type { User as GqlUser } from '~/common/generated/graphql'
-import { apolloClient } from '~/common/services/graphql'
 
 export type User = Partial<GqlUser>
 
@@ -19,6 +16,8 @@ interface Session {
 
 export const useSessionStore = createGlobalState(
   () => {
+    const apollo = useApollo()
+
     const user = ref<User | undefined>()
     const accessToken = useStorage<Session['accessToken']>('accessToken', '')
     const refreshToken = useStorage<Session['refreshToken']>('refreshToken', '')
@@ -27,7 +26,7 @@ export const useSessionStore = createGlobalState(
     async function fetchSession(): Promise<void> {
       if (accessToken.value) {
         try {
-          const accountData = await apolloClient.query({
+          const accountData = await apollo.query({
             query: AccountDocument,
           })
 

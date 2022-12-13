@@ -1,0 +1,8 @@
+@layer components {
+  .chart-action {
+    @apply h-8 uppercase bg-white text-secondary font-bold text-sm hover:bg-primary-lighter rounded-md p-2
+  }
+  .chart-action.selected {
+    @apply bg-primary-lighter
+  }
+}

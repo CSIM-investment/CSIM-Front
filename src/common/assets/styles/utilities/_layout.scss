@@ -1,0 +1,8 @@
+@layer utilities {
+  .h-header {
+    @apply h-16;
+  }
+  .h-body {
+    height: calc(100vh - theme('height.16'));
+  }
+}

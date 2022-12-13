@@ -47,17 +47,12 @@ async function onLogin() {
 <template>
   <AuthLayout :title="t('login.title')" :subtitle="t('login.subtitle')">
     <form class="flex flex-col items-center gap-8 w-full" @submit.prevent="onLogin">
-      <InputText v-model="loginForm.email" type="text" class="text-input" placeholder="Email" />
-      <Password
+      <TextInput v-model="loginForm.email" placeholder="Email" />
+      <PasswordInput
         v-model="loginForm.password"
-        class="password-input"
         placeholder="Password"
-        toggle-mask
-        :feedback="false"
       />
-      <Button class="button w-2/3 mb-4" type="submit" :loading="loading">
-        Connexion
-      </Button>
+      <Button class="button w-2/3 mb-4" type="submit" :loading="!!loading" :label="t('login.action')"/>
     </form>
     <p>
       Pas de compte ?
@@ -67,3 +62,8 @@ async function onLogin() {
     </p>
   </AuthLayout>
 </template>
+
+<route lang="yaml">
+meta:
+  auth: false
+</route>

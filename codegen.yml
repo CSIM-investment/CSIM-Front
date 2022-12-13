@@ -1,5 +1,5 @@
 schema: ${VITE_GRAPHQL_URL}/graphql
-documents: 'src/**/graphql/**/*.gql'
+documents: 'src/**/graphql/**/*.(gql|graphql)'
 ignoreNoDocuments: true
 generates:
   src/common/generated/graphql.ts:

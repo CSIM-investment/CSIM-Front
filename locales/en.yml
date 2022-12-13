@@ -47,6 +47,10 @@ register:
   submit: Create your account
   next: Next
   back: Back
+  terms:
+    label: I accept the {termsLink} and the {privacyLink} of CSIM.
+    termsLink: Terms of Service
+    privacyLink: Privacy Policy
   placeholders:
     firstName: First name
     lastName: Last name
@@ -65,3 +69,38 @@ validators:
   email: Email is invalid
   sameAsPassword: Passwords does not match
   minLength: It must have {length} characters minimum.
+crypto:
+  details:
+    conversion:
+      title: Conversion
+    graphs:
+      title: Graphs
+    info:
+      title: Information
+    news:
+        title: News
+    notFound: Crypto not found
+  follow: Follow
+  buy: Buy
+  sell: Sell
+  current_price: Current price
+  price: Price | Prices
+  market_cap: Market cap | Market caps
+  circulating_supply: Circulating supply
+  market_cap_rank: Market cap rank
+  high_24h: High 24h
+  low_24h: Low 24h
+  total_volume: Total volume | Total volumes
+  change_24h: Change 24h
+  total_supply: Total supply
+  last_updated: Last updated
+error:
+  404:
+    title: Page not found
+    subtitle: The page you are looking for does not exist.
+    back: Back to home
+  500:
+   title:
+     part1: An error has occurred,
+     part2: please reload the page
+     part3: or try again later.
