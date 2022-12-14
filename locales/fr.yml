@@ -1,4 +1,35 @@
 home: ceci est traduit
+header:
+  market: Marché
+  exchange: Echange
+  wallet: Portefeuille
+  welcome: Bienvenue
+footer:
+  company: Entreprise
+  about: Qui sommes-nous ?
+  contact: Nous contacter
+  gtcu: CGU
+  cookies: Cookies
+  terms: Données et sécurité
+market:
+  list: Liste des cryptomonnaies
+  description: Une liste de toutes les cryptomonnaies
+cryptoList:
+  icon: Icône
+  name: Nom
+  symbol: Symbole
+  price: Prix
+  marketCap: Market Cap
+  changes: Changement 24h
+  filtersApplied: Filtres appliqués
+  search: Rechercher
+  filters: Filtres
+  favorites: Favoris
+  columns: Colonnes
+  emptyFavorites: Vous n'avez aucun favori
+  emptyCryptos: Aucune cryptomonnaie trouvée
+  loading: Chargement...
+  resetFilters: Annuler les filtres
 loading: Chargement
 auth:
   description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
