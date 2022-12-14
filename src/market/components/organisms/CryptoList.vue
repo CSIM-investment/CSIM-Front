@@ -12,6 +12,7 @@ import Message from 'primevue/message'
 import { computed, ref, watch } from 'vue'
 import { FilterMatchMode } from 'primevue/api'
 import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
+import { debounce } from 'lodash'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
 import type { Crypto } from '~/interfaces/crypto.interface'
@@ -34,16 +35,9 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
   },
 })
 
-watch(result, () => {
-  console.log(result.value)
-})
-
-const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-})
-
-watch(filters, () => {
-  refetch({
+const debouncedRefetch = debounce(() => {
+  console.log('bebounced')
+  return refetch({
     options: {
       filterBy: {
         pagination: {
@@ -55,7 +49,20 @@ watch(filters, () => {
       },
     },
   })
+}, 1500)
+
+watch(result, () => {
+  console.log(result.value)
 })
+
+const filters = ref({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+})
+
+watch(filters, () => {
+  console.log(filters.value.global.value)
+  debouncedRefetch()
+}, { deep: true })
 
 const columns = ref<any>([
   { field: 'icon', header: 'Icône' },
