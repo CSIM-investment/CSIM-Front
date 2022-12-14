@@ -1,5 +1,3 @@
-const numberFormatEURO = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' })
-const numberFormatUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 const dateFormat = new Intl.DateTimeFormat('fr-FR')
 
 export const format = {

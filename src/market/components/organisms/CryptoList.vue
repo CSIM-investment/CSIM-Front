@@ -67,10 +67,6 @@ const filters = ref({
 }, { deep: true }) */
 
 const columns = ref<any>([
-  { field: 'icon', header: t('cryptoList.icon') },
-  { field: 'name', header: t('cryptoList.name') },
-  { field: 'symbol', header: t('cryptoList.symbol') },
-  { field: 'current_price', header: t('cryptoList.price') },
   { field: 'market_cap', header: t('cryptoList.marketCap') },
   { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
 ])
@@ -235,14 +231,13 @@ const resetFilters = (): void => {
           </div>
         </template>
       </Column>
-      <Column v-if="columnIsSelected('icon')" header-style="width: 7rem">
+      <Column header-style="width: 7rem">
         <template #body="{ data }">
           <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
         </template>
       </Column>
-      <Column v-if="columnIsSelected('name')" field="name" :header="t('cryptoList.name')" />
+      <Column field="name" :header="t('cryptoList.name')" />
       <Column
-        v-if="columnIsSelected('symbol')"
         field="symbol"
         :header="t('cryptoList.symbol')"
       >
@@ -251,7 +246,6 @@ const resetFilters = (): void => {
         </template>
       </Column>
       <Column
-        v-if="columnIsSelected('current_price')"
         field="current_price"
         :sortable="true"
         :header="t('cryptoList.price')"
