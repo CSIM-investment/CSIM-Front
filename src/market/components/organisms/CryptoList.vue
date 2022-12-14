@@ -17,6 +17,7 @@ import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
 import type { Crypto } from '~/interfaces/crypto.interface'
 import { useGetCryptosListQuery } from '~/common/generated/graphql'
+const { t } = useI18n()
 
 const cryptoStore = useCryptoStore()
 cryptoStore.setCryptos()
@@ -65,12 +66,12 @@ watch(filters, () => {
 }, { deep: true })
 
 const columns = ref<any>([
-  { field: 'icon', header: 'Icône' },
-  { field: 'name', header: 'Nom' },
-  { field: 'symbol', header: 'Symbole' },
-  { field: 'price', header: 'Prix' },
-  { field: 'marketCap', header: 'Market Cap' },
-  { field: 'changes', header: 'Changement 24h' },
+  { field: 'icon', header: t('cryptoList.icon') },
+  { field: 'name', header: t('cryptoList.name') },
+  { field: 'symbol', header: t('cryptoList.symbol') },
+  { field: 'price', header: t('cryptoList.price') },
+  { field: 'marketCap', header: t('cryptoList.marketCap') },
+  { field: 'changes', header: t('cryptoList.changes') },
 ])
 
 const selectedColumns = ref<any>(columns.value)
@@ -91,7 +92,7 @@ const addMessages = (): void => {
   messages.value = [
     {
       severity: 'success',
-      content: 'Filtres appliqués',
+      content: t('cryptoList.filtersApplied'),
       id: messageId.value++,
     },
   ]
@@ -166,7 +167,7 @@ const resetFilters = (): void => {
   <div>
     <DataTable
       v-model:filters="filters"
-      :value="cryptosFiltered"
+      :value=""
       :paginator="true"
       :row-hover="true"
       :rows="10"
@@ -184,13 +185,13 @@ const resetFilters = (): void => {
               <i class="pi pi-search mr-4" />
               <InputText
                 v-model="filters['global'].value"
-                placeholder="Rechercher"
+                :placeholder="t('cryptoList.search')"
               />
             </span>
           </div>
           <div class="m-2">
             <Button
-              label="Filtres"
+              :label="t('cryptoList.filters')"
               class="p-button-outlined"
               icon="pi pi-filter"
               @click="visibleRight = true"
@@ -198,7 +199,7 @@ const resetFilters = (): void => {
           </div>
           <div class="m-2">
             <Button
-              label="Favoris"
+              :label="t('cryptoList.favorites')"
               :class="displayFavorites ? '' : 'p-button-outlined'"
               icon="pi pi-star-fill"
               @click="displayFavorites = !displayFavorites"
@@ -210,7 +211,7 @@ const resetFilters = (): void => {
               :model-value="selectedColumns"
               :options="columns"
               option-label="header"
-              placeholder="Colonnes"
+              :placeholder="t('cryptoList.columns')"
               @update:model-value="onToggle"
             />
           </div>
@@ -219,12 +220,12 @@ const resetFilters = (): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faBitcoinSign" />
-          {{ isFavorite ? "Vous n'avez aucun favori" : 'Aucune cryptomonnaies trouvée' }}
+          {{ isFavorite ? t('cryptoList.emptyFavorites') : t('cryptoList.emptyCryptos') }}
         </div>
       </template>
       <template #loading>
         <font-awesome-icon class="mr-1" :icon="faHourglass" />
-        Chargement...
+        {{ t('cryptoList.loading') }}
       </template>
       <Column header-style="width: 3rem">
         <template #body="{data}">
@@ -238,17 +239,17 @@ const resetFilters = (): void => {
           <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
         </template>
       </Column>
-      <Column v-if="columnIsSelected('name')" field="name" header="Nom" />
+      <Column v-if="columnIsSelected('name')" field="name" :header="t('cryptoList.name')" />
       <Column
         v-if="columnIsSelected('symbol')"
         field="symbol"
-        header="Symbole"
+        :header="t('cryptoList.symbol')"
       />
       <Column
         v-if="columnIsSelected('price')"
         field="price"
-        sortable
-        header="Prix"
+        :sortable="true"
+        :header="t('cryptoList.price')"
       >
         <template #body="{ data }">
           {{ format.dollarPrice(data.price) }}
@@ -257,8 +258,8 @@ const resetFilters = (): void => {
       <Column
         v-if="columnIsSelected('marketCap')"
         field="marketCap"
-        sortable
-        header="Market Cap"
+        :sortable="true"
+        :header="t('cryptoList.marketCap')"
       >
         <template #body="{ data }">
           {{ format.cap(data.marketCap) }}
@@ -267,8 +268,8 @@ const resetFilters = (): void => {
       <Column
         v-if="columnIsSelected('changes')"
         field="changes"
-        sortable
-        header="Changement 24h"
+        :sortable="true"
+        :header="t('cryptoList.changes')"
       >
         <template #body="{ data }">
           <div :class="data.changes >= 0 ? 'text-green' : 'text-red'">
@@ -291,6 +292,7 @@ const resetFilters = (): void => {
               :life="messageLife"
               :sticky="false"
               :severity="msg.severity"
+              :closable="false"
             >
               {{ msg.content }}
             </Message>
@@ -299,14 +301,14 @@ const resetFilters = (): void => {
       </template>
       <div class="mt-8">
         <h2 class="font-bold text-2xl">
-          Filtres
+          {{ t('cryptoList.filters') }}
         </h2>
         <div class="my-4">
           <Accordion class="accordion-custom">
             <AccordionTab>
               <template #header>
                 <i class="pi pi-dollar mr-2" />
-                <span>Prix</span>
+                <span>{{ t('cryptoList.price') }}</span>
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
@@ -335,7 +337,7 @@ const resetFilters = (): void => {
             <AccordionTab>
               <template #header>
                 <i class="pi pi-flag mr-2" />
-                <span>Market Cap</span>
+                <span>{{ t('cryptoList.marketCap') }}</span>
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
@@ -360,7 +362,7 @@ const resetFilters = (): void => {
             <AccordionTab>
               <template #header>
                 <i class="pi pi-sort-alt mr-2" />
-                <span>Changement 24h</span>
+                <span>{{ t('cryptoList.changes') }}</span>
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
@@ -391,7 +393,7 @@ const resetFilters = (): void => {
       </div>
       <div class="flex flex-wrap justify-end">
         <Button
-          label="Annuler les filtres"
+          :label="t('cryptoList.resetFilters')"
           background
           class="p-button-outlined"
           icon="pi pi-refresh"

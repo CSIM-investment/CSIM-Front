@@ -1,12 +1,14 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { t } = useI18n()
+</script>
 
 <template>
   <div class="my-10 mx-8">
     <div class="mb-10">
       <h1 class="font-bold text-4xl">
-        Liste des cryptomonnaies
+        {{ t('market.list') }}
       </h1>
-      <span>Une liste de toutes les cryptomonnaies</span>
+      <span>{{ t('market.description') }}</span>
     </div>
     <div>
       <CryptoList />
