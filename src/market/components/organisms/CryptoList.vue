@@ -23,6 +23,15 @@ const cryptoStore = useCryptoStore()
 cryptoStore.setCryptos()
 const cryptos = cryptoStore.getCryptos
 
+const visibleRight = ref<boolean>(false)
+const minPrice = ref<any>(null)
+const maxPrice = ref<any>(null)
+const minCap = ref<any>(null)
+const maxCap = ref<any>(null)
+const minChanges = ref<any>(null)
+const maxChanges = ref<any>(null)
+const search = ref<any>(null)
+
 const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
     filterBy: {
@@ -38,7 +47,6 @@ const cryptoList = computed(() => {
 })
 
 const debouncedRefetch = debounce(() => {
-  console.log('bebounced')
   return refetch({
     options: {
       filterBy: {
@@ -46,15 +54,15 @@ const debouncedRefetch = debounce(() => {
           start: 0, end: 10,
         },
         search: {
-          name: 'bitcoin',
+          name: search.value,
         },
       },
     },
   })
-}, 1500)
+}, 500)
 
-watch(result, () => {
-  console.log(result.value)
+watch(search, () => {
+  debouncedRefetch()
 })
 
 const filters = ref({
@@ -98,25 +106,8 @@ const addMessages = (): void => {
   }, messageLife.value + 500)
 }
 
-const visibleRight = ref<boolean>(false)
-
-const minPrice = ref<any>(null)
-const maxPrice = ref<any>(null)
-const minCap = ref<any>(null)
-const maxCap = ref<any>(null)
-const minChanges = ref<any>(null)
-const maxChanges = ref<any>(null)
-
-const displayFavorites = ref<boolean>(false)
-const isFavorite = (crypto: Crypto): boolean => {
-  return cryptoStore.getFavorites.includes(crypto)
-}
-
 const cryptosFiltered = computed((): Array<Crypto> => {
   let _cryptos = cryptos
-
-  if (displayFavorites.value)
-    _cryptos = cryptoStore.getFavorites
 
   if (minPrice.value)
     _cryptos = _cryptos.filter(crypto => crypto.price >= minPrice.value)
@@ -181,7 +172,7 @@ const resetFilters = (): void => {
             <span>
               <i class="pi pi-search mr-4" />
               <InputText
-                v-model="filters['global'].value"
+                v-model="search"
                 :placeholder="t('cryptoList.search')"
               />
             </span>
@@ -197,9 +188,8 @@ const resetFilters = (): void => {
           <div class="m-2">
             <Button
               :label="t('cryptoList.favorites')"
-              :class="displayFavorites ? '' : 'p-button-outlined'"
+              :class="false ? '' : 'p-button-outlined'"
               icon="pi pi-star-fill"
-              @click="displayFavorites = !displayFavorites"
             />
           </div>
           <div class="m-2">
@@ -217,7 +207,7 @@ const resetFilters = (): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faBitcoinSign" />
-          {{ isFavorite ? t('cryptoList.emptyFavorites') : t('cryptoList.emptyCryptos') }}
+          {{ false ? t('cryptoList.emptyFavorites') : t('cryptoList.emptyCryptos') }}
         </div>
       </template>
       <template #loading>
@@ -226,8 +216,8 @@ const resetFilters = (): void => {
       </template>
       <Column header-style="width: 3rem">
         <template #body="{data}">
-          <div class="cursor-pointer" @click="cryptoStore.setFavorite(data)">
-            <i class="pi text-main-primary" :class="displayFavorites || isFavorite(data) ? 'pi-star-fill' : 'pi-star'" />
+          <div class="cursor-pointer">
+            <i class="pi text-main-primary" :class="false ? 'pi-star-fill' : 'pi-star'" />
           </div>
         </template>
       </Column>
