@@ -1,0 +1,9 @@
+query GetCryptosList($options: CryptoSearchInput!){
+    cryptos(options: $options){
+        id
+        name
+        current_price
+        market_cap
+        current_price
+    }
+}

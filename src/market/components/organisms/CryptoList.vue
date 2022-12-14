@@ -15,13 +15,46 @@ import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
 import type { Crypto } from '~/interfaces/crypto.interface'
+import { useGetCryptosListQuery } from '~/common/generated/graphql'
 
 const cryptoStore = useCryptoStore()
 cryptoStore.setCryptos()
 const cryptos = cryptoStore.getCryptos
 
+const { result, error, loading, refetch } = useGetCryptosListQuery({
+  options: {
+    filterBy: {
+      pagination: {
+        start: 0, end: 20,
+      },
+      search: {
+        name: 'Bitcoin',
+      },
+    },
+  },
+})
+
+watch(result, () => {
+  console.log(result.value)
+})
+
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+})
+
+watch(filters, () => {
+  refetch({
+    options: {
+      filterBy: {
+        pagination: {
+          start: 0, end: 20,
+        },
+        search: {
+          name: 'bitcoin',
+        },
+      },
+    },
+  })
 })
 
 const columns = ref<any>([
@@ -135,6 +168,7 @@ const resetFilters = (): void => {
       :global-filter-fields="['name', 'symbol']"
       :rows-per-page-options="[10, 25, 50]"
       responsive-layout="scroll"
+      :loading="!!loading"
     >
       <template #header>
         <div class="flex flex-wrap">
