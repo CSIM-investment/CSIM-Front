@@ -10,18 +10,11 @@ import AccordionTab from 'primevue/accordiontab'
 import InputNumber from 'primevue/inputnumber'
 import Message from 'primevue/message'
 import { computed, ref, watch } from 'vue'
-import { FilterMatchMode } from 'primevue/api'
 import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { debounce } from 'lodash'
-import { useCryptoStore } from '~/stores/crypto'
 import { format } from '~/support/format'
-import type { Crypto } from '~/interfaces/crypto.interface'
 import { useGetCryptosListQuery } from '~/common/generated/graphql'
 const { t } = useI18n()
-
-const cryptoStore = useCryptoStore()
-cryptoStore.setCryptos()
-const cryptos = cryptoStore.getCryptos
 
 const visibleRight = ref<boolean>(false)
 const minPrice = ref<any>(null)
@@ -30,7 +23,14 @@ const minCap = ref<any>(null)
 const maxCap = ref<any>(null)
 const minChanges = ref<any>(null)
 const maxChanges = ref<any>(null)
-const search = ref<any>(null)
+const search = ref<any>('')
+
+const filters = ref<any>({
+  minPrice: null,
+  maxPrice: null,
+  minCap: null,
+  maxCap: null,
+})
 
 const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
@@ -45,50 +45,6 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
 const cryptoList = computed(() => {
   return result?.value?.cryptos ?? []
 })
-
-const debouncedRefetch = debounce(() => {
-  return refetch({
-    options: {
-      filterBy: {
-        pagination: {
-          start: 0, end: 10,
-        },
-        search: {
-          name: search.value,
-        },
-      },
-    },
-  })
-}, 500)
-
-watch(search, () => {
-  debouncedRefetch()
-})
-
-const filters = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-})
-
-/* watch(filters, () => {
-  console.log(filters.value.global.value)
-  debouncedRefetch()
-}, { deep: true }) */
-
-const columns = ref<any>([
-  { field: 'market_cap', header: t('cryptoList.marketCap') },
-  { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
-])
-
-const selectedColumns = ref<any>(columns.value)
-const onToggle = (val: any): void => {
-  selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
-}
-
-const columnIsSelected = (col: string): boolean => {
-  return selectedColumns.value.some(
-    (column: { field: string }) => column.field === col,
-  )
-}
 
 const messages = ref<Array<any>>([])
 const messageLife = ref<number>(4000)
@@ -106,28 +62,49 @@ const addMessages = (): void => {
   }, messageLife.value + 500)
 }
 
-const cryptosFiltered = computed((): Array<Crypto> => {
-  let _cryptos = cryptos
+const debouncedRefetch = debounce(() => {
+  return refetch({
+    options: {
+      filterBy: {
+        pagination: {
+          start: 0, end: 10,
+        },
+        search: {
+          name: search.value,
+        },
+        min_current_price: filters.value.minPrice,
+        max_current_price: filters.value.maxPrice,
+        min_cap: filters.value.minCap,
+        max_cap: filters.value.maxCap,
+      },
+    },
+  })
+}, 500)
 
-  if (minPrice.value)
-    _cryptos = _cryptos.filter(crypto => crypto.price >= minPrice.value)
-  if (maxPrice.value)
-    _cryptos = _cryptos.filter(crypto => crypto.price <= maxPrice.value)
-  if (minCap.value)
-    _cryptos = _cryptos.filter(crypto => crypto.marketCap >= minCap.value)
-  if (maxCap.value)
-    _cryptos = _cryptos.filter(crypto => crypto.marketCap <= maxCap.value)
-  if (minChanges.value)
-    _cryptos = _cryptos.filter(crypto => crypto.changes >= minChanges.value)
-  if (maxChanges.value)
-    _cryptos = _cryptos.filter(crypto => crypto.changes <= maxChanges.value)
-
-  return _cryptos
+watch(search, () => {
+  debouncedRefetch()
 })
 
-watch(cryptosFiltered, (): void => {
+watch(filters, () => {
+  debouncedRefetch()
   addMessages()
-})
+}, { deep: true })
+
+const columns = ref<any>([
+  { field: 'market_cap', header: t('cryptoList.marketCap') },
+  { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
+])
+
+const selectedColumns = ref<any>(columns.value)
+const onToggle = (val: any): void => {
+  selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
+}
+
+const columnIsSelected = (col: string): boolean => {
+  return selectedColumns.value.some(
+    (column: { field: string }) => column.field === col,
+  )
+}
 
 const resetPriceFilter = (): void => {
   minPrice.value = null
@@ -154,7 +131,6 @@ const resetFilters = (): void => {
 <template>
   <div>
     <DataTable
-      v-model:filters="filters"
       :value="cryptoList"
       :paginator="true"
       :row-hover="true"
@@ -301,7 +277,7 @@ const resetFilters = (): void => {
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
-                  v-model="minPrice"
+                  v-model="filters.minPrice"
                   class="my-2 lg:my-auto"
                   placeholder="min"
                   mode="currency"
@@ -309,7 +285,7 @@ const resetFilters = (): void => {
                   locale="en-US"
                 />
                 <InputNumber
-                  v-model="maxPrice"
+                  v-model="filters.maxPrice"
                   class="my-2 lg:my-auto"
                   placeholder="max"
                   mode="currency"
@@ -330,13 +306,13 @@ const resetFilters = (): void => {
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
-                  v-model="minCap"
+                  v-model="filters.minCap"
                   class="my-2 lg:my-auto"
                   placeholder="min"
                   :min="1"
                 />
                 <InputNumber
-                  v-model="maxCap"
+                  v-model="filters.maxCap"
                   class="my-2 lg:my-auto"
                   placeholder="max"
                   :min="1"
@@ -348,7 +324,7 @@ const resetFilters = (): void => {
                 />
               </div>
             </AccordionTab>
-            <AccordionTab>
+            <!--            <AccordionTab>
               <template #header>
                 <i class="pi pi-sort-alt mr-2" />
                 <span>{{ t('cryptoList.changes') }}</span>
@@ -376,7 +352,7 @@ const resetFilters = (): void => {
                   @click="resetChangesFilter"
                 />
               </div>
-            </AccordionTab>
+            </AccordionTab>-->
           </Accordion>
         </div>
       </div>
