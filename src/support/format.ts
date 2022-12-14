@@ -4,11 +4,11 @@ const dateFormat = new Intl.DateTimeFormat('fr-FR')
 
 export const format = {
   euroPrice: (price: number) => {
-    return numberFormatEURO.format(price)
+    return `${price}€`
   },
 
   dollarPrice: (price: number) => {
-    return numberFormatUSD.format(price)
+    return `$${price}`
   },
 
   date: (date: Date) => {

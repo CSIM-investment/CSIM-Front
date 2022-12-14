@@ -27,13 +27,14 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
     filterBy: {
       pagination: {
-        start: 0, end: 20,
-      },
-      search: {
-        name: 'Bitcoin',
+        start: 0, end: 10,
       },
     },
   },
+})
+
+const cryptoList = computed(() => {
+  return result?.value?.cryptos ?? []
 })
 
 const debouncedRefetch = debounce(() => {
@@ -42,7 +43,7 @@ const debouncedRefetch = debounce(() => {
     options: {
       filterBy: {
         pagination: {
-          start: 0, end: 20,
+          start: 0, end: 10,
         },
         search: {
           name: 'bitcoin',
@@ -60,18 +61,18 @@ const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 })
 
-watch(filters, () => {
+/* watch(filters, () => {
   console.log(filters.value.global.value)
   debouncedRefetch()
-}, { deep: true })
+}, { deep: true }) */
 
 const columns = ref<any>([
   { field: 'icon', header: t('cryptoList.icon') },
   { field: 'name', header: t('cryptoList.name') },
   { field: 'symbol', header: t('cryptoList.symbol') },
-  { field: 'price', header: t('cryptoList.price') },
-  { field: 'marketCap', header: t('cryptoList.marketCap') },
-  { field: 'changes', header: t('cryptoList.changes') },
+  { field: 'current_price', header: t('cryptoList.price') },
+  { field: 'market_cap', header: t('cryptoList.marketCap') },
+  { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
 ])
 
 const selectedColumns = ref<any>(columns.value)
@@ -167,7 +168,7 @@ const resetFilters = (): void => {
   <div>
     <DataTable
       v-model:filters="filters"
-      :value=""
+      :value="cryptoList"
       :paginator="true"
       :row-hover="true"
       :rows="10"
@@ -244,36 +245,40 @@ const resetFilters = (): void => {
         v-if="columnIsSelected('symbol')"
         field="symbol"
         :header="t('cryptoList.symbol')"
-      />
+      >
+        <template #body="{ data }">
+          {{ data.symbol.toUpperCase() }}
+        </template>
+      </Column>
       <Column
-        v-if="columnIsSelected('price')"
-        field="price"
+        v-if="columnIsSelected('current_price')"
+        field="current_price"
         :sortable="true"
         :header="t('cryptoList.price')"
       >
         <template #body="{ data }">
-          {{ format.dollarPrice(data.price) }}
+          {{ format.dollarPrice(data.current_price) }}
         </template>
       </Column>
       <Column
-        v-if="columnIsSelected('marketCap')"
-        field="marketCap"
+        v-if="columnIsSelected('market_cap')"
+        field="market_cap"
         :sortable="true"
         :header="t('cryptoList.marketCap')"
       >
         <template #body="{ data }">
-          {{ format.cap(data.marketCap) }}
+          {{ format.cap(data.market_cap) }}
         </template>
       </Column>
       <Column
-        v-if="columnIsSelected('changes')"
-        field="changes"
+        v-if="columnIsSelected('price_change_percentage_24h')"
+        field="price_change_percentage_24h"
         :sortable="true"
         :header="t('cryptoList.changes')"
       >
         <template #body="{ data }">
-          <div :class="data.changes >= 0 ? 'text-green' : 'text-red'">
-            {{ format.percentage(data.changes) }}
+          <div :class="data.price_change_percentage_24h >= 0 ? 'text-success' : 'text-error'">
+            {{ format.percentage(data.price_change_percentage_24h) }}
           </div>
         </template>
       </Column>
