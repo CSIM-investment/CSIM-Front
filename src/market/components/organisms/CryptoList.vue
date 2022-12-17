@@ -18,20 +18,26 @@ const { t } = useI18n()
 
 const visibleRight = ref<boolean>(false)
 const search = ref<any>('')
+const totalRecords = ref(100)
 
 const filters = ref<any>({
   minPrice: null,
   maxPrice: null,
   minCap: null,
   maxCap: null,
+  rowsPerPage: 10,
+  pagination: {
+    start: 0,
+    end: 10,
+  },
 })
 
 const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
     filterBy: {
       pagination: {
-        start: 0,
-        end: 10,
+        start: filters.value.pagination.start,
+        end: filters.value.pagination.end,
       },
     },
   },
@@ -62,8 +68,8 @@ const debouncedRefetch = debounce(() => {
     options: {
       filterBy: {
         pagination: {
-          start: 0,
-          end: 10,
+          start: filters.value.pagination.start,
+          end: filters.value.pagination.end,
         },
         search: {
           name: search.value,
@@ -120,6 +126,12 @@ const resetFilters = (): void => {
   resetPriceFilter()
   resetCapFilter()
 }
+
+const onPage = (event: any) => {
+  filters.value.rowsPerPage = event.rows
+  filters.value.pagination.start = event.first
+  filters.value.pagination.end = event.first + event.rows
+}
 </script>
 
 <template>
@@ -128,13 +140,15 @@ const resetFilters = (): void => {
       :value="cryptoList"
       :paginator="true"
       :row-hover="true"
-      :rows="10"
+      :rows="filters.rowsPerPage"
       filter-display="menu"
+      :lazy="true"
       paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-      :global-filter-fields="['name', 'symbol']"
+      :total-records="totalRecords"
       :rows-per-page-options="[10, 25, 50]"
       responsive-layout="scroll"
       :loading="!!loading"
+      @page="onPage($event)"
     >
       <template #header>
         <div class="flex flex-wrap">
