@@ -1,73 +1,69 @@
 <script lang="ts" setup>
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
-import InputText from 'primevue/inputtext'
-import MultiSelect from 'primevue/multiselect'
-import Sidebar from 'primevue/sidebar'
-import Button from 'primevue/button'
-import Accordion from 'primevue/accordion'
-import AccordionTab from 'primevue/accordiontab'
-import InputNumber from 'primevue/inputnumber'
-import Message from 'primevue/message'
-import { computed, ref, watch } from 'vue'
-import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
-import { debounce } from 'lodash'
-import { format } from '~/support/format'
-import { useGetCryptosListQuery } from '~/common/generated/graphql'
-const { t } = useI18n()
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import InputText from "primevue/inputtext";
+import MultiSelect from "primevue/multiselect";
+import Sidebar from "primevue/sidebar";
+import Button from "primevue/button";
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
+import InputNumber from "primevue/inputnumber";
+import Message from "primevue/message";
+import { computed, ref, watch } from "vue";
+import { faBitcoinSign, faHourglass } from "@fortawesome/free-solid-svg-icons";
+import { debounce } from "lodash";
+import { format } from "~/support/format";
+import { useGetCryptosListQuery } from "~/common/generated/graphql";
+const { t } = useI18n();
 
-const visibleRight = ref<boolean>(false)
-const minPrice = ref<any>(null)
-const maxPrice = ref<any>(null)
-const minCap = ref<any>(null)
-const maxCap = ref<any>(null)
-const minChanges = ref<any>(null)
-const maxChanges = ref<any>(null)
-const search = ref<any>('')
+const visibleRight = ref<boolean>(false);
+const search = ref<any>("");
 
 const filters = ref<any>({
   minPrice: null,
   maxPrice: null,
   minCap: null,
   maxCap: null,
-})
+});
 
 const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
     filterBy: {
       pagination: {
-        start: 0, end: 10,
+        start: 0,
+        end: 10,
       },
     },
   },
-})
+});
 
 const cryptoList = computed(() => {
-  return result?.value?.cryptos ?? []
-})
+  return result?.value?.cryptos ?? [];
+});
 
-const messages = ref<Array<any>>([])
-const messageLife = ref<number>(4000)
-const messageId = ref<number>(0)
+const messages = ref<Array<any>>([]);
+const messageLife = ref<number>(4000);
+const messageId = ref<number>(0);
 const addMessages = (): void => {
   messages.value = [
     {
-      severity: 'success',
-      content: t('cryptoList.filtersApplied'),
+      severity: "success",
+      content: t("cryptoList.filtersApplied"),
       id: messageId.value++,
     },
-  ]
+  ];
   setTimeout((): void => {
-    messages.value = []
-  }, messageLife.value + 500)
-}
+    messages.value = [];
+  }, messageLife.value + 500);
+};
 
 const debouncedRefetch = debounce(() => {
   return refetch({
     options: {
       filterBy: {
         pagination: {
-          start: 0, end: 10,
+          start: 0,
+          end: 10,
         },
         search: {
           name: search.value,
@@ -78,54 +74,52 @@ const debouncedRefetch = debounce(() => {
         max_cap: filters.value.maxCap,
       },
     },
-  })
-}, 500)
+  });
+}, 500);
 
 watch(search, () => {
-  debouncedRefetch()
-})
+  debouncedRefetch();
+});
 
-watch(filters, () => {
-  debouncedRefetch()
-  addMessages()
-}, { deep: true })
+watch(
+  filters,
+  () => {
+    debouncedRefetch();
+    addMessages();
+  },
+  { deep: true }
+);
 
 const columns = ref<any>([
-  { field: 'market_cap', header: t('cryptoList.marketCap') },
-  { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
-])
+  { field: "market_cap", header: t("cryptoList.marketCap") },
+  { field: "price_change_percentage_24h", header: t("cryptoList.changes") },
+]);
 
-const selectedColumns = ref<any>(columns.value)
+const selectedColumns = ref<any>(columns.value);
 const onToggle = (val: any): void => {
-  selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
-}
+  selectedColumns.value = columns.value.filter((col: any) => val.includes(col));
+};
 
 const columnIsSelected = (col: string): boolean => {
   return selectedColumns.value.some(
-    (column: { field: string }) => column.field === col,
-  )
-}
+    (column: { field: string }) => column.field === col
+  );
+};
 
 const resetPriceFilter = (): void => {
-  minPrice.value = null
-  maxPrice.value = null
-}
+  filters.value.minPrice = null;
+  filters.value.maxPrice = null;
+};
 
 const resetCapFilter = (): void => {
-  minCap.value = null
-  maxCap.value = null
-}
-
-const resetChangesFilter = (): void => {
-  minChanges.value = null
-  maxChanges.value = null
-}
+  filters.value.minCap = null;
+  filters.value.maxCap = null;
+};
 
 const resetFilters = (): void => {
-  resetPriceFilter()
-  resetCapFilter()
-  resetChangesFilter()
-}
+  resetPriceFilter();
+  resetCapFilter();
+};
 </script>
 
 <template>
@@ -183,30 +177,34 @@ const resetFilters = (): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faBitcoinSign" />
-          {{ false ? t('cryptoList.emptyFavorites') : t('cryptoList.emptyCryptos') }}
+          {{
+            false
+              ? t("cryptoList.emptyFavorites")
+              : t("cryptoList.emptyCryptos")
+          }}
         </div>
       </template>
       <template #loading>
         <font-awesome-icon class="mr-1" :icon="faHourglass" />
-        {{ t('cryptoList.loading') }}
+        {{ t("cryptoList.loading") }}
       </template>
       <Column header-style="width: 3rem">
-        <template #body="{data}">
+        <template #body="{ data }">
           <div class="cursor-pointer">
-            <i class="pi text-main-primary" :class="false ? 'pi-star-fill' : 'pi-star'" />
+            <i
+              class="pi text-main-primary"
+              :class="false ? 'pi-star-fill' : 'pi-star'"
+            />
           </div>
         </template>
       </Column>
       <Column header-style="width: 7rem">
         <template #body="{ data }">
-          <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
+          <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name" />
         </template>
       </Column>
       <Column field="name" :header="t('cryptoList.name')" />
-      <Column
-        field="symbol"
-        :header="t('cryptoList.symbol')"
-      >
+      <Column field="symbol" :header="t('cryptoList.symbol')">
         <template #body="{ data }">
           {{ data.symbol.toUpperCase() }}
         </template>
@@ -237,7 +235,13 @@ const resetFilters = (): void => {
         :header="t('cryptoList.changes')"
       >
         <template #body="{ data }">
-          <div :class="data.price_change_percentage_24h >= 0 ? 'text-success' : 'text-error'">
+          <div
+            :class="
+              data.price_change_percentage_24h >= 0
+                ? 'text-success'
+                : 'text-error'
+            "
+          >
             {{ format.percentage(data.price_change_percentage_24h) }}
           </div>
         </template>
@@ -266,14 +270,14 @@ const resetFilters = (): void => {
       </template>
       <div class="mt-8">
         <h2 class="font-bold text-2xl">
-          {{ t('cryptoList.filters') }}
+          {{ t("cryptoList.filters") }}
         </h2>
         <div class="my-4">
-          <Accordion class="accordion-custom">
+          <Accordion :multiple="true" class="accordion-custom">
             <AccordionTab>
               <template #header>
                 <i class="pi pi-dollar mr-2" />
-                <span>{{ t('cryptoList.price') }}</span>
+                <span>{{ t("cryptoList.price") }}</span>
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
@@ -302,7 +306,7 @@ const resetFilters = (): void => {
             <AccordionTab>
               <template #header>
                 <i class="pi pi-flag mr-2" />
-                <span>{{ t('cryptoList.marketCap') }}</span>
+                <span>{{ t("cryptoList.marketCap") }}</span>
               </template>
               <div class="flex flex-wrap justify-around">
                 <InputNumber
@@ -324,35 +328,6 @@ const resetFilters = (): void => {
                 />
               </div>
             </AccordionTab>
-            <!--            <AccordionTab>
-              <template #header>
-                <i class="pi pi-sort-alt mr-2" />
-                <span>{{ t('cryptoList.changes') }}</span>
-              </template>
-              <div class="flex flex-wrap justify-around">
-                <InputNumber
-                  v-model="minChanges"
-                  class="my-2 lg:my-auto"
-                  placeholder="min"
-                  mode="decimal"
-                  :min-fraction-digits="2"
-                  suffix="%"
-                />
-                <InputNumber
-                  v-model="maxChanges"
-                  class="my-2 lg:my-auto"
-                  placeholder="max"
-                  mode="decimal"
-                  :min-fraction-digits="2"
-                  suffix="%"
-                />
-                <Button
-                  icon="pi pi-refresh"
-                  class="p-button-rounded p-button-text p-button-plain"
-                  @click="resetChangesFilter"
-                />
-              </div>
-            </AccordionTab>-->
           </Accordion>
         </div>
       </div>
