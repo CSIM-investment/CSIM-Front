@@ -1,30 +1,30 @@
 <script lang="ts" setup>
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
-import InputText from "primevue/inputtext";
-import MultiSelect from "primevue/multiselect";
-import Sidebar from "primevue/sidebar";
-import Button from "primevue/button";
-import Accordion from "primevue/accordion";
-import AccordionTab from "primevue/accordiontab";
-import InputNumber from "primevue/inputnumber";
-import Message from "primevue/message";
-import { computed, ref, watch } from "vue";
-import { faBitcoinSign, faHourglass } from "@fortawesome/free-solid-svg-icons";
-import { debounce } from "lodash";
-import { format } from "~/support/format";
-import { useGetCryptosListQuery } from "~/common/generated/graphql";
-const { t } = useI18n();
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import InputText from 'primevue/inputtext'
+import MultiSelect from 'primevue/multiselect'
+import Sidebar from 'primevue/sidebar'
+import Button from 'primevue/button'
+import Accordion from 'primevue/accordion'
+import AccordionTab from 'primevue/accordiontab'
+import InputNumber from 'primevue/inputnumber'
+import Message from 'primevue/message'
+import { computed, ref, watch } from 'vue'
+import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
+import { debounce } from 'lodash'
+import { format } from '~/support/format'
+import { useGetCryptosListQuery } from '~/common/generated/graphql'
+const { t } = useI18n()
 
-const visibleRight = ref<boolean>(false);
-const search = ref<any>("");
+const visibleRight = ref<boolean>(false)
+const search = ref<any>('')
 
 const filters = ref<any>({
   minPrice: null,
   maxPrice: null,
   minCap: null,
   maxCap: null,
-});
+})
 
 const { result, error, loading, refetch } = useGetCryptosListQuery({
   options: {
@@ -35,27 +35,27 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
       },
     },
   },
-});
+})
 
 const cryptoList = computed(() => {
-  return result?.value?.cryptos ?? [];
-});
+  return result?.value?.cryptos ?? []
+})
 
-const messages = ref<Array<any>>([]);
-const messageLife = ref<number>(4000);
-const messageId = ref<number>(0);
+const messages = ref<Array<any>>([])
+const messageLife = ref<number>(4000)
+const messageId = ref<number>(0)
 const addMessages = (): void => {
   messages.value = [
     {
-      severity: "success",
-      content: t("cryptoList.filtersApplied"),
+      severity: 'success',
+      content: t('cryptoList.filtersApplied'),
       id: messageId.value++,
     },
-  ];
+  ]
   setTimeout((): void => {
-    messages.value = [];
-  }, messageLife.value + 500);
-};
+    messages.value = []
+  }, messageLife.value + 500)
+}
 
 const debouncedRefetch = debounce(() => {
   return refetch({
@@ -74,52 +74,52 @@ const debouncedRefetch = debounce(() => {
         max_cap: filters.value.maxCap,
       },
     },
-  });
-}, 500);
+  })
+}, 500)
 
 watch(search, () => {
-  debouncedRefetch();
-});
+  debouncedRefetch()
+})
 
 watch(
   filters,
   () => {
-    debouncedRefetch();
-    addMessages();
+    debouncedRefetch()
+    addMessages()
   },
-  { deep: true }
-);
+  { deep: true },
+)
 
 const columns = ref<any>([
-  { field: "market_cap", header: t("cryptoList.marketCap") },
-  { field: "price_change_percentage_24h", header: t("cryptoList.changes") },
-]);
+  { field: 'market_cap', header: t('cryptoList.marketCap') },
+  { field: 'price_change_percentage_24h', header: t('cryptoList.changes') },
+])
 
-const selectedColumns = ref<any>(columns.value);
+const selectedColumns = ref<any>(columns.value)
 const onToggle = (val: any): void => {
-  selectedColumns.value = columns.value.filter((col: any) => val.includes(col));
-};
+  selectedColumns.value = columns.value.filter((col: any) => val.includes(col))
+}
 
 const columnIsSelected = (col: string): boolean => {
   return selectedColumns.value.some(
-    (column: { field: string }) => column.field === col
-  );
-};
+    (column: { field: string }) => column.field === col,
+  )
+}
 
 const resetPriceFilter = (): void => {
-  filters.value.minPrice = null;
-  filters.value.maxPrice = null;
-};
+  filters.value.minPrice = null
+  filters.value.maxPrice = null
+}
 
 const resetCapFilter = (): void => {
-  filters.value.minCap = null;
-  filters.value.maxCap = null;
-};
+  filters.value.minCap = null
+  filters.value.maxCap = null
+}
 
 const resetFilters = (): void => {
-  resetPriceFilter();
-  resetCapFilter();
-};
+  resetPriceFilter()
+  resetCapFilter()
+}
 </script>
 
 <template>
@@ -200,7 +200,7 @@ const resetFilters = (): void => {
       </Column>
       <Column header-style="width: 7rem">
         <template #body="{ data }">
-          <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name" />
+          <img class="max-h-10 mx-auto" :src="data.image" :alt="data.name">
         </template>
       </Column>
       <Column field="name" :header="t('cryptoList.name')" />
