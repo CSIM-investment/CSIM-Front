@@ -132,6 +132,11 @@ const onPage = (event: any) => {
   filters.value.pagination.start = event.first
   filters.value.pagination.end = event.first + event.rows
 }
+
+const onSort = (event: any) => {
+  /* waiting for api back integration */
+  console.log(event)
+}
 </script>
 
 <template>
@@ -149,6 +154,7 @@ const onPage = (event: any) => {
       responsive-layout="scroll"
       :loading="!!loading"
       @page="onPage($event)"
+      @sort="onSort($event)"
     >
       <template #header>
         <div class="flex flex-wrap">
