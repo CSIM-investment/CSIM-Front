@@ -1,6 +1,7 @@
 home: it's translated
 header:
   market: Market
+  news: news
   exchange: Exchange
   wallet: Wallet
   welcome: Welcome
@@ -34,7 +35,7 @@ loading: Loading
 news:
   search: Search
   articles: articles
-  cryptocurrency: Crptycurrency
+  cryptocurrency: Cryptocurrency
 auth:
   description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 login:
