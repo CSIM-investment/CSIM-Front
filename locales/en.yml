@@ -31,6 +31,10 @@ cryptoList:
   loading: Loading...
   resetFilters: Reset filters
 loading: Loading
+news:
+  search: Search
+  articles: articles
+  cryptocurrency: Crptycurrency
 auth:
   description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 login:

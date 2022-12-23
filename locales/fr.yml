@@ -1,9 +1,14 @@
 home: ceci est traduit
 header:
   market: Marché
+  news: Actualité
   exchange: Echange
   wallet: Portefeuille
   welcome: Bienvenue
+news:
+  search: Rechercher
+  articles: articles
+  cryptocurrency: Cryptomonnaie
 footer:
   company: Entreprise
   about: Qui sommes-nous ?

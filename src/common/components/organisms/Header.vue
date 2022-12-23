@@ -14,8 +14,8 @@ const { t } = useI18n()
         <RouterLink class="py-4 px-6 hover:text-main-primary" to="exchange">
           {{ t('header.exchange') }}
         </RouterLink>
-        <RouterLink class="py-4 px-6 hover:text-main-primary" to="wallet">
-          {{ t('header.wallet') }}
+        <RouterLink class="py-4 px-6 hover:text-main-primary" to="news">
+          {{ t('header.news') }}
         </RouterLink>
       </div>
       <div class="flex flex-col text-xs">

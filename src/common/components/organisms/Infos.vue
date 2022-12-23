@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import moment from 'moment-with-locales-es6'
 import type { Article } from '~/common/generated/graphql'
-moment.locale('fr')
 const momentDate = (date: string) => moment(date).format('LL')
 const props = defineProps<{
   article: Article
@@ -10,10 +9,11 @@ const props = defineProps<{
 <template>
   <div class="w-full flex-col flex">
     <div class="w-full flex-col mt-5 sm:flex-row-reverse items-center sm:items-start justify-around flex">
-      <div id="img" class="sm:w-1/4 sm:self-center">
+      <div id="img" class="border-4-black overflow-hidden sm:w-1/4 sm:self-center">
         <img
-          :src="props.article"
-          alt="EDF"
+          class="inner-img w-1/2 sm:w-full mx-auto sm:mx-0"
+          :src="props.article.picture"
+          :alt="props.article.source"
         >
       </div>
       <div class="sm:w-1/2 sm:mx-3 flex-col flex text-center sm:text-start">
