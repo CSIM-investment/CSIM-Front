@@ -30,6 +30,10 @@ const filters = ref<any>({
     start: 0,
     end: 10,
   },
+  orderBy: {
+    direction: null,
+    name: null,
+  },
 })
 
 const { result, error, loading, refetch } = useGetCryptosListQuery({
@@ -73,6 +77,7 @@ const debouncedRefetch = debounce(() => {
         },
         search: {
           name: search.value,
+          symbol: search.value,
         },
         min_current_price: filters.value.minPrice,
         max_current_price: filters.value.maxPrice,
@@ -127,15 +132,19 @@ const resetFilters = (): void => {
   resetCapFilter()
 }
 
-const onPage = (event: any) => {
+const onPage = (event: any): void => {
   filters.value.rowsPerPage = event.rows
   filters.value.pagination.start = event.first
   filters.value.pagination.end = event.first + event.rows
 }
 
-const onSort = (event: any) => {
-  /* waiting for api back integration */
-  console.log(event)
+const onSort = (event: any): void => {
+  if (event.sortOrder === 1)
+    filters.value.orderBy.direction = 'ASC'
+  else if (event.sortOrder === -1)
+    filters.value.orderBy.direction = 'DESC'
+
+  filters.value.orderBy.name = event.sortField
 }
 </script>
 
