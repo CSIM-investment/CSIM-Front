@@ -7,7 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AuthLayout: typeof import('./authentication/components/organisms/AuthLayout.vue')['default']
     CodeInput: typeof import('./authentication/components/organisms/CodeInput.vue')['default']
-    CryptoList: typeof import('./common/modules/market/components/organisms/CryptoList.vue')['default']
+    CryptoList: typeof import('./market/components/organisms/CryptoList.vue')['default']
     CsimLogo: typeof import('./common/components/atoms/CsimLogo.vue')['default']
     Footer: typeof import('./common/components/organisms/Footer.vue')['default']
     Header: typeof import('./common/components/organisms/Header.vue')['default']
