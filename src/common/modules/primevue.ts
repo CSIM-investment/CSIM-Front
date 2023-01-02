@@ -22,7 +22,7 @@ import Button from 'primevue/button'
 // import DataView from 'primevue/dataview'
 // import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
 // import Dialog from 'primevue/dialog'
-// import Divider from 'primevue/divider'
+import Divider from 'primevue/divider'
 // import Dropdown from 'primevue/dropdown'
 // import Fieldset from 'primevue/fieldset'
 // import FileUpload from 'primevue/fileupload'
@@ -127,7 +127,7 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('DataView', DataView)
   // app.component('DataViewLayoutOptions', DataViewLayoutOptions)
   // app.component('Dialog', Dialog)
-  // app.component('Divider', Divider)
+  app.component('Divider', Divider)
   // app.component('Dropdown', Dropdown)
   // app.component('Fieldset', Fieldset)
   // app.component('FileUpload', FileUpload)

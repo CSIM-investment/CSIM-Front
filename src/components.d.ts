@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     CsimLogo: typeof import('./common/components/atoms/CsimLogo.vue')['default']
     Footer: typeof import('./common/components/organisms/Footer.vue')['default']
     Header: typeof import('./common/components/organisms/Header.vue')['default']
+    Infos: typeof import('./common/components/organisms/Infos.vue')['default']
     LoadingPage: typeof import('./common/components/organisms/LoadingPage.vue')['default']
     PasswordInput: typeof import('./common/components/molecules/PasswordInput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
