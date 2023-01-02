@@ -1,0 +1,12 @@
+query GetArticles($search: String!) {
+articles(options: {orderBy:null, filterBy: {search: $search}}) {
+  author
+  description
+    title
+    url
+    publishedDate
+    source
+    symbol
+    picture
+  }
+ }

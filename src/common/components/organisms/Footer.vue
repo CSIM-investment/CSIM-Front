@@ -8,7 +8,7 @@ const { t } = useI18n()
         <img class="w-14 md:w-20 mx-auto my-14" src="/src/common/assets/images/CSIM.svg" alt="csim-logo">
       </RouterLink>
     </div>
-    <div class="flex justify-around text-black justify-center text-white text-xs md:text-sm mt-8 w-2/3 md:w-1/2">
+    <div class="flex justify-around text-black justify-center text-xs md:text-sm mt-8 w-2/3 md:w-1/2">
       <div class="flex flex-col">
         <h3 class="font-bold">
           {{ t('footer.company') }}
