@@ -74,6 +74,3 @@ const basicOptions = {
   </div>
   <Error500 v-else />
 </template>
-<style scoped>
-
-</style>

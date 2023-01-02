@@ -24,6 +24,3 @@ const news = ref([
     <CryptoDetailsArticle v-for="article in news" :key="article.name" :article="article" />
   </div>
 </template>
-<style scoped>
-
-</style>

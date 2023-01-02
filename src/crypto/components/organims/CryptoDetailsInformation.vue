@@ -66,6 +66,3 @@ const statistics: Statistic[] = [
     />
   </div>
 </template>
-<style scoped>
-
-</style>

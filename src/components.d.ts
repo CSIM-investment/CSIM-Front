@@ -16,7 +16,7 @@ declare module '@vue/runtime-core' {
     CryptoDetailsNews: typeof import('./crypto/components/organims/CryptoDetailsNews.vue')['default']
     CryptoDetailsStat: typeof import('./crypto/components/atoms/CryptoDetailsStat.vue')['default']
     CryptoDetailsTabs: typeof import('./crypto/components/organims/CryptoDetailsTabs.vue')['default']
-    CryptoList: typeof import('./common/modules/market/components/organisms/CryptoList.vue')['default']
+    CryptoList: typeof import('./market/components/organisms/CryptoList.vue')['default']
     CsimLogo: typeof import('./common/components/atoms/CsimLogo.vue')['default']
     Error404: typeof import('./common/components/molecules/Error404.vue')['default']
     Error500: typeof import('./common/components/molecules/Error500.vue')['default']

@@ -27,6 +27,3 @@ const props = defineProps<{
     </footer>
   </article>
 </template>
-<style scoped>
-
-</style>
