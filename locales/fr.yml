@@ -47,6 +47,10 @@ register:
   submit: Créer votre compte
   next: Suivant
   back: Retour
+  terms:
+    label: J'accepte les {termsLink} et la {privacyLink} de CSIM.
+    termsLink: Conditions générales de service
+    privacyLink: Politique de confidentialité
   placeholders:
     firstName: Prénom
     lastName: Nom
@@ -65,3 +69,28 @@ validators:
   email: L'email est invalide
   sameAsPassword: Les mots de passes ne correspondent pas
   minLength: Il doit comporter {length} caractères au minimum.
+crypto:
+  details:
+    conversion:
+      title: Conversion
+    graphs:
+      title: Graphiques
+    info:
+      title: Informations
+    news:
+      title: Actualités
+    notFound: Crypto non trouvée
+  follow: Suivre
+  buy: Acheter
+  sell: Vendre
+  current_price: Prix actuel
+  price: Prix | Prix
+  market_cap: Plafond du marché | Plafonds du marché
+  circulating_supply: Circulation
+  market_cap_rank: Classement sur le marché
+  high_24h: Haut 24h
+  low_24h: Bas 24h
+  total_volume: Volume total | Volumes totaux
+  change_24h: Variation 24h
+  total_supply: Total en circulation
+  last_updated: Dernière mise à jour

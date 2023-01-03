@@ -3,7 +3,6 @@ import { ref } from 'vue'
 
 import { useVuelidate } from '@vuelidate/core'
 import { helpers } from '@vuelidate/validators'
-import AuthLayout from '~/authentication/components/organisms/AuthLayout.vue'
 import { useRegisterMutation } from '~/common/generated/graphql'
 import { useGraphqlErrorHandler } from '~/common/composables/useGraphqlErrorHandler'
 import { useVuelidateValidators } from '~/common/composables/useVuelidateValidators'
@@ -26,6 +25,7 @@ interface RegisterForm {
   lastName: string
   password: string
   confirmPassword: string
+  confirmTerms: boolean
 }
 
 const registerState = reactive<RegisterForm>({
@@ -34,6 +34,7 @@ const registerState = reactive<RegisterForm>({
   lastName: '',
   password: '',
   confirmPassword: '',
+  confirmTerms: false,
 })
 
 const rules = {
@@ -78,7 +79,7 @@ async function onRegister() {
   if (currentFormStep.value === RegisterStep.Infos)
     return currentFormStep.value = RegisterStep.Password
 
-  const { confirmPassword, ...userInput } = registerState
+  const { confirmPassword, confirmTerms, ...userInput } = registerState
 
   try {
     const { errors } = await register({ createUserInput: userInput })
@@ -126,6 +127,21 @@ async function onRegister() {
           :placeholder="t('register.placeholders.confirmPassword')"
           :error-message="getValidatorMessage($validation.confirmPassword)"
         />
+        <div class="field-checkbox">
+          <Checkbox input-id="binary" class="mr-4" v-model="registerState.confirmTerms" :binary="true" />
+          <i18n-t keypath="register.terms.label" tag="label">
+            <template #termsLink>
+              <RouterLink to="/terms" class="text-primary underline">
+                {{ t('register.terms.termsLink') }}
+              </RouterLink>
+            </template>
+            <template #privacyLink>
+              <RouterLink to="/privacy" class="text-primary underline">
+                {{ t('register.terms.privacyLink') }}
+              </RouterLink>
+            </template>
+          </i18n-t>
+        </div>
       </div>
 
       <Button
@@ -135,7 +151,7 @@ async function onRegister() {
         :disabled="areInfosInvalid"
         :label="t('register.next')"
       />
-      <div v-else class="flex gap-2 content-between w-full">
+      <div v-else class="flex flex-wrap content-between w-full">
         <Button
           :label="t('register.back')"
           class="p-button-text"
@@ -159,3 +175,8 @@ async function onRegister() {
     </p>
   </AuthLayout>
 </template>
+
+<route lang="yaml">
+meta:
+  auth: false
+</route>

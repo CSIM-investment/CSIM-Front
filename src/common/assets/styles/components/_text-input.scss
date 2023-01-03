@@ -1,6 +1,6 @@
 @layer components {
   .text-input {
-    @apply h-12 bg-grey-light border-2 border-grey rounded-md text-xl text-grey-darker p-3 w-full;
+    @apply h-12 bg-grey-light border-2 border-grey rounded-md text-grey-darker p-3 w-full;
 
     &:enabled:focus {
       box-shadow: none;

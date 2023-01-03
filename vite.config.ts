@@ -9,7 +9,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
-import { routesMetas } from './src/common/modules/router'
 
 export default defineConfig({
   resolve: {
@@ -17,7 +16,6 @@ export default defineConfig({
       '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
-
   plugins: [
     Vue({
       include: [/\.vue$/],
@@ -30,18 +28,6 @@ export default defineConfig({
       pagesDir: [
         { dir: 'src/**/pages', baseRoute: '' },
       ],
-      extendRoute(route) {
-        const meta = routesMetas[route.name]
-
-        if (meta) {
-          return {
-            ...route,
-            meta,
-          }
-        }
-
-        return route
-      },
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts

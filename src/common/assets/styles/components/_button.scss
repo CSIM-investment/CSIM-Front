@@ -19,5 +19,25 @@
     &:focus-visible {
       @apply outline-grey-darker
     }
+
+    &-secondary {
+      @apply bg-secondary;
+    }
+
+    &-small {
+      @apply text-base w-40 h-10 p-0;
+    }
+
+    &-icon-only {
+      @apply rounded-full;
+
+      .p-button-label {
+        @apply hidden;
+      }
+
+      &.button-small {
+        @apply w-10;
+      }
+    }
   }
 }

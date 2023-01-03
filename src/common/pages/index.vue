@@ -65,7 +65,7 @@ function AmountColor(data: any) {
         <p class="pt-5">
           L'endroit où vous pouvez controller et suivre les cryptommonaies pour mieux investir.
         </p>
-        <Button class="button-landing-page xl:w-1/6 xs:2/6 mt-15 font-bold mb-4 mt-10" type="submit">
+        <Button class="button xl:w-1/6 xs:2/6 mt-15 font-bold mb-4 mt-10" type="submit">
           Se connecter
         </Button>
       </div>
@@ -106,7 +106,7 @@ function AmountColor(data: any) {
         <Column field="changement" header="Changement 24h" style="min-width: 14rem">
           <template #body="{ data }">
             <div class="flex align-middle items-center">
-              <font-awesome-icon class="mr-2" :class="AmountColor(data.changement)" icon="fa-solid fa-caret-up" />
+              <fontAwesomeIcon class="mr-2" :class="AmountColor(data.changement)" icon="fa-solid fa-caret-up" />
               <span :class="AmountColor(data.changement)"> {{ data.changement.symbole }} {{
                 data.changement.amount
               }}</span>
@@ -157,7 +157,7 @@ function AmountColor(data: any) {
       >
         Commencez à investir dans les cryptomonnaies maintenant !
       </div>
-      <Button class="mb-10 button-landing-page self-center xl:w-1/6 sm:w-1/2 mt-15 font-bold mb-4 mt-10" type="submit">
+      <Button class="mb-10 button self-center xl:w-1/6 sm:w-1/2 mt-15 font-bold mb-4 mt-10" type="submit">
         Se connecter
       </Button>
     </div>

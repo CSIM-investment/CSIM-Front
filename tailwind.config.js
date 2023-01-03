@@ -28,6 +28,7 @@ module.exports = {
     colors: {
       primary: {
         disabled: '#EAD7C5',
+        lighter: '#FEF6E8',
         light: '#D7B492',
         DEFAULT: '#CA9A6F',
       },
@@ -38,6 +39,7 @@ module.exports = {
       info: '#3EB8A5',
       white: '#fff',
       grey: {
+        lighter: '#F9FBFC',
         light: '#EDEDED',
         DEFAULT: '#D9D9D9',
         dark: '#A299B5',
@@ -45,6 +47,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      appearance: ['hover', 'focus'],
+    },
+  },
   plugins: [],
 }
