@@ -16,6 +16,8 @@ import { format } from '~/support/format'
 import { useGetCryptosListQuery } from '~/common/generated/graphql'
 const { t } = useI18n()
 
+const router = useRouter()
+
 const visibleRight = ref<boolean>(false)
 const search = ref<any>('')
 const totalRecords = ref(100)
@@ -146,8 +148,11 @@ const onSort = (event: any): void => {
 
   filters.value.orderBy.name = event.sortField
 }
-</script>
 
+const redirect = (event: any): void => {
+  router.push(`cryptos/${event.data.symbol}`)
+}
+</script>
 <template>
   <div>
     <DataTable
@@ -162,8 +167,10 @@ const onSort = (event: any): void => {
       :rows-per-page-options="[10, 25, 50]"
       responsive-layout="scroll"
       :loading="!!loading"
-      @page="onPage($event)"
-      @sort="onSort($event)"
+      :row-style="'cursor: pointer'"
+      @page="onPage"
+      @sort="onSort"
+      @row-click="redirect"
     >
       <template #header>
         <div class="flex flex-wrap">
