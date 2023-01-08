@@ -1,4 +1,21 @@
 home: it's translated
+index:
+  title: The fastest and most efficient way to
+  subtitle: Manage, Track & Exchange your cryptocurrencies
+  slogan: The place where you can control and track cryptocurrencies to better invest.
+  subSlogan: Start investing in cryptocurrencies now!
+  catchPhrase: Better manage your cryptocurrencies with CSIM
+  container1:
+    title: Watch cryptocurrencies with CSIM market
+    description: Watch all cryptocurrencies with the market. Watch the latest trends to invest better in your favorite cryptocurrency.
+  container2:
+    title: Follow the news of your favorite cryptocurrencies in real time
+    description: Take advantage of the latest news of your cryptocurrencies. You will always be up to date with crypto news.
+  container3:
+    title: Remain master of your wallet with CSIM
+    description: Manage your cryptocurrency budget. See what you have invested in and the latest transactions. Remain master of your wallet.
+  button: Login
+
 header:
   market: Market
   news: news
@@ -37,13 +54,13 @@ news:
   articles: articles
   cryptocurrency: Cryptocurrency
 auth:
-  description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+  description: Master your investments with CSIM
 login:
   title: Connection
-  subtitle: printing and typesetting industry. Lorem Ipsum
+  subtitle: Login to CSIM
 register:
   title: Inscription
-  subtitle: printing and typesetting industry. Lorem Ipsum
+  subtitle: Login to CSIM
   submit: Create your account
   next: Next
   back: Back
@@ -57,6 +74,9 @@ register:
     email: Email
     password: Password
     confirmPassword: Re-enter your password
+    registerRedirection:
+      wording: Don't have an account ?
+      link: Register.
   loginRedirection:
     wording: Already have an account ?
     link: Log in.

@@ -1,4 +1,20 @@
 home: ceci est traduit
+index:
+  title: Le chemin le plus rapide et efficace pour
+  subtitle: Gérer, Suivre & Echanger vos cryptomonnaies
+  slogan: L'endroit où vous pouvez controller et suivre les cryptommonaies pour mieux investir.
+  subSlogan: Commencez à investir dans les cryptomonnaies maintenant !
+  catchPhrase: Mieux gérer vos cryptomonnaies avec CSIM
+  container1:
+    title: Regarder les cryptomonaie avec CSIM market
+    description: Regarder toutes les cryptommaie avec le market. Regarder les dernières tendances pour investire au mieux dans votre cryptomonnaie préferé.
+  container2:
+    title: Suivez à l’instant les news de vos cryptomonnaie préférées
+    description: Profiter des dernières news de vos crpyotmmaies. Vous resterez toujours à jour grâce aux news crypto.
+  container3:
+    title: Rester maître de votre wallet avec CSIM
+    description: Gérer votre budget de cryptomonnaie. Voir dans quoi vous avez investi et les dernières transactions. Rester maître de votre portefeuille.
+  button: Se connecter
 header:
   market: Marché
   news: Actualité
@@ -37,13 +53,13 @@ cryptoList:
   resetFilters: Annuler les filtres
 loading: Chargement
 auth:
-  description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+  description: Maitriser aux mieux vos investissements avec CSIM
 login:
   title: Connexion
-  subtitle: "printing and typesetting industry. Lorem Ipsum"
+  subtitle: Connecter vous à CSIM
 register:
   title: Inscription
-  subtitle: printing and typesetting industry. Lorem Ipsum
+  subtitle: Connecter vous à CSIM
   submit: Créer votre compte
   next: Suivant
   back: Retour
@@ -57,6 +73,9 @@ register:
     email: Email
     password: Mots de passe
     confirmPassword: Retapez votre mot de passe
+    registerRedirection:
+      wording: Pas de compte?
+      link: S'inscrire.
   loginRedirection:
     wording: Déja un compte ?
     link: Connectez-vous.

@@ -14,11 +14,11 @@ import Checkbox from 'primevue/checkbox'
 // import Chip from 'primevue/chip'
 // import Chips from 'primevue/chips'
 // import ColorPicker from 'primevue/colorpicker'
-// import Column from 'primevue/column'
+import Column from 'primevue/column'
 // import ConfirmDialog from 'primevue/confirmdialog'
 // import ConfirmPopup from 'primevue/confirmpopup'
 // import ContextMenu from 'primevue/contextmenu'
-// import DataTable from 'primevue/datatable'
+import DataTable from 'primevue/datatable'
 // import DataView from 'primevue/dataview'
 // import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
 // import Dialog from 'primevue/dialog'
@@ -119,11 +119,11 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('Chip', Chip)
   // app.component('Chips', Chips)
   // app.component('ColorPicker', ColorPicker)
-  // app.component('Column', Column)
+  app.component('Column', Column)
   // app.component('ConfirmDialog', ConfirmDialog)
   // app.component('ConfirmPopup', ConfirmPopup)
   // app.component('ContextMenu', ContextMenu)
-  // app.component('DataTable', DataTable)
+  app.component('DataTable', DataTable)
   // app.component('DataView', DataView)
   // app.component('DataViewLayoutOptions', DataViewLayoutOptions)
   // app.component('Dialog', Dialog)
