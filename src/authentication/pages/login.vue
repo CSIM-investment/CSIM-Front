@@ -55,9 +55,9 @@ async function onLogin() {
       <Button class="button w-2/3 mb-4" type="submit" :loading="!!loading" :label="t('login.action')"/>
     </form>
     <p>
-      Pas de compte ?
+     {{t('register.placeholders.registerRedirection.wording')}}
       <RouterLink to="/register" class="font-bold">
-        S'inscrire
+        {{t('register.placeholders.registerRedirection.link')}}
       </RouterLink>
     </p>
   </AuthLayout>
