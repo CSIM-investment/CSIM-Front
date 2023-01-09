@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import './common/assets/styles/style.scss'
+import './common/assets/styles/tailwindPrimevue.css'
 
 const routes = setupLayouts(generatedRoutes)
 

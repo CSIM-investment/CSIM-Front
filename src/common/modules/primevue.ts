@@ -78,7 +78,6 @@ import Image from 'primevue/image'
 
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
-import '~/common/assets/styles/tailwindPrimevue.css'
 import PrimeVue from 'primevue/config'
 
 // directives
