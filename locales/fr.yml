@@ -57,6 +57,7 @@ auth:
 login:
   title: Connexion
   subtitle: Connecter vous à CSIM
+  action: Se connecter
 register:
   title: Inscription
   subtitle: Connecter vous à CSIM
