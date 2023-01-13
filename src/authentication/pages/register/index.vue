@@ -98,7 +98,7 @@ async function onRegister() {
 <template>
   <AuthLayout :title="t('register.title')" :subtitle="t('register.subtitle')">
     <form class="flex flex-col items-center w-full" @submit.prevent="onRegister">
-      <div v-if="currentFormStep === RegisterStep.Infos" class="flex flex-col items-center gap-2 w-2/3">
+      <div v-if="currentFormStep === RegisterStep.Infos" class="flex flex-col items-center gap-2 w-full">
         <TextInput
           v-model="registerState.lastName"
           :placeholder="t('register.placeholders.lastName')"
@@ -128,7 +128,7 @@ async function onRegister() {
           :error-message="getValidatorMessage($validation.confirmPassword)"
         />
         <div class="field-checkbox">
-          <Checkbox input-id="binary" class="mr-4" v-model="registerState.confirmTerms" :binary="true" />
+          <Checkbox v-model="registerState.confirmTerms" input-id="binary" class="mr-4" :binary="true" />
           <i18n-t keypath="register.terms.label" tag="label">
             <template #termsLink>
               <RouterLink to="/terms" class="text-primary underline">

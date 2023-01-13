@@ -1,8 +1,9 @@
 @layer components {
   .button {
-    display: block;
+    display: flex;
     border: none;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     outline: none;
     box-shadow: none;
     max-width: 275px;
