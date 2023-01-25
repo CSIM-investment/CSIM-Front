@@ -95,6 +95,13 @@ enum ArticleOrderBy {
     publishedDate
 }
 
+enum CryptoOrderBy {
+    current_price
+    high_24h
+    low_24
+    market_cap
+}
+
 enum OrderDirection {
     ASC
     DESC
@@ -179,7 +186,7 @@ input CryptoMarketSearchInput {
 
 input CryptoOrderInput {
     direction: OrderDirection!
-    name: ArticleOrderBy!
+    name: CryptoOrderBy!
 }
 
 input CryptoSearchInput {
