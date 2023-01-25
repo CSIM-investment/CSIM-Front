@@ -6,7 +6,7 @@ const { symbol } = useRoute().params as Record<'symbol', string>
 
 const { result, error, loading } = useGetCryptoQuery({ symbol })
 
-const crypto = computed(() => result?.value?.cryptos[0])
+const crypto = computed(() => result?.value?.cryptos.datas[0])
 
 function onFavoriteClick() {
   // console.log('onFavoriteClick')
@@ -43,6 +43,7 @@ function onFavoriteClick() {
   display: flex;
   background: #F4F7F9;
   padding: 0;
+  margin-top: 70px;
 
   @screen xs {
     padding: 1rem;
