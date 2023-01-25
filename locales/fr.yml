@@ -21,6 +21,7 @@ header:
   exchange: Echange
   wallet: Portefeuille
   welcome: Bienvenue
+  login: Se connecter
 news:
   search: Rechercher
   articles: articles
