@@ -23,7 +23,7 @@ const { result, error, loading } = useGetCryptosListQuery({
 })
 
 const bestCryptos = computed(() => {
-  return result?.value?.cryptos ?? []
+  return result?.value?.cryptos.datas ?? []
 })
 
 const data = ref([

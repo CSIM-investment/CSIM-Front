@@ -3,7 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div class="my-10 mx-8">
+  <div class="mt-32 mb-10 mx-8">
     <div class="mb-10">
       <h1 class="font-bold text-4xl">
         {{ t('market.list') }}

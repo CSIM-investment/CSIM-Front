@@ -18,7 +18,6 @@ const router = useRouter()
 
 const visibleRight = ref<boolean>(false)
 const search = ref<any>('')
-const totalRecords = ref(100)
 
 const filters = ref<any>({
   minPrice: null,
@@ -48,7 +47,11 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
 })
 
 const cryptoList = computed(() => {
-  return result?.value?.cryptos ?? []
+  return result?.value?.cryptos.datas ?? []
+})
+
+const totalCryptos = computed(() => {
+  return result?.value?.cryptos.count ?? 0
 })
 
 const messages = ref<Array<any>>([])
@@ -161,7 +164,7 @@ const redirect = (event: any): void => {
       filter-display="menu"
       :lazy="true"
       paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-      :total-records="totalRecords"
+      :total-records="totalCryptos"
       :rows-per-page-options="[10, 25, 50]"
       responsive-layout="scroll"
       :loading="!!loading"

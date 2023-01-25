@@ -9,6 +9,7 @@ type Article {
     author: String
     description: String!
     id: ID!
+    picture: String
     publishedDate: DateTime!
     source: String
     symbol: String
@@ -45,6 +46,11 @@ type CryptoCurrencyMarket {
     total_volume: Float!
 }
 
+type CryptoCurrencyMarketPaginatedResults {
+    count: Float!
+    datas: [CryptoCurrencyMarket!]!
+}
+
 type CryptoMarketOutput {
     cryptoCurrencyMarket: CryptoCurrencyMarket!
 }
@@ -64,6 +70,7 @@ type Mutation {
     resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
     sendRegisterConfirmation(email: String!): User!
     sendResetPasswordCode(email: String!): String!
+    toggleFavoriteCrypto(input: ToggleFavoriteInput!): User!
     updateAccount(updateUserInput: UpdateUserInput!): User!
     updateArticles: String!
 }
@@ -71,11 +78,12 @@ type Mutation {
 type Query {
     account: User!
     articles(options: ArticlesInput!): [Article!]!
-    cryptos(options: CryptoSearchInput!): [CryptoCurrencyMarket!]!
+    cryptos(options: CryptoSearchInput!): CryptoCurrencyMarketPaginatedResults!
 }
 
 type User {
     email: String!
+    favoritesCrypto: [CryptoCurrencyMarket!]!
     firstName: String!
     id: ID!
     lastName: String!
@@ -128,8 +136,6 @@ input CreateUserInput {
     firstName: String!
     lastName: String!
     password: String!
-    phone: String!
-    username: String!
 }
 
 input CryptoFilterInput {
@@ -191,10 +197,13 @@ input PaginationInput {
     start: Int!
 }
 
+input ToggleFavoriteInput {
+    cryptoId: String!
+    hadToFavorite: Boolean!
+}
+
 input UpdateUserInput {
     firstName: String
     lastName: String
     password: String
-    phone: String
-    username: String
 }
