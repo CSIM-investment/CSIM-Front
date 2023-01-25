@@ -21,6 +21,10 @@
       @apply outline-grey-darker
     }
 
+    &-primary {
+      @apply bg-primary;
+    }
+
     &-secondary {
       @apply bg-secondary;
     }

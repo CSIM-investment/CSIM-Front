@@ -2,7 +2,7 @@
 const { t } = useI18n()
 </script>
 <template>
-  <div class="relative top-0 h-header w-full flex justify-between">
+  <div class="fixed bg-white z-50 top-0 h-header w-full flex justify-between">
     <RouterLink to="/" class="flex justify-center p-2 md:ml-8">
       <img src="/src/common/assets/images/CSIM.svg" alt="csim-logo">
     </RouterLink>
