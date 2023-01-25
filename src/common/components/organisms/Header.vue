@@ -1,6 +1,10 @@
 <script lang="ts" setup>
+import { useSessionStore } from '~/authentication/stores/session'
+
 const { t } = useI18n()
+const { user } = useSessionStore()
 </script>
+
 <template>
   <div class="relative top-0 h-header w-full flex justify-between">
     <RouterLink to="/" class="flex justify-center p-2 md:ml-8">
@@ -18,13 +22,20 @@ const { t } = useI18n()
           {{ t('header.news') }}
         </RouterLink>
       </div>
-      <div class="flex flex-col text-xs">
-        <small class="hidden md:block">{{ t('header.welcome') }}</small>
-        <span class="text-xs font-bold">Michael Smith</span>
-      </div>
-      <div class="ml-2">
-        <img src="/src/common/assets/images/user.png" alt="user-photo">
-      </div>
+      <template v-if="user">
+        <div class="flex flex-col text-xs">
+          <small class="hidden md:block">{{ t('header.welcome') }}</small>
+          <span class="text-xs font-bold">{{ user.firstName }} {{ user.lastName }}</span>
+        </div>
+        <div class="ml-2">
+          <img src="/src/common/assets/images/user.png" alt="user-photo">
+        </div>
+      </template>
+      <template v-else>
+        <RouterLink class="text-sm" to="login">
+          {{ t('header.login') }}
+        </RouterLink>
+      </template>
     </div>
   </div>
 </template>

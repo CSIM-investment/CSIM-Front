@@ -22,6 +22,7 @@ header:
   exchange: Exchange
   wallet: Wallet
   welcome: Welcome
+  login: Login
 footer:
   company: Company
   about: About us
