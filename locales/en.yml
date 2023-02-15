@@ -1,1 +1,130 @@
 home: it's translated
+index:
+  title: The fastest and most efficient way to
+  subtitle: Manage, Track & Exchange your cryptocurrencies
+  slogan: The place where you can control and track cryptocurrencies to better invest.
+  subSlogan: Start investing in cryptocurrencies now!
+  catchPhrase: Better manage your cryptocurrencies with CSIM
+  container1:
+    title: Watch cryptocurrencies with CSIM market
+    description: Watch all cryptocurrencies with the market. Watch the latest trends to invest better in your favorite cryptocurrency.
+  container2:
+    title: Follow the news of your favorite cryptocurrencies in real time
+    description: Take advantage of the latest news of your cryptocurrencies. You will always be up to date with crypto news.
+  container3:
+    title: Remain master of your wallet with CSIM
+    description: Manage your cryptocurrency budget. See what you have invested in and the latest transactions. Remain master of your wallet.
+  button: Login
+
+header:
+  market: Market
+  news: News
+  exchange: Exchange
+  wallet: Wallet
+  welcome: Welcome
+  login: Login
+footer:
+  company: Company
+  about: About us
+  contact: Contact us
+  gtcu: GTCU
+  cookies: Cookies
+  terms: Terms and Privacy
+market:
+  list: List of cryptocurrencies
+  description: A list of all cryptocurrencies
+cryptoList:
+  icon: Icon
+  name: Name
+  symbol: Symbol
+  price: Price
+  marketCap: Market Cap
+  changes: 24h changes
+  filtersApplied: Filters applied
+  search: Search
+  filters: Filters
+  favorites: Favorites
+  columns: Columns
+  emptyFavorites: You have no favorites yet
+  emptyCryptos: No cryptocurrency found
+  addFavorite: "{cryptoName} add to favorites"
+  removeFavorite: "{cryptoName} remove from favorites"
+  loading: Loading...
+  resetFilters: Reset filters
+loading: Loading
+news:
+  search: Search
+  articles: articles
+  cryptocurrency: Cryptocurrency
+auth:
+  description: Master your investments with CSIM
+login:
+  title: Connection
+  subtitle: Login to CSIM
+  action: Login
+register:
+  title: Inscription
+  subtitle: Login to CSIM
+  submit: Create your account
+  next: Next
+  back: Back
+  terms:
+    label: I accept the {termsLink} and the {privacyLink} of CSIM.
+    termsLink: Terms of Service
+    privacyLink: Privacy Policy
+  placeholders:
+    firstName: First name
+    lastName: Last name
+    email: Email
+    password: Password
+    confirmPassword: Re-enter your password
+    registerRedirection:
+      wording: Don't have an account ?
+      link: Register.
+  loginRedirection:
+    wording: Already have an account ?
+    link: Log in.
+confirm:
+    title: Email confirmation
+    subtitle: A confirmation code has been sent to your email address.
+    submit: Confirm your account
+validators:
+  required: This field is required
+  email: Email is invalid
+  sameAsPassword: Passwords does not match
+  minLength: It must have {length} characters minimum.
+crypto:
+  details:
+    conversion:
+      title: Conversion
+    graphs:
+      title: Graphs
+    info:
+      title: Information
+    news:
+        title: News
+    notFound: Crypto not found
+  follow: Follow
+  buy: Buy
+  sell: Sell
+  current_price: Current price
+  price: Price | Prices
+  market_cap: Market cap | Market caps
+  circulating_supply: Circulating supply
+  market_cap_rank: Market cap rank
+  high_24h: High 24h
+  low_24h: Low 24h
+  total_volume: Total volume | Total volumes
+  change_24h: Change 24h
+  total_supply: Total supply
+  last_updated: Last updated
+error:
+  404:
+    title: Page not found
+    subtitle: The page you are looking for does not exist.
+    back: Back to home
+  500:
+   title:
+     part1: An error has occurred,
+     part2: please reload the page
+     part3: or try again later.

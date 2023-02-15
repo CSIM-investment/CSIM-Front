@@ -1,0 +1,48 @@
+@layer components {
+  .button {
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    box-shadow: none;
+    max-width: 275px;
+    @apply h-16 bg-primary rounded-md text-white text-xl p-3 w-full;
+
+    &:enabled:hover, &:enabled:active {
+      @apply bg-primary-light
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      @apply outline-grey-darker
+    }
+
+    &-primary {
+      @apply bg-primary;
+    }
+
+    &-secondary {
+      @apply bg-secondary;
+    }
+
+    &-small {
+      @apply text-base w-40 h-10 p-0;
+    }
+
+    &-icon-only {
+      @apply rounded-full;
+
+      .p-button-label {
+        @apply hidden;
+      }
+
+      &.button-small {
+        @apply w-10;
+      }
+    }
+  }
+}

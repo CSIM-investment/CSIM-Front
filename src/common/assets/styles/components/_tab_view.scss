@@ -1,0 +1,15 @@
+.p-tabview {
+  .p-tabview-nav {
+    a {
+      @apply text-sm;
+    }
+  }
+
+  & .p-tabview-panels {
+    padding: 1rem !important;
+
+    @screen md {
+        padding: 1.25rem !important;
+    }
+  }
+}

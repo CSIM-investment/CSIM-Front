@@ -1,0 +1,9 @@
+mutation ConfirmEmail($emailCode: Float!, $email: String!) {
+  confirmEmail(emailCode: $emailCode, email: $email) {
+    accessToken
+    refreshToken
+    user {
+      ...UserSession
+    }
+  }
+}

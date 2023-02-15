@@ -1,0 +1,216 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Article {
+    author: String
+    description: String!
+    id: ID!
+    picture: String
+    publishedDate: DateTime!
+    source: String
+    symbol: String
+    title: String!
+    url: String!
+}
+
+type CryptoCurrencyMarket {
+    ath: Float!
+    ath_change_percentage: Float!
+    ath_date: DateTime!
+    atl: Float!
+    atl_change_percentage: Float!
+    atl_date: DateTime!
+    circulating_supply: Float!
+    current_price: Float!
+    fully_diluted_valuation: Float!
+    high_24h: Float!
+    id: ID!
+    image: String!
+    last_updated: DateTime!
+    low_24h: Float!
+    market_cap: Float!
+    market_cap_change_24h: Float!
+    market_cap_change_percentage_24h: Float!
+    market_cap_rank: Float!
+    max_supply: Float!
+    name: String!
+    price_change_24h: Float!
+    price_change_percentage_24h: Float!
+    roi: String!
+    symbol: String!
+    total_supply: Float!
+    total_volume: Float!
+}
+
+type CryptoCurrencyMarketPaginatedResults {
+    count: Float!
+    datas: [CryptoCurrencyMarket!]!
+}
+
+type CryptoMarketOutput {
+    cryptoCurrencyMarket: CryptoCurrencyMarket!
+}
+
+type LoginResponse {
+    accessToken: String!
+    refreshToken: String!
+    user: User!
+}
+
+type Mutation {
+    confirmEmail(email: String!, emailCode: Float!): LoginResponse!
+    createCryptoMarket: CryptoMarketOutput!
+    login(loginUserInput: LoginUserInput!): LoginResponse!
+    refreshTokens(refreshToken: String!): LoginResponse!
+    register(createUserInput: CreateUserInput!): User!
+    resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
+    sendRegisterConfirmation(email: String!): User!
+    sendResetPasswordCode(email: String!): String!
+    toggleFavoriteCrypto(input: ToggleFavoriteInput!): User!
+    updateAccount(updateUserInput: UpdateUserInput!): User!
+    updateArticles: String!
+}
+
+type Query {
+    account: User!
+    articles(options: ArticlesInput!): [Article!]!
+    cryptos(options: CryptoSearchInput!): CryptoCurrencyMarketPaginatedResults!
+}
+
+type User {
+    email: String!
+    favoritesCrypto: [CryptoCurrencyMarket!]!
+    firstName: String!
+    id: ID!
+    lastName: String!
+    role: UserRoles!
+    status: UserStatus!
+}
+
+enum ArticleOrderBy {
+    publishedDate
+}
+
+enum CryptoOrderBy {
+    current_price
+    high_24h
+    low_24
+    market_cap
+}
+
+enum OrderDirection {
+    ASC
+    DESC
+}
+
+enum UserRoles {
+    admin
+    user
+    validator
+    visitor
+}
+
+enum UserStatus {
+    isActive
+    isPending
+}
+
+"A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
+scalar DateTime
+
+input ArticleFilterInput {
+    pagination: PaginationInput
+    search: String
+    symbol: String
+}
+
+input ArticleOrderInput {
+    direction: OrderDirection!
+    name: ArticleOrderBy!
+}
+
+input ArticlesInput {
+    filterBy: ArticleFilterInput = {}
+    orderBy: ArticleOrderInput = {}
+}
+
+input CreateUserInput {
+    email: String!
+    firstName: String!
+    lastName: String!
+    password: String!
+}
+
+input CryptoFilterInput {
+    max_cap: Float
+    max_current_price: Float
+    min_cap: Float
+    min_current_price: Float
+    pagination: PaginationInput
+    search: CryptoMarketSearchInput
+    symbol: String
+}
+
+input CryptoMarketSearchInput {
+    ath: Float
+    ath_change_percentage: Float
+    ath_date: DateTime
+    atl: Float
+    atl_change_percentage: Float
+    atl_date: DateTime
+    circulating_supply: Float
+    current_price: Float
+    fully_diluted_valuation: Float
+    high_24h: Float
+    id: String
+    image: String
+    last_updated: DateTime
+    low_24h: Float
+    market_cap: Float
+    market_cap_change_24h: Float
+    market_cap_change_percentage_24h: Float
+    market_cap_rank: Float
+    max_supply: Float
+    name: String
+    price_change_24h: Float
+    price_change_percentage_24h: Float
+    roi: String
+    symbol: String
+    total_supply: Float
+    total_volume: Float
+}
+
+input CryptoOrderInput {
+    direction: OrderDirection!
+    name: CryptoOrderBy!
+}
+
+input CryptoSearchInput {
+    filterBy: CryptoFilterInput = {}
+    orderBy: CryptoOrderInput = {}
+}
+
+input LoginUserInput {
+    email: String!
+    password: String!
+}
+
+input PaginationInput {
+    end: Int!
+    start: Int!
+}
+
+input ToggleFavoriteInput {
+    cryptoId: String!
+    hadToFavorite: Boolean!
+}
+
+input UpdateUserInput {
+    firstName: String
+    lastName: String
+    password: String
+}

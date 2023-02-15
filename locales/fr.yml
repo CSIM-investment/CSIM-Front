@@ -1,1 +1,119 @@
 home: ceci est traduit
+index:
+  title: Le chemin le plus rapide et efficace pour
+  subtitle: Gérer, Suivre & Echanger vos cryptomonnaies
+  slogan: L'endroit où vous pouvez controller et suivre les cryptommonaies pour mieux investir.
+  subSlogan: Commencez à investir dans les cryptomonnaies maintenant !
+  catchPhrase: Mieux gérer vos cryptomonnaies avec CSIM
+  container1:
+    title: Regarder les cryptomonaie avec CSIM market
+    description: Regarder toutes les cryptommaie avec le market. Regarder les dernières tendances pour investire au mieux dans votre cryptomonnaie préferé.
+  container2:
+    title: Suivez à l’instant les news de vos cryptomonnaie préférées
+    description: Profiter des dernières news de vos crpyotmmaies. Vous resterez toujours à jour grâce aux news crypto.
+  container3:
+    title: Rester maître de votre wallet avec CSIM
+    description: Gérer votre budget de cryptomonnaie. Voir dans quoi vous avez investi et les dernières transactions. Rester maître de votre portefeuille.
+  button: Se connecter
+header:
+  market: Marché
+  news: Actualité
+  exchange: Echange
+  wallet: Portefeuille
+  welcome: Bienvenue
+  login: Se connecter
+news:
+  search: Rechercher
+  articles: articles
+  cryptocurrency: Cryptomonnaie
+footer:
+  company: Entreprise
+  about: Qui sommes-nous ?
+  contact: Nous contacter
+  gtcu: CGU
+  cookies: Cookies
+  terms: Données et sécurité
+market:
+  list: Liste des cryptomonnaies
+  description: Une liste de toutes les cryptomonnaies
+cryptoList:
+  icon: Icône
+  name: Nom
+  symbol: Symbole
+  price: Prix
+  marketCap: Market Cap
+  changes: Changement 24h
+  filtersApplied: Filtres appliqués
+  search: Rechercher
+  filters: Filtres
+  favorites: Favoris
+  columns: Colonnes
+  emptyFavorites: Vous n'avez aucun favori
+  emptyCryptos: Aucune cryptomonnaie trouvée
+  addFavorite: "{cryptoName} ajoutée aux favoris"
+  removeFavorite: "{cryptoName} supprimée des favoris"
+  loading: Chargement...
+  resetFilters: Annuler les filtres
+loading: Chargement
+auth:
+  description: Maitriser aux mieux vos investissements avec CSIM
+login:
+  title: Connexion
+  subtitle: Connecter vous à CSIM
+  action: Se connecter
+register:
+  title: Inscription
+  subtitle: Connecter vous à CSIM
+  submit: Créer votre compte
+  next: Suivant
+  back: Retour
+  terms:
+    label: J'accepte les {termsLink} et la {privacyLink} de CSIM.
+    termsLink: Conditions générales de service
+    privacyLink: Politique de confidentialité
+  placeholders:
+    firstName: Prénom
+    lastName: Nom
+    email: Email
+    password: Mots de passe
+    confirmPassword: Retapez votre mot de passe
+    registerRedirection:
+      wording: Pas de compte?
+      link: S'inscrire.
+  loginRedirection:
+    wording: Déja un compte ?
+    link: Connectez-vous.
+confirm:
+  title: Confirmation d'email
+  subtitle: Un code de confirmation vous a été envoyé à votre adresse email.
+  submit: Confirmer votre compte
+validators:
+  required: Ce champ est requit
+  email: L'email est invalide
+  sameAsPassword: Les mots de passes ne correspondent pas
+  minLength: Il doit comporter {length} caractères au minimum.
+crypto:
+  details:
+    conversion:
+      title: Conversion
+    graphs:
+      title: Graphiques
+    info:
+      title: Informations
+    news:
+      title: Actualités
+    notFound: Crypto non trouvée
+  follow: Suivre
+  buy: Acheter
+  sell: Vendre
+  current_price: Prix actuel
+  price: Prix | Prix
+  market_cap: Plafond du marché | Plafonds du marché
+  circulating_supply: Circulation
+  market_cap_rank: Classement sur le marché
+  high_24h: Haut 24h
+  low_24h: Bas 24h
+  total_volume: Volume total | Volumes totaux
+  change_24h: Variation 24h
+  total_supply: Total en circulation
+  last_updated: Dernière mise à jour

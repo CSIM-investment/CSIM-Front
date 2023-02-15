@@ -1,0 +1,33 @@
+query GetCrypto($symbol: String){
+  cryptos(options: {
+    filterBy: {
+      symbol: $symbol
+    }
+  }) {
+    datas {
+      ath
+      ath_change_percentage
+      ath_date
+      atl
+      atl_change_percentage
+      atl_date
+      circulating_supply
+      current_price
+      high_24h
+      low_24h
+      market_cap
+      market_cap_change_24h
+      market_cap_change_percentage_24h
+      market_cap_rank
+      last_updated
+      name
+      price_change_24h
+      price_change_percentage_24h
+      symbol
+      image
+      total_supply
+      total_volume
+      id
+    }
+  }
+}

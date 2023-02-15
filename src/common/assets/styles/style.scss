@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "primevue/resources/themes/bootstrap4-light-blue/theme.css";
+@import "primevue/resources/primevue.css";
+@import 'primeicons/primeicons.css';
+
+@import "components";
+@import "utilities";
+
+:root {
+  --primary-color: red;
+}
+
+html, body {
+  height: 100vh;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button,
+input[type='number'] {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield !important;
+}

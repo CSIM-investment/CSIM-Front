@@ -8,3 +8,6 @@ node_modules
 .idea/
 *.log
 *.env*
+src/common/generated/
+.graphqlconfig
+schema.graphql
