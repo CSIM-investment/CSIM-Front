@@ -11,13 +11,16 @@ import { computed, ref, watch } from 'vue'
 import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { debounce } from 'lodash'
 import { format } from '~/support/format'
-import { useGetCryptosListQuery } from '~/common/generated/graphql'
+import { useGetCryptosListQuery, useToggleFavoriteCryptoMutation } from '~/common/generated/graphql'
+import { useSessionStore } from '~/authentication/stores/session'
 const { t } = useI18n()
 
 const router = useRouter()
+const { user, fetchSession } = useSessionStore()
 
 const visibleRight = ref<boolean>(false)
 const search = ref<any>('')
+const displayFavorite = ref<boolean>(false)
 
 const filters = ref<any>({
   minPrice: null,
@@ -46,12 +49,30 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
   },
 })
 
+const { mutate: toggleFavorite } = useToggleFavoriteCryptoMutation({})
+
+const toggleFavoriteCrypto = async(cryptoId: string, hadToFavorite: boolean) => {
+  try {
+    await toggleFavorite({ input: { cryptoId, hadToFavorite } })
+    await fetchSession()
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
+const isFavorite = (id: string): boolean => {
+  if (user.value && user.value?.favoritesCrypto)
+    return user.value?.favoritesCrypto.filter(crypto => crypto.id === id).length > 0
+  return false
+}
+
 const cryptoList = computed(() => {
-  return result?.value?.cryptos.datas ?? []
+  return displayFavorite.value ? user.value?.favoritesCrypto : result?.value?.cryptos.datas ?? []
 })
 
 const totalCryptos = computed(() => {
-  return result?.value?.cryptos.count ?? 0
+  return displayFavorite.value ? user.value?.favoritesCrypto?.length : result?.value?.cryptos.count ?? 0
 })
 
 const messages = ref<Array<any>>([])
@@ -177,10 +198,11 @@ const redirect = (event: any): void => {
         <div class="flex flex-wrap">
           <div class="m-2">
             <span>
-              <i class="pi pi-search mr-4" />
+              <i :class="displayFavorite && 'opacity-20'" class="pi pi-search mr-4" />
               <InputText
                 v-model="search"
                 :placeholder="t('cryptoList.search')"
+                :disabled="displayFavorite"
               />
             </span>
           </div>
@@ -189,14 +211,16 @@ const redirect = (event: any): void => {
               :label="t('cryptoList.filters')"
               class="p-button-outlined"
               icon="pi pi-filter"
+              :disabled="displayFavorite"
               @click="visibleRight = true"
             />
           </div>
-          <div class="m-2">
+          <div v-if="user" class="m-2">
             <Button
               :label="t('cryptoList.favorites')"
-              :class="false ? '' : 'p-button-outlined'"
+              :class="displayFavorite ? '' : 'p-button-outlined'"
               icon="pi pi-star-fill"
+              @click="displayFavorite = !displayFavorite"
             />
           </div>
           <div class="m-2">
@@ -215,7 +239,7 @@ const redirect = (event: any): void => {
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faBitcoinSign" />
           {{
-            false
+            displayFavorite
               ? t("cryptoList.emptyFavorites")
               : t("cryptoList.emptyCryptos")
           }}
@@ -225,12 +249,12 @@ const redirect = (event: any): void => {
         <font-awesome-icon class="mr-1" :icon="faHourglass" />
         {{ t("cryptoList.loading") }}
       </template>
-      <Column header-style="width: 3rem">
+      <Column v-if="user" header-style="width: 3rem">
         <template #body="{ data }">
-          <div class="cursor-pointer">
+          <div class="cursor-pointer" @click.stop="toggleFavoriteCrypto(data.id, !isFavorite(data.id))">
             <i
               class="pi text-main-primary"
-              :class="false ? 'pi-star-fill' : 'pi-star'"
+              :class="isFavorite(data.id) ? 'pi-star-fill' : 'pi-star'"
             />
           </div>
         </template>
