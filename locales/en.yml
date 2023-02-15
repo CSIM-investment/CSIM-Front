@@ -47,6 +47,8 @@ cryptoList:
   columns: Columns
   emptyFavorites: You have no favorites yet
   emptyCryptos: No cryptocurrency found
+  addFavorite: "{cryptoName} add to favorites"
+  removeFavorite: "{cryptoName} remove from favorites"
   loading: Loading...
   resetFilters: Reset filters
 loading: Loading

@@ -6,10 +6,10 @@ import Button from 'primevue/button'
 import Accordion from 'primevue/accordion'
 import AccordionTab from 'primevue/accordiontab'
 import InputNumber from 'primevue/inputnumber'
-import Message from 'primevue/message'
 import { computed, ref, watch } from 'vue'
 import { faBitcoinSign, faHourglass } from '@fortawesome/free-solid-svg-icons'
 import { debounce } from 'lodash'
+import { useToast } from 'primevue/usetoast'
 import { format } from '~/support/format'
 import { useGetCryptosListQuery, useToggleFavoriteCryptoMutation } from '~/common/generated/graphql'
 import { useSessionStore } from '~/authentication/stores/session'
@@ -17,6 +17,7 @@ const { t } = useI18n()
 
 const router = useRouter()
 const { user, fetchSession } = useSessionStore()
+const toast = useToast()
 
 const visibleRight = ref<boolean>(false)
 const search = ref<any>('')
@@ -51,7 +52,12 @@ const { result, error, loading, refetch } = useGetCryptosListQuery({
 
 const { mutate: toggleFavorite } = useToggleFavoriteCryptoMutation({})
 
-const toggleFavoriteCrypto = async(cryptoId: string, hadToFavorite: boolean) => {
+const toggleFavoriteCrypto = async(cryptoId: string, hadToFavorite: boolean, cryptoName?: string) => {
+  if (hadToFavorite)
+    toast.add({ detail: t('cryptoList.addFavorite', { cryptoName }), severity: 'success', life: 3000 })
+  else
+    toast.add({ detail: t('cryptoList.removeFavorite', { cryptoName }), severity: 'success', life: 3000 })
+
   try {
     await toggleFavorite({ input: { cryptoId, hadToFavorite } })
     await fetchSession()
@@ -74,22 +80,6 @@ const cryptoList = computed(() => {
 const totalCryptos = computed(() => {
   return displayFavorite.value ? user.value?.favoritesCrypto?.length : result?.value?.cryptos.count ?? 0
 })
-
-const messages = ref<Array<any>>([])
-const messageLife = ref<number>(4000)
-const messageId = ref<number>(0)
-const addMessages = (): void => {
-  messages.value = [
-    {
-      severity: 'success',
-      content: t('cryptoList.filtersApplied'),
-      id: messageId.value++,
-    },
-  ]
-  setTimeout((): void => {
-    messages.value = []
-  }, messageLife.value + 500)
-}
 
 const debouncedRefetch = debounce(() => {
   return refetch({
@@ -120,7 +110,7 @@ watch(
   filters,
   () => {
     debouncedRefetch()
-    addMessages()
+    toast.add({ detail: t('cryptoList.filtersApplied'), severity: 'success', life: 3000 })
   },
   { deep: true },
 )
@@ -251,7 +241,7 @@ const redirect = (event: any): void => {
       </template>
       <Column v-if="user" header-style="width: 3rem">
         <template #body="{ data }">
-          <div class="cursor-pointer" @click.stop="toggleFavoriteCrypto(data.id, !isFavorite(data.id))">
+          <div class="cursor-pointer" @click.stop="toggleFavoriteCrypto(data.id, !isFavorite(data.id), data.name)">
             <i
               class="pi text-main-primary"
               :class="isFavorite(data.id) ? 'pi-star-fill' : 'pi-star'"
@@ -313,22 +303,6 @@ const redirect = (event: any): void => {
       class="p-sidebar-md h-100"
       position="right"
     >
-      <template #header>
-        <div class="absolute left-4 top-0">
-          <transition-group name="p-message" tag="div">
-            <Message
-              v-for="msg of messages"
-              :key="msg.id"
-              :life="messageLife"
-              :sticky="false"
-              :severity="msg.severity"
-              :closable="false"
-            >
-              {{ msg.content }}
-            </Message>
-          </transition-group>
-        </div>
-      </template>
       <div class="mt-8">
         <h2 class="font-bold text-2xl">
           {{ t("cryptoList.filters") }}
