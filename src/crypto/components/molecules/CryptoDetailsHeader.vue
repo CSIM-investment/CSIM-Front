@@ -1,5 +1,10 @@
 <script setup lang='ts'>
+import { useToast } from 'primevue/usetoast'
 import type { CryptoCurrencyMarket } from '~/common/generated/graphql'
+import { useToggleFavoriteCryptoMutation } from '~/common/generated/graphql'
+import { useSessionStore } from '~/authentication/stores/session'
+const toast = useToast()
+const { user, fetchSession } = useSessionStore()
 
 const { t } = useI18n()
 
@@ -7,15 +12,34 @@ const props = defineProps<{
   crypto: CryptoCurrencyMarket
 }>()
 
-const favoriteIcon = computed(() => {
-  return true ? 'pi pi-star-fill' : 'pi pi-star'
-})
-
 const marketCapClass = computed(() => {
   return props.crypto.market_cap_change_percentage_24h > 0
     ? 'text-success'
     : 'text-error'
 })
+
+const isFavorite = computed(() => {
+  if (user.value && user.value?.favoritesCrypto)
+    return user.value?.favoritesCrypto.filter(item => item.id === props.crypto.id).length > 0
+  return false
+})
+
+const { mutate: toggleFavorite } = useToggleFavoriteCryptoMutation({})
+
+const toggleFavoriteCrypto = async(hadToFavorite: boolean) => {
+  if (hadToFavorite)
+    toast.add({ detail: t('cryptoList.addFavorite', { cryptoName: props.crypto.name }), severity: 'success', life: 3000 })
+  else
+    toast.add({ detail: t('cryptoList.removeFavorite', { cryptoName: props.crypto.name }), severity: 'success', life: 3000 })
+
+  try {
+    await toggleFavorite({ input: { cryptoId: props.crypto.id, hadToFavorite } })
+    await fetchSession()
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
 </script>
 
 <template>
@@ -32,7 +56,7 @@ const marketCapClass = computed(() => {
         </div>
       </div>
       <div class="flex gap-1 ml-auto lg:hidden">
-        <Button :icon="favoriteIcon" class="button button-icon-only button-small" />
+        <Button v-if="user" :icon="isFavorite ? 'pi pi-star-fill' : 'pi pi-star'" class="button button-icon-only button-small" @click="toggleFavoriteCrypto(!isFavorite)" />
         <Button icon="pi pi-shopping-cart" class="button button-icon-only button-small" />
         <Button icon="pi pi-dollar" class="button button-icon-only button-small" />
       </div>
