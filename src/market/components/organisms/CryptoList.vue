@@ -273,7 +273,7 @@ const redirect = (event: any): void => {
       </Column>
       <Column
         field="current_price"
-        :sortable="true"
+        :sortable="!displayFavorite"
         :header="t('cryptoList.price')"
       >
         <template #body="{ data }">
@@ -283,7 +283,7 @@ const redirect = (event: any): void => {
       <Column
         v-if="columnIsSelected('market_cap')"
         field="market_cap"
-        :sortable="true"
+        :sortable="!displayFavorite"
         :header="t('cryptoList.marketCap')"
       >
         <template #body="{ data }">
@@ -293,7 +293,7 @@ const redirect = (event: any): void => {
       <Column
         v-if="columnIsSelected('price_change_percentage_24h')"
         field="price_change_percentage_24h"
-        :sortable="true"
+        :sortable="!displayFavorite"
         :header="t('cryptoList.changes')"
       >
         <template #body="{ data }">
