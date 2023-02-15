@@ -5,11 +5,6 @@ import { useGetCryptosListQuery } from '~/common/generated/graphql'
 
 const { t } = useI18n()
 const router = useRouter()
-const columns = ref([
-  { field: 'nom', header: 'Nom' },
-  { field: 'price', header: 'Prix' },
-  { field: 'changement', header: 'Changement 24h' },
-])
 
 const { result, error, loading } = useGetCryptosListQuery({
   options: {
@@ -19,51 +14,16 @@ const { result, error, loading } = useGetCryptosListQuery({
         end: 3,
       },
     },
+    orderBy: {
+      direction: 'DESC',
+      name: 'market_cap',
+    },
   },
 })
 
 const bestCryptos = computed(() => {
   return result?.value?.cryptos.datas ?? []
 })
-
-const data = ref([
-  {
-    id: '1000',
-    nom: {
-      image: '/public/bitcoin.png',
-      nom: 'Bitcoin',
-    },
-    price: '47,412.65',
-    changement: {
-      symbole: '+',
-      amount: '1.65 %',
-    },
-  },
-  {
-    id: '1001',
-    nom: {
-      image: '/public/etherium.png',
-      nom: 'Etherium',
-    },
-    price: '47,412.65',
-    changement: {
-      symbole: '+',
-      amount: '1.65 %',
-    },
-  },
-  {
-    id: '1002',
-    nom: {
-      image: '/public/litecoin.png',
-      nom: 'Litecoin',
-    },
-    price: '47,412.65',
-    changement: {
-      symbole: '-',
-      amount: '1.65 %',
-    },
-  },
-])
 
 function AmountColor(data: number, rotate = false) {
   if (data >= 0)
@@ -81,7 +41,7 @@ const redirect = (event: any): void => {
     <div class="flex-col">
       <section class="flex-col background-landing-page pt-20">
         <img class="absolute top-52 md:left-10 xl:left-20" src="/src/common/assets/images/bitcoin.png" alt="bitcoin">
-        <img class="absolute top-72 md:right-10 xl:right-48" src="/src/common/assets/images/ethereum.png" alt="ethereum">
+        <img class="absolute top-72 md:right-10 xl:right-48 hidden xl:block" src="/src/common/assets/images/ethereum.png" alt="ethereum">
         <div class="flex-col text-center pt-10">
           <h1 class=" text-2xl sm:text-5xl font-black">
             {{ t('index.title') }}
@@ -100,17 +60,9 @@ const redirect = (event: any): void => {
           </button>
         </div>
         <div class="mt-10 mb-10 flex justify-center flex-wrap">
-          <div class="flex items-center pr-10">
-            <img src="/public/bitcoin.png" alt="bitcoin-logo" class="mr-3" width="40px" height="40px">
-            <span> Bitcoin </span>
-          </div>
-          <div class="flex items-center pr-10">
-            <img src="/public/etherium.png" alt="etherium-logo" class="mr-3" width="40px" height="40px">
-            <span> Ethereum </span>
-          </div>
-          <div class="flex items-center">
-            <img src="/public/litecoin.png" alt="litecoin-logo" class="mr-3" width="40px" height="40px">
-            <span> Litecoin </span>
+          <div v-for="(crypto, index) in bestCryptos" :key="index" class="ml-4 flex items-center">
+            <Image :src="crypto.image" :alt="crypto.name" class="mr-3" width="40" height="40" />
+            <span> {{ crypto.name }} </span>
           </div>
         </div>
         <div class="bottom-0 w-full transition-all duration-300 ease-in-out delay-150">

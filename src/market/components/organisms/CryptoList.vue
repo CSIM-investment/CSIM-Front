@@ -98,6 +98,10 @@ const debouncedRefetch = debounce(() => {
         min_cap: filters.value.minCap,
         max_cap: filters.value.maxCap,
       },
+      orderBy: {
+        direction: filters.value.orderBy.direction,
+        name: filters.value.orderBy.name,
+      },
     },
   })
 }, 500)
@@ -159,6 +163,13 @@ const onSort = (event: any): void => {
     filters.value.orderBy.direction = 'DESC'
 
   filters.value.orderBy.name = event.sortField
+}
+
+function AmountColor(data: number, rotate = false) {
+  if (data >= 0)
+    return 'icon_list'
+  else
+    return `icon_list_minus${rotate ? ' rotate-180' : ''}`
 }
 
 const redirect = (event: any): void => {
@@ -286,14 +297,11 @@ const redirect = (event: any): void => {
         :header="t('cryptoList.changes')"
       >
         <template #body="{ data }">
-          <div
-            :class="
-              data.price_change_percentage_24h >= 0
-                ? 'text-success'
-                : 'text-error'
-            "
-          >
-            {{ format.percentage(data.price_change_percentage_24h) }}
+          <div class="flex align-middle items-center">
+            <font-awesome-icon class="mr-2" :class="AmountColor(data.price_change_percentage_24h, true)" icon="fa-solid fa-caret-up" />
+            <span :class="AmountColor(data.price_change_percentage_24h)">{{
+              format.percentage(data.price_change_percentage_24h)
+            }}</span>
           </div>
         </template>
       </Column>
@@ -383,5 +391,13 @@ const redirect = (event: any): void => {
 <style scoped lang="scss">
 ::v-deep(.p-paginator) {
   justify-content: end;
+}
+
+.icon_list {
+  color: #40BF6A;
+}
+
+.icon_list_minus {
+  color: #DF2040;
 }
 </style>
