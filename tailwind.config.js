@@ -34,13 +34,15 @@ module.exports = {
       },
       secondary: {
         DEFAULT: '#1F074D',
-        light: '#8E82A5',
+        lighter: '#8E6ECA',
+        light: 'rgba(186, 104, 200, 0.67)'
       },
       error: '#B83E51',
       success: '#8EB83E',
       warning: '#FFC300',
       info: '#3EB8A5',
       white: '#fff',
+      pink: "rgba(250, 93, 162, 0.67)",
       grey: {
         lighter: '#F9FBFC',
         light: '#EDEDED',

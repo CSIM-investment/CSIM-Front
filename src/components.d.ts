@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppSidebar: typeof import('./common/components/organisms/AppSidebar.vue')['default']
     AuthLayout: typeof import('./authentication/components/organisms/AuthLayout.vue')['default']
+    CardSolde: typeof import('./authentication/components/organisms/dashboard/cardSolde.vue')['default']
     Chip: typeof import('./common/components/atoms/Chip.vue')['default']
     CodeInput: typeof import('./authentication/components/organisms/CodeInput.vue')['default']
     CryptoDetailsArticle: typeof import('./crypto/components/molecules/CryptoDetailsArticle.vue')['default']
@@ -20,6 +21,7 @@ declare module '@vue/runtime-core' {
     CryptoDetailsTabs: typeof import('./crypto/components/organims/CryptoDetailsTabs.vue')['default']
     CryptoList: typeof import('./market/components/organisms/CryptoList.vue')['default']
     CsimLogo: typeof import('./common/components/atoms/CsimLogo.vue')['default']
+    Doughnuts: typeof import('./authentication/components/organisms/dashboard/doughnuts.vue')['default']
     Error404: typeof import('./common/components/molecules/Error404.vue')['default']
     Error500: typeof import('./common/components/molecules/Error500.vue')['default']
     FileInput: typeof import('./investments/components/atoms/FileInput.vue')['default']

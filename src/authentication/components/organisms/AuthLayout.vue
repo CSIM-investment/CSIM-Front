@@ -14,7 +14,7 @@ const props = defineProps<{
     <section class="hidden lg:flex bg-primary flex-col flex-1 items-center justify-center gap-2 p-8">
       <img :src="authIllustration" alt="" class="w-full max-w-2xl">
       <p class="text-white text-2xl text-center">
-        {{ t('auth.description') }}
+        {{ t('Dashboard.description') }}
       </p>
     </section>
     <section class="flex-1 md:px-28 flex items-center justify-center">
