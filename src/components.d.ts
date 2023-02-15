@@ -5,8 +5,10 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CryptoList: typeof import('./market/components/organisms/CryptoList.vue')['default']
     Footer: typeof import('./common/components/organisms/Footer.vue')['default']
     Header: typeof import('./common/components/organisms/Header.vue')['default']
+    LoadingPage: typeof import('./common/components/organisms/LoadingPage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
