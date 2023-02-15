@@ -1,0 +1,5 @@
+mutation ToggleFavoriteCrypto ($input: ToggleFavoriteInput!) {
+    toggleFavoriteCrypto(input: $input) {
+        id
+    }
+}

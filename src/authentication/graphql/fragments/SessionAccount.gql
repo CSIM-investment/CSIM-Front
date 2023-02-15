@@ -5,4 +5,13 @@ fragment UserSession  on User {
     email
     firstName
     lastName
+    favoritesCrypto {
+        id
+        name
+        image
+        symbol
+        current_price
+        market_cap
+        price_change_percentage_24h
+    }
 }

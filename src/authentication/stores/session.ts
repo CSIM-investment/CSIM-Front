@@ -27,6 +27,7 @@ export const useSessionStore = createGlobalState(
       if (accessToken.value) {
         try {
           const accountData = await apollo.query({
+            fetchPolicy: 'network-only',
             query: AccountDocument,
           })
 

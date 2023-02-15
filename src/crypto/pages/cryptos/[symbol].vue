@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { useGetCryptoQuery } from '~/common/generated/graphql'
+import { useToast } from 'primevue/usetoast'
+import { useGetCryptoQuery, useToggleFavoriteCryptoMutation } from '~/common/generated/graphql'
+import { useSessionStore } from '~/authentication/stores/session'
+const toast = useToast()
+const { user, fetchSession } = useSessionStore()
 
 const { t } = useI18n()
 const { symbol } = useRoute().params as Record<'symbol', string>
@@ -8,8 +12,27 @@ const { result, error, loading } = useGetCryptoQuery({ symbol })
 
 const crypto = computed(() => result?.value?.cryptos.datas[0])
 
-function onFavoriteClick() {
-  // console.log('onFavoriteClick')
+const isFavorite = computed(() => {
+  if (user.value && user.value?.favoritesCrypto)
+    return user.value?.favoritesCrypto.filter(item => item.id === crypto.value?.id).length > 0
+  return false
+})
+
+const { mutate: toggleFavorite } = useToggleFavoriteCryptoMutation({})
+
+const toggleFavoriteCrypto = async(hadToFavorite: boolean) => {
+  if (hadToFavorite)
+    toast.add({ detail: t('cryptoList.addFavorite', { cryptoName: crypto.value?.name }), severity: 'success', life: 3000 })
+  else
+    toast.add({ detail: t('cryptoList.removeFavorite', { cryptoName: crypto.value?.name }), severity: 'success', life: 3000 })
+
+  try {
+    await toggleFavorite({ input: { cryptoId: crypto.value?.id ?? '', hadToFavorite } })
+    await fetchSession()
+  }
+  catch (e) {
+    console.error(e)
+  }
 }
 
 </script>
@@ -25,10 +48,11 @@ function onFavoriteClick() {
     <div v-else-if="crypto" class="CryptoDetailsPage__content">
       <CryptoDetailsHeader :crypto="crypto" />
       <div
-        class="cursor-pointer shadow rounded-md flex justify-center items-center gap-2 text-xl hidden md:flex"
-        @click="onFavoriteClick"
+        v-if="user"
+        class="cursor-pointer shadow rounded-md flex justify-center items-center gap-2 text-xl hidden lg:flex"
+        @click="toggleFavoriteCrypto(!isFavorite)"
       >
-        <i class="pi pi-star-fill !text-xl" />{{ t('crypto.follow') }}
+        <i class="pi !text-xl" :class="isFavorite ? 'pi-star-fill' : 'pi-star'" />{{ t('crypto.follow') }}
       </div>
       <CryptoDetailsConversion :crypto="crypto" />
       <CryptoDetailsTabs :crypto="crypto" />
