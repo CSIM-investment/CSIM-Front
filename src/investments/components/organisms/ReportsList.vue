@@ -98,3 +98,9 @@ const displayPDFPreview = (event: any): void => {
     </Dialog>
   </div>
 </template>
+
+<style scoped lang="scss">
+::v-deep(.p-paginator) {
+  justify-content: end;
+}
+</style>
