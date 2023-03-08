@@ -62,11 +62,19 @@ const displayPDFPreview = (event: any): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faSquarePollVertical" />
-          {{ t('investments.reports.empty') }}
+          {{ t("investments.reports.empty") }}
         </div>
       </template>
-      <Column field="name" :header="t('investments.reports.name')" :sortable="true" />
-      <Column field="created_at" :header="t('investments.reports.created_at')" :sortable="true" />
+      <Column
+        field="name"
+        :header="t('investments.reports.name')"
+        :sortable="true"
+      />
+      <Column
+        field="created_at"
+        :header="t('investments.reports.created_at')"
+        :sortable="true"
+      />
       <Column
         field="fileLink"
         :header="t('investments.reports.download')"
@@ -90,3 +98,8 @@ const displayPDFPreview = (event: any): void => {
     </Dialog>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  auth: true
+</route>
