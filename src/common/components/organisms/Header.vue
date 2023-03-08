@@ -12,13 +12,13 @@ const { user } = useSessionStore()
     </RouterLink>
     <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
-        <RouterLink class="py-4 px-6 hover:text-main-primary" to="market">
+        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="market">
           {{ t('header.market') }}
         </RouterLink>
-        <RouterLink class="py-4 px-6 hover:text-main-primary" to="exchange">
+        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="exchange">
           {{ t('header.exchange') }}
         </RouterLink>
-        <RouterLink class="py-4 px-6 hover:text-main-primary" to="news">
+        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="news">
           {{ t('header.news') }}
         </RouterLink>
       </div>
@@ -32,7 +32,7 @@ const { user } = useSessionStore()
         </div>
       </template>
       <template v-else>
-        <RouterLink class="text-sm" to="login">
+        <RouterLink class="text-md hover:text-secondary hover:font-medium" to="login">
           {{ t('header.login') }}
         </RouterLink>
       </template>
