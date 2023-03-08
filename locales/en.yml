@@ -128,3 +128,13 @@ error:
      part1: An error has occurred,
      part2: please reload the page
      part3: or try again later.
+investments:
+  reports:
+    title: My reports
+    description: Retrieve your investment reports
+    dates: Dates
+    empty: You have no reports yet
+    name: File name
+    created_at: Created at
+    download: Download CSV file
+    preview: Preview of the report

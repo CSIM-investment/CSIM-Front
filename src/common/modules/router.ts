@@ -1,18 +1,5 @@
 import { type UserModule } from '~/types'
 
-interface RouteMeta {
-  auth: boolean
-}
-
-export const routesMetas: Record<string, RouteMeta> = {
-  login: {
-    auth: false,
-  },
-  register: {
-    auth: false,
-  },
-}
-
 export const install: UserModule = ({ isClient, router }) => {
   if (isClient) {
     const accessToken = localStorage.getItem('accessToken')
