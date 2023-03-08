@@ -1,7 +1,15 @@
 <script lang="ts" setup>
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { useNavigationStore } from '~/common/stores/navigation'
 import { useSessionStore } from '~/authentication/stores/session'
 
 const { t } = useI18n()
+const {
+  headerItems,
+  mobileSidebarItems,
+  isSidebarOpen,
+} = useNavigationStore()
+
 const { user } = useSessionStore()
 </script>
 
@@ -12,14 +20,8 @@ const { user } = useSessionStore()
     </RouterLink>
     <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
-        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="market">
-          {{ t('header.market') }}
-        </RouterLink>
-        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="exchange">
-          {{ t('header.exchange') }}
-        </RouterLink>
-        <RouterLink class="py-4 px-6 hover:text-secondary hover:font-medium" to="news">
-          {{ t('header.news') }}
+        <RouterLink v-for="item in headerItems" :key="item.label" class="py-4 px-6 hover:text-secondary hover:font-medium" :to="item.to">
+          {{ item.label }}
         </RouterLink>
       </div>
       <template v-if="user">
@@ -36,6 +38,16 @@ const { user } = useSessionStore()
           {{ t('header.login') }}
         </RouterLink>
       </template>
+      <div class="mx-4 md:hidden">
+        <font-awesome-icon :icon="faBars" @click="isSidebarOpen = true" />
+      </div>
     </div>
+
+    <Sidebar v-model:visible="isSidebarOpen">
+      <template #header>
+        <CsimLogo class="h-12 w-full mr-auto" />
+      </template>
+      <AppSidebar :nav-items="mobileSidebarItems" />
+    </Sidebar>
   </div>
 </template>

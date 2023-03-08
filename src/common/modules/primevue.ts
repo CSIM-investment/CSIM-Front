@@ -55,9 +55,9 @@ import Password from 'primevue/password'
 // import ScrollPanel from 'primevue/scrollpanel'
 // import ScrollTop from 'primevue/scrolltop'
 // import Slider from 'primevue/slider'
-// import Sidebar from 'primevue/sidebar'
+import Sidebar from 'primevue/sidebar'
 // import Skeleton from 'primevue/skeleton'
-// import SplitButton from 'primevue/splitbutton'
+import SplitButton from 'primevue/splitbutton'
 // import Splitter from 'primevue/splitter'
 // import SplitterPanel from 'primevue/splitterpanel'
 // import Steps from 'primevue/steps'
@@ -159,9 +159,9 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('ScrollPanel', ScrollPanel)
   // app.component('ScrollTop', ScrollTop)
   // app.component('Slider', Slider)
-  // app.component('Sidebar', Sidebar)
+  app.component('Sidebar', Sidebar)
   // app.component('Skeleton', Skeleton)
-  // app.component('SplitButton', SplitButton)
+  app.component('SplitButton', SplitButton)
   // app.component('Splitter', Splitter)
   // app.component('SplitterPanel', SplitterPanel)
   // app.component('Steps', Steps)
