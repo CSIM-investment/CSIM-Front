@@ -121,3 +121,9 @@ investments:
   reports:
     title: Mes rapports
     description: Récupérer vos rapports d'investissement
+    dates: Dates
+    empty: Aucun rapport disponible
+    name: Nom du rapport
+    created_at: Date de création
+    download: Télécharger le CSV
+    preview: Prévisualisation du rapport

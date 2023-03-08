@@ -3,6 +3,7 @@ import Calendar from 'primevue/calendar'
 import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
 import type { Report } from '~/interfaces/report.interface'
 
+const { t } = useI18n()
 const dateFilterRange = ref<Array<Date | null>>()
 const pdfPreview = ref<boolean>(false)
 const pdfPreviewLink = ref<string>('')
@@ -51,7 +52,7 @@ const displayPDFPreview = (event: any): void => {
           <div class="m-2">
             <Calendar
               v-model="dateFilterRange"
-              placeholder="Dates"
+              :placeholder="t('investments.reports.dates')"
               selection-mode="range"
               :manual-input="false"
             />
@@ -61,14 +62,14 @@ const displayPDFPreview = (event: any): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-1" :icon="faSquarePollVertical" />
-          Aucun rapport disponible
+          {{ t('investments.reports.empty') }}
         </div>
       </template>
-      <Column field="name" header="Nom du rapport" :sortable="true" />
-      <Column field="created_at" header="Date de création" :sortable="true" />
+      <Column field="name" :header="t('investments.reports.name')" :sortable="true" />
+      <Column field="created_at" :header="t('investments.reports.created_at')" :sortable="true" />
       <Column
         field="fileLink"
-        header="Télécharger le CSV"
+        :header="t('investments.reports.download')"
         header-style="width: 13rem"
       >
         <template #body="slotProps">
@@ -80,7 +81,7 @@ const displayPDFPreview = (event: any): void => {
     </DataTable>
     <Dialog
       v-model:visible="pdfPreview"
-      header="Prévisualisation du rapport"
+      :header="t('investments.reports.preview')"
       :modal="true"
       :dismissable-mask="true"
       class="w-5/6 mx-auto bg-white h-full"

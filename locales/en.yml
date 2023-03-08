@@ -132,3 +132,9 @@ investments:
   reports:
     title: My reports
     description: Retrieve your investment reports
+    dates: Dates
+    empty: You have no reports yet
+    name: File name
+    created_at: Created at
+    download: Download CSV file
+    preview: Preview of the report
