@@ -32,7 +32,10 @@ module.exports = {
         light: '#D7B492',
         DEFAULT: '#CA9A6F',
       },
-      secondary: '#1F074D',
+      secondary: {
+        DEFAULT: '#1F074D',
+        light: '#8E82A5',
+      },
       error: '#B83E51',
       success: '#8EB83E',
       warning: '#FFC300',

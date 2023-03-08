@@ -1,25 +1,32 @@
 <script lang="ts" setup>
-import {useGetArticlesQuery} from '~/common/generated/graphql'
+import { useGetArticlesQuery } from '~/common/generated/graphql'
+
 const { t } = useI18n()
 const search = ref<string>('')
-const {result, loading, refetch} = useGetArticlesQuery({
+const {
+  result,
+  loading,
+  refetch,
+} = useGetArticlesQuery({
   search: search.value,
 })
 
 function debounce(fn: Function, delay: number) {
   let timer: any
-  return function (this: any, ...args: any[]) {
+  return function(this: any, ...args: any[]) {
     clearTimeout(timer)
     timer = setTimeout(() => {
       fn.apply(this, args)
     }, delay)
   }
 }
+
 function goUrl(url: string) {
   window.open(url, '_blank')
 }
+
 const debouncedSearch = debounce(() => {
-  refetch({search: search.value})
+  refetch({ search: search.value })
 }, 500)
 
 watch(search, () => {
@@ -36,20 +43,20 @@ watch(search, () => {
         <div class="col-12 md:col-4">
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon">
-              <i class="pi pi-search"/>
+              <i class="pi pi-search" />
             </span>
-            <InputText v-model="search" :placeholder="t('news.search')"/>
+            <InputText v-model="search" :placeholder="t('news.search')" />
           </div>
         </div>
       </div>
-      <Divider style="height: 1px; background-color:lightgrey" class="w-5/6 divider"/>
-      <span/>
+      <Divider style="height: 1px; background-color:lightgrey" class="w-5/6 divider" />
+      <span />
       <div v-if="result">
         <div v-for="article in result.articles" :key="article.id">
-          <Infos @click="goUrl(article.url)" v-if="article.picture" class="infos" :article="article"/>
+          <Infos v-if="article.picture" class="infos" :article="article" @click="goUrl(article.url)" />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   </div>
 </template>

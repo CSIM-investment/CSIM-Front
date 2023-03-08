@@ -4,7 +4,9 @@ const { t } = useI18n()
 const props = defineProps<{
   modelValue: string
 }>()
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void
+}>()
 
 const CODE_LENGTH = 6
 const code = computed<string[]>(() => props.modelValue.split(''))

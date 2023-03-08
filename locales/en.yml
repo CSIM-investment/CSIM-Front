@@ -47,8 +47,8 @@ cryptoList:
   columns: Columns
   emptyFavorites: You have no favorites yet
   emptyCryptos: No cryptocurrency found
-  addFavorite: "{cryptoName} add to favorites"
-  removeFavorite: "{cryptoName} remove from favorites"
+  addFavorite: '{cryptoName} add to favorites'
+  removeFavorite: '{cryptoName} remove from favorites'
   loading: Loading...
   resetFilters: Reset filters
 loading: Loading
@@ -85,9 +85,9 @@ register:
     wording: Already have an account ?
     link: Log in.
 confirm:
-    title: Email confirmation
-    subtitle: A confirmation code has been sent to your email address.
-    submit: Confirm your account
+  title: Email confirmation
+  subtitle: A confirmation code has been sent to your email address.
+  submit: Confirm your account
 validators:
   required: This field is required
   email: Email is invalid
@@ -102,7 +102,7 @@ crypto:
     info:
       title: Information
     news:
-        title: News
+      title: News
     notFound: Crypto not found
   follow: Follow
   buy: Buy
@@ -118,16 +118,23 @@ crypto:
   change_24h: Change 24h
   total_supply: Total supply
   last_updated: Last updated
+sidebar:
+  dashboard: Dashboard
+  favorites: Favorites
+  investments: Investments
+  reports: Reports
+  wallet: Wallet
+  settings: Settings
 error:
   404:
     title: Page not found
     subtitle: The page you are looking for does not exist.
     back: Back to home
   500:
-   title:
-     part1: An error has occurred,
-     part2: please reload the page
-     part3: or try again later.
+    title:
+      part1: An error has occurred,
+      part2: please reload the page
+      part3: or try again later.
 investments:
   reports:
     title: My reports
@@ -138,3 +145,20 @@ investments:
     created_at: Created at
     download: Download CSV file
     preview: Preview of the report
+  investments:
+    title: Investment
+    subtitle: Manage your investments
+    drop:
+      select: Select files
+      upload: Upload
+      cancel: Cancel
+      placeholder: Drop files here or click select files for upload
+      template-tooltip: Download the file template
+    list:
+      title1: Buy
+      title2: Sell
+      type: Type
+      transactionDate: Transaction date
+      from: From
+      to: To
+      fees: Fees
