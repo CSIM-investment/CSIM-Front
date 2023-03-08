@@ -2,7 +2,6 @@
 const { t } = useI18n()
 const templateLink = ref<HTMLAnchorElement>()
 function onClickTemplateDownload() {
-  console.log('templateLink.value', templateLink.value)
   templateLink.value?.click()
 }
 </script>
@@ -10,10 +9,10 @@ function onClickTemplateDownload() {
 <template>
   <div class="min-h-full flex flex-col gap-4">
     <h1 class="text-3xl font-bold">
-      {{ t('investment.title') }}
+      {{ t('investments.investments.title') }}
     </h1>
     <h2 class="text-md text-grey-dark">
-      {{ t('investment.subtitle') }}
+      {{ t('investments.investments.subtitle') }}
     </h2>
     <InvestmentFilesDrop @template-download="onClickTemplateDownload" />
     <a ref="templateLink" href="investment-template.csv" download />
@@ -21,9 +20,6 @@ function onClickTemplateDownload() {
   </div>
 </template>
 
-<style scoped>
-
-</style>
 <route lang="yaml">
 meta:
   layout: admin

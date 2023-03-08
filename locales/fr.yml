@@ -127,3 +127,27 @@ investments:
     created_at: Date de création
     download: Télécharger le CSV
     preview: Prévisualisation du rapport
+  investments:
+    title: Mes investissements
+    subtitle: Gérer vos investissements
+    drop:
+      select: Sélectionner un fichier
+      upload: Télécharger
+      cancel: Annuler
+      placeholder: Déposer vos fichiers ici et ou sélectionner des fichiers à télécharger
+      template-tooltip: Télécharger le modèle
+    list:
+      title1: Acheter
+      title2: Vendre
+      type: Type
+      transactionDate: Date de transaction
+      from: De
+      to: À
+      fees: Frais
+sidebar:
+  dashboard: Tableau de bord
+  favorites: Favoris
+  investments: Investissements
+  reports: Rapports
+  wallet: Portefeuille
+  settings: Paramètres

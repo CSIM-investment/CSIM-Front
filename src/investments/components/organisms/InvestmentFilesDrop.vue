@@ -1,36 +1,42 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const emit = defineEmits(['templateDownload'])
+const emit = defineEmits<{
+  (event: 'templateDownload'): void
+}>()
 
 const filesToUpload = ref<File[]>([])
 const areFilesDraggedOver = ref(false)
 const dragCounter = ref(0)
 
-function dropHandler(event) {
+function dropHandler(event: DragEvent): void {
   event.preventDefault()
   areFilesDraggedOver.value = false
+
+  if (!event.dataTransfer?.files)
+    return
+
   filesToUpload.value = [...filesToUpload.value, ...event.dataTransfer.files]
 }
 
-function dragEnterHandler(event) {
+function dragEnterHandler(event: DragEvent): void {
   event.preventDefault()
   dragCounter.value++
   areFilesDraggedOver.value = true
 }
 
-function dragLeaveHandler(event) {
+function dragLeaveHandler(event: DragEvent): void {
   event.preventDefault()
   dragCounter.value--
   if (dragCounter.value === 0)
     areFilesDraggedOver.value = false
 }
 
-function fileAdd(files: File[]) {
+function fileAdd(files: File[]): void {
   filesToUpload.value = [...filesToUpload.value, ...files]
 }
 
-function removeFile(index: number) {
+function removeFile(index: number): void {
   filesToUpload.value = filesToUpload.value.filter((_, i) => i !== index)
 }
 </script>
@@ -39,23 +45,23 @@ function removeFile(index: number) {
   <div>
     <div class="flex gap-2 bg-grey p-4 rounded-t-xl">
       <FileInput @change="fileAdd">
-        {{ t('investment.drop.select') }}
+        {{ t('investments.investments.drop.select') }}
       </FileInput>
       <Button
-        v-tooltip.top="t('investment.drop.template-tooltip')"
+        v-tooltip.top="t('investments.investments.drop.template-tooltip')"
         class="button button-small p-button-success button-icon-only"
         icon="pi pi-save"
       />
       <Button
-        v-tooltip.top="t('investment.drop.template-tooltip')"
+        v-tooltip.top="t('investments.investments.drop.template-tooltip')"
         class="button button-small p-button-danger button-icon-only"
         icon="pi pi-trash"
       />
       <Button
-        v-tooltip.top="t('investment.drop.template-tooltip')"
+        v-tooltip.top="t('investments.investments.drop.template-tooltip')"
         class="button button-small button-icon-only ml-auto"
         icon="pi pi-file-excel"
-        @click="() => emit('templateDownload')"
+        @click="emit('templateDownload')"
       />
     </div>
     <div
@@ -73,10 +79,10 @@ function removeFile(index: number) {
         @dragleave="dragLeaveHandler"
       >
         <p v-if="filesToUpload.length === 0">
-          {{ t('investment.drop.placeholder') }}
+          {{ t('investments.investments.drop.placeholder') }}
         </p>
         <div v-else class="flex gap-2">
-          <Chip v-for="(file, index) in filesToUpload" :key="file.name" @remove="() => removeFile(index)">
+          <Chip v-for="(file, index) in filesToUpload" :key="file.name" @remove="removeFile(index)">
             {{ file.name }}
           </Chip>
         </div>
@@ -84,7 +90,3 @@ function removeFile(index: number) {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

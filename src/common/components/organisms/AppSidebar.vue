@@ -24,7 +24,3 @@ const { sidebarItems } = useNavigationStore()
     />
   </div>
 </template>
-
-<style scoped>
-
-</style>

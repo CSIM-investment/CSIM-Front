@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { faClose } from '@fortawesome/free-solid-svg-icons'
-const emit = defineEmits(['remove'])
+
+const emit = defineEmits<{
+  (event: 'remove'): void
+}>()
 </script>
 
 <template>
@@ -8,10 +11,6 @@ const emit = defineEmits(['remove'])
     <span class="">
       <slot />
     </span>
-    <font-awesome-icon class="mr-1" :icon="faClose" @click="() => emit('remove')" />
+    <font-awesome-icon class="mr-1" :icon="faClose" @click="emit('remove')" />
   </div>
 </template>
-
-<style scoped>
-
-</style>

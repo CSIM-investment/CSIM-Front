@@ -74,7 +74,7 @@ export const useNavigationStore = createGlobalState(() => {
 
   const isSidebarOpen = ref(false)
 
-  const mobileSidebarItems = computed(() => {
+  const mobileSidebarItems = computed<NavItem[]>(() => {
     if (!user.value)
       return headerItems
 

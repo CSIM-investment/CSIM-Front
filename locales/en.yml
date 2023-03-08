@@ -118,23 +118,6 @@ crypto:
   change_24h: Change 24h
   total_supply: Total supply
   last_updated: Last updated
-investment:
-  title: Investment
-  subtitle: Manage your investments
-  drop:
-    select: Select files
-    upload: Upload
-    cancel: Cancel
-    placeholder: Drop files here or click select files for upload
-    template-tooltip: Download the file template
-  list:
-    title1: Buy
-    title2: Sell
-    type: Type
-    transactionDate: Transaction date
-    from: From
-    to: To
-    fees: Fees
 sidebar:
   dashboard: Dashboard
   favorites: Favorites
@@ -162,3 +145,20 @@ investments:
     created_at: Created at
     download: Download CSV file
     preview: Preview of the report
+  investments:
+    title: Investment
+    subtitle: Manage your investments
+    drop:
+      select: Select files
+      upload: Upload
+      cancel: Cancel
+      placeholder: Drop files here or click select files for upload
+      template-tooltip: Download the file template
+    list:
+      title1: Buy
+      title2: Sell
+      type: Type
+      transactionDate: Transaction date
+      from: From
+      to: To
+      fees: Fees
