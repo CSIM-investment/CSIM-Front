@@ -50,8 +50,8 @@ cryptoList:
   columns: Colonnes
   emptyFavorites: Vous n'avez aucun favori
   emptyCryptos: Aucune cryptomonnaie trouvée
-  addFavorite: "{cryptoName} ajoutée aux favoris"
-  removeFavorite: "{cryptoName} supprimée des favoris"
+  addFavorite: '{cryptoName} ajoutée aux favoris'
+  removeFavorite: '{cryptoName} supprimée des favoris'
   loading: Chargement...
   resetFilters: Annuler les filtres
 loading: Chargement

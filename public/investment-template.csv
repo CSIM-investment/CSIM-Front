@@ -1,0 +1,3 @@
+type,transaction_date,from_value,from_currency,quantity,to_value,to_currency,fees_money
+buy,15/02/22 14:00,1,EUR,1,30,SOL,"0,02"
+sell,16/02/22 14:00,1,EUR,1,"30,05",SOL,"0,02"
