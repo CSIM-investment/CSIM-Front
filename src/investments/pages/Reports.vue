@@ -15,3 +15,8 @@ const { t } = useI18n()
     </div>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  auth: true
+</route>

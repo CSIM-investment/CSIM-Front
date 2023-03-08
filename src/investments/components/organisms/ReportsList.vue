@@ -94,12 +94,7 @@ const displayPDFPreview = (event: any): void => {
       :dismissable-mask="true"
       class="w-5/6 mx-auto bg-white h-full"
     >
-      <iframe :src="pdfPreviewLink" class="w-full h-[calc(100vh-13rem)]" />
+      <iframe title="preview" :src="pdfPreviewLink" class="w-full h-[calc(100vh-13rem)]" />
     </Dialog>
   </div>
 </template>
-
-<route lang="yaml">
-meta:
-  auth: true
-</route>
