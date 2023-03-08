@@ -117,3 +117,7 @@ crypto:
   change_24h: Variation 24h
   total_supply: Total en circulation
   last_updated: Dernière mise à jour
+investments:
+  reports:
+    title: Mes rapports
+    description: Récupérer vos rapports d'investissement

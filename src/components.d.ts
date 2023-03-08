@@ -25,6 +25,7 @@ declare module '@vue/runtime-core' {
     Infos: typeof import('./common/components/organisms/Infos.vue')['default']
     LoadingPage: typeof import('./common/components/organisms/LoadingPage.vue')['default']
     PasswordInput: typeof import('./common/components/molecules/PasswordInput.vue')['default']
+    ReportsList: typeof import('./investments/components/organisms/ReportsList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Spinner: typeof import('./common/components/molecules/Spinner.vue')['default']
