@@ -72,8 +72,8 @@ const displayPDFPreview = (event: any): void => {
         :header="t('investments.reports.download')"
         header-style="width: 13rem"
       >
-        <template #body="slotProps">
-          <a :href="slotProps.data.csvLink" target="_blank">
+        <template #body="{ data }">
+          <a :href="data.csvLink" target="_blank">
             <Button icon="pi pi-download" />
           </a>
         </template>
