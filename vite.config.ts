@@ -11,6 +11,14 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
+  server: {
+    middleware: {
+      '^/api/graphql/': (req, res, next) => {
+        res.setHeader('Cache-Control', 'no-store')
+        next()
+      }
+    }
+  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
