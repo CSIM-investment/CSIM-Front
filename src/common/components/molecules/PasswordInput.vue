@@ -5,6 +5,7 @@ interface Props {
   placeholder?: string
   errorMessage?: string
   class?: string
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -23,6 +24,7 @@ const emit = defineEmits<{
       v-model="input"
       :placeholder="props.placeholder"
       :class="['password-input', ...props.class.split(' ')]"
+      :aria-label="props.ariaLabel"
       toggle-mask
       :feedback="false"
       @input="emit('update:modelValue', $event.target.value)"

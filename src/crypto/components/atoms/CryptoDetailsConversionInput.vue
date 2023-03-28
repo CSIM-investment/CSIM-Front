@@ -17,10 +17,11 @@ const emit = defineEmits<{
       class="w-3/4 font-bold h-full rounded-xl bg-grey-light text-grey-darkest focus:outline-none"
       :value="props.modelValue"
       type="number"
+      :aria-label="`${props.symbol} input`"
       @input="emit('update:modelValue', $event.target.value)"
     >
     <div class="w-6 h-6">
-      <img v-if="props.cryptoImage" :src="props.cryptoImage" alt="">
+      <img v-if="props.cryptoImage" :src="props.cryptoImage" :alt="`${props.symbol} icon`">
     </div>
     <label>{{ props.symbol }}</label>
   </div>

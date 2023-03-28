@@ -6,7 +6,7 @@ const { label, stat } = defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col md:gap-1 gap-0.5">
+  <div class="flex flex-col md:gap-1 gap-0.5" :aria-label="label">
     <label class="text-grey-dark text-xs md:text-base">{{ label }}</label>
     <span class="font-bold text-xs md:text-base">{{ stat }}</span>
   </div>

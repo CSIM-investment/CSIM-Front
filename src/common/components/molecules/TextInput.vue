@@ -5,6 +5,7 @@ interface Props {
   errorMessage?: string
   class?: string
   modelValue: string
+  ariaLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -23,6 +24,7 @@ const emit = defineEmits<{
       :class="['text-input', ...props.class.split(' ')]"
       :placeholder="props.placeholder"
       :value="props.modelValue"
+      :aria-label="props.ariaLabel"
       type="text"
       @input="emit('update:modelValue', $event.target.value)"
     />

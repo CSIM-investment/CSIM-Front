@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 import { useVuelidate } from '@vuelidate/core'
-import { helpers } from '@vuelidate/validators'
+import { helpers, sameAs } from '@vuelidate/validators'
 import { useRegisterMutation } from '~/common/generated/graphql'
 import { useGraphqlErrorHandler } from '~/common/composables/useGraphqlErrorHandler'
 import { useVuelidateValidators } from '~/common/composables/useVuelidateValidators'
@@ -52,6 +52,7 @@ const rules = {
     minLength: validations.minLength(10),
     required: validations.required,
   },
+  confirmTerms: { sameAs: sameAs(true) },
   confirmPassword: {
     sameAsPassword: helpers.withMessage(
       t('validators.sameAsPassword'),
@@ -97,21 +98,24 @@ async function onRegister() {
 </script>
 <template>
   <AuthLayout :title="t('register.title')" :subtitle="t('register.subtitle')">
-    <form class="flex flex-col items-center w-full" @submit.prevent="onRegister">
+    <form class="flex flex-col items-center w-full" aria-label="register form" @submit.prevent="onRegister">
       <div v-if="currentFormStep === RegisterStep.Infos" class="flex flex-col items-center gap-2 w-full">
         <TextInput
           v-model="registerState.lastName"
+          aria-label="lastName field"
           :placeholder="t('register.placeholders.lastName')"
           :error-message="getValidatorMessage($validation.lastName)"
         />
         <TextInput
           v-model="registerState.firstName"
+          aria-label="firstName field"
           :placeholder="t('register.placeholders.firstName')"
           :error-message="getValidatorMessage($validation.firstName)"
         />
 
         <TextInput
           v-model="registerState.email"
+          aria-label="email field"
           :placeholder="t('register.placeholders.email')"
           :error-message="getValidatorMessage($validation.email)"
         />
@@ -119,16 +123,26 @@ async function onRegister() {
       <div v-else class="flex flex-col items-center w-2/3 gap-2 pb-8">
         <PasswordInput
           v-model="registerState.password"
+          aria-label="password field"
           :placeholder="t('register.placeholders.password')"
           :error-message="getValidatorMessage($validation.password)"
         />
         <PasswordInput
           v-model="registerState.confirmPassword"
+          aria-label="confirm password field"
           :placeholder="t('register.placeholders.confirmPassword')"
           :error-message="getValidatorMessage($validation.confirmPassword)"
         />
-        <div class="field-checkbox">
-          <Checkbox v-model="registerState.confirmTerms" input-id="binary" class="mr-4" :binary="true" />
+        <div
+          class="field-checkbox"
+          aria-label="accept terms section"
+        >
+          <Checkbox
+            v-model="registerState.confirmTerms"
+            input-id="binary"
+            class="mr-4"
+            :binary="true"
+          />
           <i18n-t keypath="register.terms.label" tag="label">
             <template #termsLink>
               <RouterLink to="/terms" class="text-primary underline">
