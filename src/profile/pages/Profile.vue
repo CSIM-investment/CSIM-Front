@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Settings from '~/profile/components/organisms/Settings.vue'
 const { t } = useI18n()
 </script>
 
@@ -10,7 +11,9 @@ const { t } = useI18n()
       </h1>
       <span>{{ t("profile.subtitle") }}</span>
     </div>
-    <div />
+    <div>
+      <Settings />
+    </div>
   </div>
 </template>
 

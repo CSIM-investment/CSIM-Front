@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     ReportsList: typeof import('./investments/components/organisms/ReportsList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Settings: typeof import('./profile/components/organisms/Settings.vue')['default']
     SidebarItem: typeof import('./investments/components/molecules/SidebarItem.vue')['default']
     Spinner: typeof import('./common/components/molecules/Spinner.vue')['default']
     TextInput: typeof import('./common/components/molecules/TextInput.vue')['default']

@@ -4,11 +4,7 @@ import { useNavigationStore } from '~/common/stores/navigation'
 import { useSessionStore } from '~/authentication/stores/session'
 
 const { t } = useI18n()
-const {
-  headerItems,
-  mobileSidebarItems,
-  isSidebarOpen,
-} = useNavigationStore()
+const { headerItems, mobileSidebarItems, isSidebarOpen } = useNavigationStore()
 
 const { user } = useSessionStore()
 </script>
@@ -20,24 +16,36 @@ const { user } = useSessionStore()
     </RouterLink>
     <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
-        <RouterLink v-for="item in headerItems" :key="item.label" class="py-4 px-6 hover:text-secondary hover:font-medium" :to="item.to">
+        <RouterLink
+          v-for="item in headerItems"
+          :key="item.label"
+          class="py-4 px-6 hover:text-secondary hover:font-medium"
+          :to="item.to"
+        >
           {{ item.label }}
         </RouterLink>
       </div>
       <template v-if="user">
-        <RouterLink class="flex" to="/profile">
+        <RouterLink class="flex items-center" to="/profile">
           <div class="flex flex-col text-xs">
-            <small class="hidden md:block">{{ t('header.welcome') }}</small>
+            <small class="hidden md:block">{{ t("header.welcome") }}</small>
             <span class="text-xs font-bold">{{ user.firstName }} {{ user.lastName }}</span>
           </div>
-          <div class="ml-2">
-            <img src="/src/common/assets/images/user.png" alt="user-photo">
+          <div class="w-12 ml-2">
+            <img
+              class="w-full"
+              src="/src/common/assets/images/user.png"
+              alt="user-photo"
+            >
           </div>
         </RouterLink>
       </template>
       <template v-else>
-        <RouterLink class="text-md hover:text-secondary hover:font-medium" to="login">
-          {{ t('header.login') }}
+        <RouterLink
+          class="text-md hover:text-secondary hover:font-medium"
+          to="login"
+        >
+          {{ t("header.login") }}
         </RouterLink>
       </template>
       <div class="mx-4 md:hidden">
