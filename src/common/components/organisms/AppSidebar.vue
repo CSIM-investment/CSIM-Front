@@ -8,6 +8,7 @@ const props = defineProps<{
 }>()
 
 const { sidebarItems } = useNavigationStore()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -18,7 +19,7 @@ const { sidebarItems } = useNavigationStore()
     <SidebarItem
       v-for="item in props.navItems"
       :key="item.label"
-      :label="item.label"
+      :label="t(item.label)"
       :icon="item.icon"
       :to="item.to"
     />

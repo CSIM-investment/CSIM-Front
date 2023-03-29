@@ -162,6 +162,7 @@ export type InvestmentEntity = {
   baseCurrency: CryptoCurrencyMarket;
   creationDate: Scalars['DateTime'];
   id: Scalars['ID'];
+  investments: Array<InvestmentEntity>;
   quantity: Scalars['Int'];
   quoteCurrency: CryptoCurrencyMarket;
   valueBaseCurrency: Scalars['Float'];
@@ -374,6 +375,14 @@ export type GetCryptosListQueryVariables = Exact<{
 
 
 export type GetCryptosListQuery = { __typename?: 'Query', cryptos: { __typename?: 'CryptoCurrencyMarketPaginatedResults', count: number, datas: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, symbol: string, current_price: number, market_cap: number, image: string, price_change_percentage_24h: number }> } };
+
+export type UpdateAccountMutationVariables = Exact<{
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
 
 export const UserSessionFragmentDoc = gql`
     fragment UserSession on User {
@@ -708,3 +717,33 @@ export function useGetCryptosListLazyQuery(variables: GetCryptosListQueryVariabl
   return VueApolloComposable.useLazyQuery<GetCryptosListQuery, GetCryptosListQueryVariables>(GetCryptosListDocument, variables, options);
 }
 export type GetCryptosListQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCryptosListQuery, GetCryptosListQueryVariables>;
+export const UpdateAccountDocument = gql`
+    mutation UpdateAccount($firstName: String, $lastName: String) {
+  updateAccount(updateUserInput: {firstName: $firstName, lastName: $lastName}) {
+    ...UserSession
+  }
+}
+    ${UserSessionFragmentDoc}`;
+
+/**
+ * __useUpdateAccountMutation__
+ *
+ * To run a mutation, you first call `useUpdateAccountMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAccountMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useUpdateAccountMutation({
+ *   variables: {
+ *     firstName: // value for 'firstName'
+ *     lastName: // value for 'lastName'
+ *   },
+ * });
+ */
+export function useUpdateAccountMutation(options: VueApolloComposable.UseMutationOptions<UpdateAccountMutation, UpdateAccountMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<UpdateAccountMutation, UpdateAccountMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<UpdateAccountMutation, UpdateAccountMutationVariables>(UpdateAccountDocument, options);
+}
+export type UpdateAccountMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<UpdateAccountMutation, UpdateAccountMutationVariables>;

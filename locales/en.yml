@@ -119,6 +119,7 @@ crypto:
   total_supply: Total supply
   last_updated: Last updated
 sidebar:
+  profile: Profile
   dashboard: Dashboard
   favorites: Favorites
   investments: Investments
@@ -162,3 +163,10 @@ investments:
       from: From
       to: To
       fees: Fees
+profile:
+  title: Profile
+  subtitle: Manage your profile
+  language: Preferred language
+  firstName: First name
+  lastName: Last name
+  update: Update

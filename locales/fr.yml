@@ -145,9 +145,17 @@ investments:
       to: À
       fees: Frais
 sidebar:
+  profile: Profil
   dashboard: Tableau de bord
   favorites: Favoris
   investments: Investissements
   reports: Rapports
   wallet: Portefeuille
   settings: Paramètres
+profile:
+    title: Votre profil
+    subtitle: Personnalisez votre profil
+    language: Préférences de langage
+    firstName: Prénom
+    lastName: Nom
+    update: Modifier

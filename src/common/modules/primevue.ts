@@ -51,7 +51,7 @@ import Password from 'primevue/password'
 // import ProgressBar from 'primevue/progressbar'
 // import Rating from 'primevue/rating'
 // import RadioButton from 'primevue/radiobutton'
-// import SelectButton from 'primevue/selectbutton'
+import SelectButton from 'primevue/selectbutton'
 // import ScrollPanel from 'primevue/scrollpanel'
 // import ScrollTop from 'primevue/scrolltop'
 // import Slider from 'primevue/slider'
@@ -155,7 +155,7 @@ export const install: UserModule = ({ app, isClient }) => {
   // app.component('ProgressBar', ProgressBar)
   // app.component('RadioButton', RadioButton)
   // app.component('Rating', Rating)
-  // app.component('SelectButton', SelectButton)
+  app.component('SelectButton', SelectButton)
   // app.component('ScrollPanel', ScrollPanel)
   // app.component('ScrollTop', ScrollTop)
   // app.component('Slider', Slider)
