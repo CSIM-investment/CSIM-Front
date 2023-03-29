@@ -1,0 +1,20 @@
+<script lang="ts" setup>
+const { t } = useI18n()
+</script>
+
+<template>
+  <div class="mt-10 mb-10 mx-8">
+    <div class="mb-10">
+      <h1 class="font-bold text-4xl">
+        {{ t("profile.title") }}
+      </h1>
+      <span>{{ t("profile.subtitle") }}</span>
+    </div>
+    <div />
+  </div>
+</template>
+
+<route lang="yaml">
+meta:
+  layout: admin
+</route>

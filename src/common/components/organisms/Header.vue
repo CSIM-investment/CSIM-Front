@@ -25,13 +25,15 @@ const { user } = useSessionStore()
         </RouterLink>
       </div>
       <template v-if="user">
-        <div class="flex flex-col text-xs">
-          <small class="hidden md:block">{{ t('header.welcome') }}</small>
-          <span class="text-xs font-bold">{{ user.firstName }} {{ user.lastName }}</span>
-        </div>
-        <div class="ml-2">
-          <img src="/src/common/assets/images/user.png" alt="user-photo">
-        </div>
+        <RouterLink class="flex" to="/profile">
+          <div class="flex flex-col text-xs">
+            <small class="hidden md:block">{{ t('header.welcome') }}</small>
+            <span class="text-xs font-bold">{{ user.firstName }} {{ user.lastName }}</span>
+          </div>
+          <div class="ml-2">
+            <img src="/src/common/assets/images/user.png" alt="user-photo">
+          </div>
+        </RouterLink>
       </template>
       <template v-else>
         <RouterLink class="text-md hover:text-secondary hover:font-medium" to="login">

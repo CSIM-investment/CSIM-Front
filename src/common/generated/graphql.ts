@@ -162,6 +162,7 @@ export type InvestmentEntity = {
   baseCurrency: CryptoCurrencyMarket;
   creationDate: Scalars['DateTime'];
   id: Scalars['ID'];
+  investments: Array<InvestmentEntity>;
   quantity: Scalars['Int'];
   quoteCurrency: CryptoCurrencyMarket;
   valueBaseCurrency: Scalars['Float'];

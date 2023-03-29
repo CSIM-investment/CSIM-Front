@@ -5,7 +5,7 @@ import {
   faCog,
   faLightbulb,
   faMoneyBillTrendUp, faNewspaper,
-  faTicket,
+  faTicket, faUser,
   faUsers,
   faWallet,
 } from '@fortawesome/free-solid-svg-icons'
@@ -40,6 +40,11 @@ export const useNavigationStore = createGlobalState(() => {
   ]
 
   const sidebarItems: NavItem[] = [
+    {
+      label: t('sidebar.profile'),
+      icon: faUser,
+      to: '/profile',
+    },
     {
       label: t('sidebar.dashboard'),
       icon: faChartPie,
