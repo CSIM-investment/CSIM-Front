@@ -34,10 +34,12 @@ const user = useSessionStore().user
 const firstName = ref<string>(user.value?.firstName ?? '')
 const lastName = ref<string>(user.value?.lastName ?? '')
 const email = ref<string>(user.value?.email ?? '')
-const updateIsDisabled = computed((): boolean => {
+const canUpdate = computed((): boolean => {
   return (
-    firstName.value === user.value?.firstName
-    && lastName.value === user.value?.lastName
+    (firstName.value !== user.value?.firstName
+    || lastName.value !== user.value?.lastName)
+    && !!firstName.value.trim()
+    && !!lastName.value.trim()
   )
 })
 
@@ -45,8 +47,8 @@ const { mutate, loading } = useUpdateAccountMutation()
 
 const updateAccount = async(): Promise<void> => {
   const userUpdated = await mutate({
-    firstName: firstName.value,
-    lastName: lastName.value,
+    firstName: firstName.value.trim(),
+    lastName: lastName.value.trim(),
   })
   user.value = {
     ...user.value,
@@ -99,7 +101,7 @@ const updateAccount = async(): Promise<void> => {
         <Button
           :label="t('profile.update')"
           class="mt-10"
-          :disabled="updateIsDisabled"
+          :disabled="!canUpdate"
           :loading="!!loading"
           @click="updateAccount"
         />
