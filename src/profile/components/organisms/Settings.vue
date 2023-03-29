@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useSessionStore } from '~/authentication/stores/session'
+import { useUpdateAccountMutation } from '~/common/generated/graphql'
 
 const { locale, t } = useI18n()
 const enum Lang {
@@ -39,6 +40,20 @@ const updateIsDisabled = computed((): boolean => {
     && lastName.value === user.value?.lastName
   )
 })
+
+const { mutate, loading } = useUpdateAccountMutation()
+
+const updateAccount = async(): Promise<void> => {
+  const userUpdated = await mutate({
+    firstName: firstName.value,
+    lastName: lastName.value,
+  })
+  user.value = {
+    ...user.value,
+    firstName: userUpdated?.data?.updateAccount.firstName,
+    lastName: userUpdated?.data?.updateAccount.lastName,
+  }
+}
 </script>
 
 <template>
@@ -54,7 +69,7 @@ const updateIsDisabled = computed((): boolean => {
         </div>
         <div class="pl-8 w-full flex flex-col justify-center items-center">
           <p class="mb-4">
-            {{ t('profile.language') }}
+            {{ t("profile.language") }}
           </p>
           <SelectButton
             v-model="lang"
@@ -68,11 +83,11 @@ const updateIsDisabled = computed((): boolean => {
       <div class="flex flex-col my-14">
         <span class="p-float-label mb-10">
           <InputText id="firstName" v-model="firstName" class="w-full" />
-          <label for="firstName">{{ t('profile.firstName') }}</label>
+          <label for="firstName">{{ t("profile.firstName") }}</label>
         </span>
         <span class="p-float-label mb-10">
           <InputText id="lastName" v-model="lastName" class="w-full" />
-          <label for="lastName">{{ t('profile.lastName') }}</label>
+          <label for="lastName">{{ t("profile.lastName") }}</label>
         </span>
         <InputText
           id="email"
@@ -81,7 +96,13 @@ const updateIsDisabled = computed((): boolean => {
           placeholder="Email"
           disabled
         />
-        <Button :label="t('profile.update')" class="mt-10" :disabled="updateIsDisabled" />
+        <Button
+          :label="t('profile.update')"
+          class="mt-10"
+          :disabled="updateIsDisabled"
+          :loading="!!loading"
+          @click="updateAccount"
+        />
       </div>
     </div>
     <div class="hidden lg:flex justify-center items-center lg:w-1/2">

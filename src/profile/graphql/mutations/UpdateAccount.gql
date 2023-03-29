@@ -1,0 +1,5 @@
+mutation UpdateAccount ($firstName: String, $lastName: String) {
+    updateAccount(updateUserInput: {firstName: $firstName, lastName: $lastName}) {
+        ...UserSession
+    }
+}
