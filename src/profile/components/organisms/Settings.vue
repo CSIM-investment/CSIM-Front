@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useSessionStore } from '~/authentication/stores/session'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const enum Lang {
   FR = 'fr',
   EN = 'en',
@@ -33,6 +33,12 @@ const user = useSessionStore().user
 const firstName = ref<string>(user.value?.firstName ?? '')
 const lastName = ref<string>(user.value?.lastName ?? '')
 const email = ref<string>(user.value?.email ?? '')
+const updateIsDisabled = computed((): boolean => {
+  return (
+    firstName.value === user.value?.firstName
+    && lastName.value === user.value?.lastName
+  )
+})
 </script>
 
 <template>
@@ -48,7 +54,7 @@ const email = ref<string>(user.value?.email ?? '')
         </div>
         <div class="pl-8 w-full flex flex-col justify-center items-center">
           <p class="mb-4">
-            Préférences de langage :
+            {{ t('profile.language') }}
           </p>
           <SelectButton
             v-model="lang"
@@ -62,13 +68,20 @@ const email = ref<string>(user.value?.email ?? '')
       <div class="flex flex-col my-14">
         <span class="p-float-label mb-10">
           <InputText id="firstName" v-model="firstName" class="w-full" />
-          <label for="firstName">firstname</label>
+          <label for="firstName">{{ t('profile.firstName') }}</label>
         </span>
         <span class="p-float-label mb-10">
           <InputText id="lastName" v-model="lastName" class="w-full" />
-          <label for="lastName">lastname</label>
+          <label for="lastName">{{ t('profile.lastName') }}</label>
         </span>
-        <InputText id="email" v-model="email" class="w-full" placeholder="email" disabled />
+        <InputText
+          id="email"
+          v-model="email"
+          class="w-full"
+          placeholder="Email"
+          disabled
+        />
+        <Button :label="t('profile.update')" class="mt-10" :disabled="updateIsDisabled" />
       </div>
     </div>
     <div class="hidden lg:flex justify-center items-center lg:w-1/2">

@@ -166,3 +166,7 @@ investments:
 profile:
   title: Profile
   subtitle: Manage your profile
+  language: Preferred language
+  firstName: First name
+  lastName: Last name
+  update: Update

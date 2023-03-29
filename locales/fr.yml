@@ -155,3 +155,7 @@ sidebar:
 profile:
     title: Votre profil
     subtitle: Personnalisez votre profil
+    language: Préférences de langage
+    firstName: Prénom
+    lastName: Nom
+    update: Modifier
