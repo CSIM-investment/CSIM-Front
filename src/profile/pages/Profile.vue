@@ -4,7 +4,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div class="mt-10 mb-10 mx-8">
+  <div class="mx-8">
     <div class="mb-10">
       <h1 class="font-bold text-4xl">
         {{ t("profile.title") }}
