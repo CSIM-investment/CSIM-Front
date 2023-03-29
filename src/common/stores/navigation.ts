@@ -19,21 +19,20 @@ export interface NavItem {
 
 export const useNavigationStore = createGlobalState(() => {
   const { user } = useSessionStore()
-  const { t } = useI18n()
 
   const headerItems: NavItem[] = [
     {
-      label: t('header.market'),
+      label: 'header.market',
       to: '/market',
       icon: faMoneyBillTrendUp,
     },
     {
-      label: t('header.exchange'),
+      label: 'header.exchange',
       to: '/exchange',
       icon: faArrowRightArrowLeft,
     },
     {
-      label: t('header.news'),
+      label: 'header.news',
       to: '/news',
       icon: faNewspaper,
     },
@@ -41,37 +40,37 @@ export const useNavigationStore = createGlobalState(() => {
 
   const sidebarItems: NavItem[] = [
     {
-      label: t('sidebar.profile'),
+      label: 'sidebar.profile',
       icon: faUser,
       to: '/profile',
     },
     {
-      label: t('sidebar.dashboard'),
+      label: 'sidebar.dashboard',
       icon: faChartPie,
       to: '/dashboard',
     },
     {
-      label: t('sidebar.favorites'),
+      label: 'sidebar.favorites',
       icon: faTicket,
       to: '/favorites',
     },
     {
-      label: t('sidebar.investments'),
+      label: 'sidebar.investments',
       icon: faLightbulb,
       to: '/investments',
     },
     {
-      label: t('sidebar.reports'),
+      label: 'sidebar.reports',
       icon: faUsers,
       to: '/reports',
     },
     {
-      label: t('sidebar.wallet'),
+      label: 'sidebar.wallet',
       icon: faWallet,
       to: '/wallet',
     },
     {
-      label: t('sidebar.settings'),
+      label: 'sidebar.settings',
       icon: faCog,
       to: '/settings',
     },

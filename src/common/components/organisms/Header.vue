@@ -22,7 +22,7 @@ const { user } = useSessionStore()
           class="py-4 px-6 hover:text-secondary hover:font-medium"
           :to="item.to"
         >
-          {{ item.label }}
+          {{ t(item.label) }}
         </RouterLink>
       </div>
       <template v-if="user">
