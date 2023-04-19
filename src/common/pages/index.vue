@@ -54,7 +54,7 @@ const redirect = (event: any): void => {
           </p>
           <button
             class="button mx-auto xl:w-1/6 xs:2/6 font-bold mb-4 mt-1 transition-all duration-200 ease-in-out"
-            @click="router.push('/login')"
+            @click="router.push('/register')"
           >
             {{ t('index.button') }}
           </button>
@@ -142,7 +142,7 @@ const redirect = (event: any): void => {
           </div>
           <button
             class="mb-10 button self-center xl:w-1/6 sm:w-1/2 mt-15 font-bold mb-4 mt-10 transition-all duration-200 ease-in-out" type="submit"
-            @click="router.push('/login')"
+            @click="router.push('/register')"
           >
             {{ t('index.button') }}
           </button>
