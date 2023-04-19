@@ -163,6 +163,8 @@ investments:
       from: From
       to: To
       fees: Fees
+      purchase: Purchase
+      sale: Sale
 profile:
   title: Profile
   subtitle: Manage your profile

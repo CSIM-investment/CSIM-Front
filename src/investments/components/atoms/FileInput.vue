@@ -4,9 +4,11 @@ const emit = defineEmits<{
   (event: 'change', value: FileList): void
 }>()
 
-interface InputFileEvent extends Event {
-  target: HTMLInputElement
-}
+const filesInputRef = ref<HTMLInputElement>()
+
+defineExpose({
+  filesInputRef,
+})
 
 function changeHandler(event: InputEvent): void {
   const target = event.target as HTMLInputElement
@@ -17,7 +19,7 @@ function changeHandler(event: InputEvent): void {
 </script>
 
 <template>
-  <input id="file" type="file" name="file" class="hidden" multiple @change="changeHandler">
+  <input id="file" ref="filesInputRef" type="file" name="file" class="hidden" multiple @change="changeHandler">
   <label for="file" class="p-button button button-small">
     <slot />
   </label>

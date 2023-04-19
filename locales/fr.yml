@@ -144,6 +144,8 @@ investments:
       from: De
       to: À
       fees: Frais
+      purchase: Achat
+      sale: Vente
 sidebar:
   profile: Profil
   dashboard: Tableau de bord

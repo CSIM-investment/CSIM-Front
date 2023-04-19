@@ -50,14 +50,6 @@ export type ArticlesInput = {
   orderBy?: InputMaybe<ArticleOrderInput>;
 };
 
-export type CreateInvestmentInput = {
-  baseCurrencyId: Scalars['String'];
-  quantity: Scalars['Int'];
-  quoteCurrencyId: Scalars['String'];
-  valueBaseCurrency: Scalars['Float'];
-  valueQuoteCurrency: Scalars['Float'];
-};
-
 export type CreateUserInput = {
   email: Scalars['String'];
   firstName: Scalars['String'];
@@ -159,12 +151,14 @@ export type CryptoSearchInput = {
 
 export type InvestmentEntity = {
   __typename?: 'InvestmentEntity';
-  baseCurrency: CryptoCurrencyMarket;
+  baseCurrency?: Maybe<CryptoCurrencyMarket>;
   creationDate: Scalars['DateTime'];
   id: Scalars['ID'];
-  investments: Array<InvestmentEntity>;
-  quantity: Scalars['Int'];
-  quoteCurrency: CryptoCurrencyMarket;
+  origin: Scalars['String'];
+  quantity: Scalars['Float'];
+  quoteCurrency?: Maybe<CryptoCurrencyMarket>;
+  status: Scalars['String'];
+  type: Scalars['String'];
   valueBaseCurrency: Scalars['Float'];
   valueQuoteCurrency: Scalars['Float'];
 };
@@ -185,7 +179,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   confirmEmail: LoginResponse;
   createCryptoMarket: Scalars['String'];
-  createInvestment: InvestmentEntity;
+  importInvestments: Array<InvestmentEntity>;
   login: LoginResponse;
   refreshTokens: LoginResponse;
   register: User;
@@ -204,8 +198,8 @@ export type MutationConfirmEmailArgs = {
 };
 
 
-export type MutationCreateInvestmentArgs = {
-  createInvestmentInput: CreateInvestmentInput;
+export type MutationImportInvestmentsArgs = {
+  link: Scalars['String'];
 };
 
 
@@ -368,6 +362,18 @@ export type GetCryptoQueryVariables = Exact<{
 
 
 export type GetCryptoQuery = { __typename?: 'Query', cryptos: { __typename?: 'CryptoCurrencyMarketPaginatedResults', datas: Array<{ __typename?: 'CryptoCurrencyMarket', ath: number, ath_change_percentage: number, ath_date: any, atl: number, atl_change_percentage: number, atl_date: any, circulating_supply: number, current_price: number, high_24h: number, low_24h: number, market_cap: number, market_cap_change_24h: number, market_cap_change_percentage_24h: number, market_cap_rank: number, last_updated: any, name: string, price_change_24h: number, price_change_percentage_24h: number, symbol: string, image: string, total_supply?: number | null, total_volume: number, id: string }> } };
+
+export type ImportInvestmentMutationVariables = Exact<{
+  link: Scalars['String'];
+}>;
+
+
+export type ImportInvestmentMutation = { __typename?: 'Mutation', importInvestments: Array<{ __typename?: 'InvestmentEntity', id: string }> };
+
+export type AccountInvestmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AccountInvestmentsQuery = { __typename?: 'Query', account: { __typename?: 'User', investments: Array<{ __typename?: 'InvestmentEntity', type: string, creationDate: any, valueQuoteCurrency: number, valueBaseCurrency: number, quoteCurrency?: { __typename?: 'CryptoCurrencyMarket', symbol: string } | null, baseCurrency?: { __typename?: 'CryptoCurrencyMarket', symbol: string } | null }> } };
 
 export type GetCryptosListQueryVariables = Exact<{
   options: CryptoSearchInput;
@@ -677,6 +683,73 @@ export function useGetCryptoLazyQuery(variables: GetCryptoQueryVariables | VueCo
   return VueApolloComposable.useLazyQuery<GetCryptoQuery, GetCryptoQueryVariables>(GetCryptoDocument, variables, options);
 }
 export type GetCryptoQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetCryptoQuery, GetCryptoQueryVariables>;
+export const ImportInvestmentDocument = gql`
+    mutation ImportInvestment($link: String!) {
+  importInvestments(link: $link) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useImportInvestmentMutation__
+ *
+ * To run a mutation, you first call `useImportInvestmentMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useImportInvestmentMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useImportInvestmentMutation({
+ *   variables: {
+ *     link: // value for 'link'
+ *   },
+ * });
+ */
+export function useImportInvestmentMutation(options: VueApolloComposable.UseMutationOptions<ImportInvestmentMutation, ImportInvestmentMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<ImportInvestmentMutation, ImportInvestmentMutationVariables>>) {
+  return VueApolloComposable.useMutation<ImportInvestmentMutation, ImportInvestmentMutationVariables>(ImportInvestmentDocument, options);
+}
+export type ImportInvestmentMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ImportInvestmentMutation, ImportInvestmentMutationVariables>;
+export const AccountInvestmentsDocument = gql`
+    query AccountInvestments {
+  account {
+    investments {
+      type
+      creationDate
+      valueQuoteCurrency
+      quoteCurrency {
+        symbol
+      }
+      valueBaseCurrency
+      baseCurrency {
+        symbol
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountInvestmentsQuery__
+ *
+ * To run a query within a Vue component, call `useAccountInvestmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountInvestmentsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useAccountInvestmentsQuery();
+ */
+export function useAccountInvestmentsQuery(options: VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>(AccountInvestmentsDocument, {}, options);
+}
+export function useAccountInvestmentsLazyQuery(options: VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>(AccountInvestmentsDocument, {}, options);
+}
+export type AccountInvestmentsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<AccountInvestmentsQuery, AccountInvestmentsQueryVariables>;
 export const GetCryptosListDocument = gql`
     query GetCryptosList($options: CryptoSearchInput!) {
   cryptos(options: $options) {

@@ -1,0 +1,18 @@
+query AccountInvestments {
+  account {
+    investments {
+      type
+      creationDate
+
+      valueQuoteCurrency
+      quoteCurrency {
+        symbol
+      }
+
+      valueBaseCurrency
+      baseCurrency {
+        symbol
+      }
+    }
+  }
+}

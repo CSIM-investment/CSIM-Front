@@ -1,13 +1,26 @@
 <script setup lang="ts">
+import { useToast } from 'primevue/usetoast'
+import { useFirebaseStorage, useStorageFile } from 'vuefire'
+import { ref as storageRef } from 'firebase/storage'
+import { useImportInvestmentMutation } from '~/common/generated/graphql'
+import type FileInput from '~/investments/components/atoms/FileInput.vue'
+
 const { t } = useI18n()
+const storage = useFirebaseStorage()
+const toast = useToast()
 
 const emit = defineEmits<{
   (event: 'templateDownload'): void
+  (event: 'filesImported'): void
 }>()
 
+const filesInputRef = ref<InstanceType<typeof FileInput>> (null)
 const filesToUpload = ref<File[]>([])
+const areFilesUploading = ref(false)
 const areFilesDraggedOver = ref(false)
 const dragCounter = ref(0)
+
+const { mutate: importInvestment } = useImportInvestmentMutation({})
 
 function dropHandler(event: DragEvent): void {
   event.preventDefault()
@@ -39,23 +52,57 @@ function fileAdd(files: File[]): void {
 function removeFile(index: number): void {
   filesToUpload.value = filesToUpload.value.filter((_, i) => i !== index)
 }
+
+function removeFiles(): void {
+  const filesInputElement = filesInputRef.value?.filesInputRef as HTMLInputElement
+  filesToUpload.value = []
+  filesInputElement.value = ''
+}
+
+async function filesSave(): Promise<void> {
+  const investmentsLinks: string[] = []
+  areFilesUploading.value = true
+
+  for (const fileToUpload of filesToUpload.value) {
+    const investmentFolderRef = storageRef(storage, `investments/${Date.now()}`)
+
+    const { upload, uploadError, url, refresh } = useStorageFile(investmentFolderRef)
+    await upload(fileToUpload)
+    await refresh()
+
+    if (uploadError.value)
+      toast.add({ detail: `there was an error saving ${fileToUpload.name}`, severity: 'error' })
+    else if (url.value)
+      investmentsLinks.push(url.value)
+  }
+
+  for (const link of investmentsLinks)
+    await importInvestment({ link })
+
+  toast.add({ detail: 'files successfully imported !', severity: 'success' })
+  areFilesUploading.value = false
+  emit('filesImported')
+}
 </script>
 
 <template>
   <div>
     <div class="flex gap-2 bg-grey p-4 rounded-t-xl">
-      <FileInput @change="fileAdd">
+      <FileInput ref="filesInputRef" @change="fileAdd">
         {{ t('investments.investments.drop.select') }}
       </FileInput>
       <Button
-        v-tooltip.top="t('investments.investments.drop.template-tooltip')"
+        v-if="filesToUpload.length"
         class="button button-small p-button-success button-icon-only"
         icon="pi pi-save"
+        :loading="areFilesUploading"
+        @click="filesSave"
       />
       <Button
-        v-tooltip.top="t('investments.investments.drop.template-tooltip')"
+        v-if="filesToUpload.length"
         class="button button-small p-button-danger button-icon-only"
         icon="pi pi-trash"
+        @click="removeFiles"
       />
       <Button
         v-tooltip.top="t('investments.investments.drop.template-tooltip')"
