@@ -24,7 +24,7 @@ const { t } = useI18n()
         <h3 class="font-bold">
           {{ t('footer.company') }}
         </h3>
-        <RouterLink class="mt-2" to="#">
+        <RouterLink class="mt-2" to="terms">
           {{ t('footer.gtcu') }}
         </RouterLink>
         <RouterLink class="mt-2" to="#">
