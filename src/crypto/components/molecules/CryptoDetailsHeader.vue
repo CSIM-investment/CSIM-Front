@@ -45,14 +45,18 @@ const toggleFavoriteCrypto = async(hadToFavorite: boolean) => {
 <template>
   <section class="CryptoDetailsHeader">
     <div class="flex w-full gap-1 lg:gap-4 lg:w-auto">
-      <img :src="props.crypto.image" alt="" class="w-12 h-12">
+      <img :src="props.crypto.image" :alt="`${props.crypto.name} logo`" class="w-12 h-12">
       <div>
-        <h1 class="font-bold">
+        <h1 class="font-bold" aria-label="Crypto name">
           {{ props.crypto.name }}
         </h1>
-        <div class="font-bold text-xl">
+        <div class="font-bold text-xl" aria-label="Current price">
           ${{ props.crypto.current_price }}
-          <span class="text-xs" :class="marketCapClass">{{ props.crypto.market_cap_change_percentage_24h }}%</span>
+          <span
+            class="text-xs"
+            :class="marketCapClass"
+            aria-label="Change percentage 24h"
+          >{{ props.crypto.market_cap_change_percentage_24h }}%</span>
         </div>
       </div>
       <div class="flex gap-1 ml-auto lg:hidden">

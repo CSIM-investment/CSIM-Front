@@ -153,9 +153,9 @@ sidebar:
   wallet: Portefeuille
   settings: Paramètres
 profile:
-    title: Votre profil
-    subtitle: Personnalisez votre profil
-    language: Préférences de langage
-    firstName: Prénom
-    lastName: Nom
-    update: Modifier
+  title: Votre profil
+  subtitle: Personnalisez votre profil
+  language: Préférences de langage
+  firstName: Prénom
+  lastName: Nom
+  update: Modifier

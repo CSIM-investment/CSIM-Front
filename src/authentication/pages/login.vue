@@ -60,10 +60,11 @@ async function onLogin() {
 <template>
   <AuthLayout :title="t('login.title')" :subtitle="t('login.subtitle')">
     <form class="flex flex-col items-center gap-8 w-full" @submit.prevent="onLogin">
-      <TextInput v-model="loginState.email" placeholder="Email" />
+      <TextInput v-model="loginState.email" placeholder="Email" aria-label="email input" />
       <PasswordInput
         v-model="loginState.password"
         placeholder="Password"
+        aria-label="password input"
       />
       <Button class="button w-2/3 mb-4" type="submit" :loading="!!loading" :disabled="loginForm.$invalid" :label="t('login.action')" />
     </form>

@@ -7,32 +7,39 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div class="w-full flex-col flex">
+  <div class="w-full flex-col flex" aria-label="news card">
     <div class="w-full flex-col mt-5 sm:flex-row-reverse items-center sm:items-start justify-around flex">
       <div id="img" class="border-4-black overflow-hidden sm:w-1/4 sm:self-center">
         <img
           class="inner-img w-1/2 sm:w-full mx-auto sm:mx-0"
+          aria-label="news image"
           :src="props.article.picture"
           :alt="props.article.source"
         >
       </div>
       <div class="sm:w-1/2 sm:mx-3 flex-col flex text-center sm:text-start">
-        <h1 class="text-xl sm:text-2xl mb-5 title hover:text-primary">
+        <h1
+          class="text-xl sm:text-2xl mb-5 title hover:text-primary"
+          aria-label="news title"
+        >
           {{ props.article.title }}
         </h1>
-        <span class="text-md mb-5 sm:text-xl leading-8 description font-medium">
+        <span
+          class="text-md mb-5 sm:text-xl leading-8 description font-medium"
+          aria-label="news description"
+        >
           {{ props.article.description }}
         </span>
         <div
           class="flex-col sm:flex-row flex mx-3 flex-wrap sub"
         >
-          <p class="mr-5">
+          <p class="mr-5" aria-label="news publish date">
             {{ momentDate(props.article.publishedDate) }}
           </p>
-          <p class="mr-5">
+          <p class="mr-5" aria-label="news source">
             {{ props.article.source }}
           </p>
-          <p class="sub__author font-medium">
+          <p class="sub__author font-medium" arial-label="news author">
             {{ props.article.author }}
           </p>
         </div>

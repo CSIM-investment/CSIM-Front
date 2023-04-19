@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useNavigationStore } from '~/common/stores/navigation'
 
 const { sidebarItems } = useNavigationStore()

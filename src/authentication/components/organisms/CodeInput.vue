@@ -56,6 +56,7 @@ function pasteCode(event: ClipboardEvent) {
       type="number"
       maxlength="1"
       max="9"
+      :aria-label="`email code step ${codeIndex + 1}`"
       @focus="$event.target.select()"
       @keydown.up.prevent
       @keydown.down.prevent

@@ -59,7 +59,6 @@ export namespace CoinGecko {
       const { data } = await this.client.get(`/coins/${cryptoName}/market_chart/range`, {
         params: {
           vs_currency: currency,
-          interval: 'daily',
           ...queryParams,
         },
       })

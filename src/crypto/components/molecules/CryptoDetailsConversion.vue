@@ -37,7 +37,10 @@ watch(currencyAmount, (value) => {
 </script>
 
 <template>
-  <section class="CryptoDetailsConversion shadow rounded-md p-2 md:p-4 flex flex-col gap-2 md:gap-4">
+  <section
+    class="CryptoDetailsConversion shadow rounded-md p-2 md:p-4 flex flex-col gap-2 md:gap-4"
+    aria-label="Crypto convertor"
+  >
     <h2 class="font-bold">
       {{ t('crypto.details.conversion.title') }}
     </h2>

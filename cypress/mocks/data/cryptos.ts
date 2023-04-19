@@ -1,0 +1,57 @@
+import type { GetCryptoQuery, GetCryptosListQuery } from '../../../src/common/generated/graphql'
+
+export const cryptos: GetCryptosListQuery['cryptos']['datas'] = [
+  {
+    id: '1',
+    name: 'Bitcoin',
+    symbol: 'BTC',
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579',
+    current_price: 10000,
+    market_cap: 100000,
+    price_change_percentage_24h: 1,
+  },
+  {
+    id: '2',
+    name: 'Ethereum',
+    symbol: 'ETH',
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579',
+    current_price: 3000,
+    market_cap: 3000,
+    price_change_percentage_24h: 1,
+  },
+  {
+    id: '3',
+    name: 'Ripple',
+    symbol: 'XRP',
+    image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579',
+    current_price: 100,
+    market_cap: 100,
+    price_change_percentage_24h: 1,
+  },
+]
+
+export const detailedCrypto: GetCryptoQuery['cryptos']['datas'][0] = {
+  id: 'bitcoin',
+  name: 'bitcoin',
+  symbol: 'btc',
+  image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579',
+  current_price: 10000,
+  market_cap: 100000,
+  price_change_percentage_24h: 1,
+  total_volume: 100000,
+  high_24h: 10000,
+  low_24h: 10000,
+  market_cap_rank: 1,
+  ath: 10000,
+  ath_date: '2021-01-01',
+  atl: 10000,
+  ath_change_percentage: 1,
+  atl_date: '2021-01-01',
+  atl_change_percentage: 1,
+  circulating_supply: 10000,
+  last_updated: '2021-01-01',
+  market_cap_change_24h: 10000,
+  market_cap_change_percentage_24h: 1,
+  price_change_24h: 10000,
+  total_supply: 10000,
+}

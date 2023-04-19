@@ -41,10 +41,7 @@ const { user } = useSessionStore()
         </RouterLink>
       </template>
       <template v-else>
-        <RouterLink
-          class="text-md hover:text-secondary hover:font-medium"
-          to="login"
-        >
+        <RouterLink class="text-md hover:text-secondary hover:font-medium" to="login" aria-label="log in">
           {{ t("header.login") }}
         </RouterLink>
       </template>

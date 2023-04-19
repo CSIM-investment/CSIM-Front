@@ -43,7 +43,7 @@ async function onVerifyCode() {
     <form class="flex flex-col gap-8 items-center w-full" @submit.prevent="onVerifyCode">
       <CodeInput v-model="emailCode" />
 
-      <Button class="button mb-4" type="submit" :loading="!!loading">
+      <Button class="button mb-4" type="submit" :loading="!!loading" aria-label="Confirm email">
         {{ t('confirm.submit') }}
       </Button>
     </form>
