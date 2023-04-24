@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppSidebar: typeof import('./common/components/organisms/AppSidebar.vue')['default']
     AuthLayout: typeof import('./authentication/components/organisms/AuthLayout.vue')['default']
+    CardDoughnut: typeof import('./authentication/components/organisms/dashboard/CardDoughnut.vue')['default']
     CardSolde: typeof import('./authentication/components/organisms/dashboard/cardSolde.vue')['default']
     Chip: typeof import('./common/components/atoms/Chip.vue')['default']
     CodeInput: typeof import('./authentication/components/organisms/CodeInput.vue')['default']
