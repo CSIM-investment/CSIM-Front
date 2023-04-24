@@ -1,32 +1,35 @@
 <script lang="ts" setup>
 import Calendar from 'primevue/calendar'
-import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarPlus, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
+import { computed } from 'vue'
+import { DataTableRowClickEvent } from 'primevue/datatable'
 import type { Report } from '~/interfaces/report.interface'
+import type { InvestmentsReportsEntity } from '~/common/generated/graphql'
+import {
+  useCreateInvestmentReportMutation,
+  useGetReportsListQuery,
+  useToggleFavoriteCryptoMutation,
+} from '~/common/generated/graphql'
 
 const { t } = useI18n()
 const dateFilterRange = ref<Array<Date | null>>()
 const pdfPreview = ref<boolean>(false)
 const pdfPreviewLink = ref<string>('')
-const reportsList = [
-  {
-    id: 1,
-    name: 'rapport-2022-10-06',
-    created_at: '2022-10-06',
-    pdfLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-    csvLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
+
+const { result, error, loading, refetch } = useGetReportsListQuery({
+  options: {
   },
-  {
-    id: 2,
-    name: 'rapport-2022-11-07',
-    created_at: '2022-10-07',
-    pdfLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-    csvLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-  },
-] as Report[]
+})
+
+const { mutate: createInvestmentReport } = useCreateInvestmentReportMutation({})
+
+const reportsList = computed(() => {
+  return result?.value?.reports ?? []
+})
+
+const totalReports = computed(() => {
+  return result?.value?.reports.length ?? 0
+})
 
 const displayPDFPreview = (event: any): void => {
   pdfPreviewLink.value = event.data.pdfLink
@@ -45,7 +48,7 @@ const displayPDFPreview = (event: any): void => {
       responsive-layout="scroll"
       paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
       :row-style="'cursor: pointer'"
-      @row-click="displayPDFPreview"
+      @row-click="displayPDFPreview as DataTableRowClickEvent"
     >
       <template #header>
         <div class="flex flex-wrap">
@@ -56,6 +59,9 @@ const displayPDFPreview = (event: any): void => {
               selection-mode="range"
               :manual-input="false"
             />
+          </div>
+          <div class="m-2 ml-6 flex justify-center items-center text-secondary-light hover:text-secondary  cursor-pointer">
+            <font-awesome-icon size="2xl" class="mr-1" :icon="faCalendarPlus" />
           </div>
         </div>
       </template>
