@@ -3,17 +3,16 @@ import Calendar from 'primevue/calendar'
 import { faCalendarPlus, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
 import { computed } from 'vue'
 import { DataTableRowClickEvent } from 'primevue/datatable'
-import type { Report } from '~/interfaces/report.interface'
-import type { InvestmentsReportsEntity } from '~/common/generated/graphql'
 import {
   useCreateInvestmentReportMutation,
   useGetReportsListQuery,
-  useToggleFavoriteCryptoMutation,
 } from '~/common/generated/graphql'
 
 const { t } = useI18n()
 const dateFilterRange = ref<Array<Date | null>>()
+const createRange = ref<Array<Date> | null>()
 const pdfPreview = ref<boolean>(false)
+const createModal = ref<boolean>(false)
 const pdfPreviewLink = ref<string>('')
 
 const { result, error, loading, refetch } = useGetReportsListQuery({
@@ -24,6 +23,7 @@ const { result, error, loading, refetch } = useGetReportsListQuery({
 const { mutate: createInvestmentReport } = useCreateInvestmentReportMutation({})
 
 const reportsList = computed(() => {
+  console.log(result?.value?.reports)
   return result?.value?.reports ?? []
 })
 
@@ -34,6 +34,22 @@ const totalReports = computed(() => {
 const displayPDFPreview = (event: any): void => {
   pdfPreviewLink.value = event.data.pdfLink
   pdfPreview.value = true
+}
+
+const generateReport = async(): Promise<void> => {
+  try {
+    await createInvestmentReport({
+      options: {
+        fromDate: createRange.value?.[0],
+        toDate: createRange.value?.[1],
+      },
+    })
+    refetch()
+  }
+  catch (e) {
+    console.error(e)
+  }
+  createModal.value = false
 }
 </script>
 
@@ -60,8 +76,8 @@ const displayPDFPreview = (event: any): void => {
               :manual-input="false"
             />
           </div>
-          <div class="m-2 ml-6 flex justify-center items-center text-secondary-light hover:text-secondary  cursor-pointer">
-            <font-awesome-icon size="2xl" class="mr-1" :icon="faCalendarPlus" />
+          <div class="ml-4 flex items-center">
+            <Button label="Générer un rapport" icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
       </template>
@@ -101,6 +117,32 @@ const displayPDFPreview = (event: any): void => {
       class="w-5/6 mx-auto bg-white h-full"
     >
       <iframe title="preview" :src="pdfPreviewLink" class="w-full h-[calc(100vh-13rem)]" />
+    </Dialog>
+    <Dialog
+      v-model:visible="createModal"
+      header="Sélectionnez la période"
+      :modal="true"
+      :dismissable-mask="true"
+      class="w-fit mx-auto bg-white"
+    >
+      <div class="flex flex-col">
+        <div class="m-2">
+          <Calendar
+            v-model="createRange"
+            class="w-full"
+            placeholder="Période"
+            selection-mode="range"
+            :manual-input="false"
+          />
+        </div>
+        <div class="m-2 flex justify-end">
+          <Button
+            label="Générer"
+            icon="pi pi-pencil"
+            @click="generateReport"
+          />
+        </div>
+      </div>
     </Dialog>
   </div>
 </template>
