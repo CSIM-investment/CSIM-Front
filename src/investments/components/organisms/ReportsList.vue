@@ -3,6 +3,7 @@ import Calendar from 'primevue/calendar'
 import { faCalendarPlus, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
 import { computed } from 'vue'
 import { DataTableRowClickEvent } from 'primevue/datatable'
+import { format } from '~/support/format'
 import {
   useCreateInvestmentReportMutation,
   useGetReportsListQuery,
@@ -23,7 +24,6 @@ const { result, error, loading, refetch } = useGetReportsListQuery({
 const { mutate: createInvestmentReport } = useCreateInvestmentReportMutation({})
 
 const reportsList = computed(() => {
-  console.log(result?.value?.reports)
   return result?.value?.reports ?? []
 })
 
@@ -60,6 +60,7 @@ const generateReport = async(): Promise<void> => {
       :row-hover="true"
       :paginator="true"
       :rows="5"
+      :total-records="totalReports"
       :rows-per-page-options="[5, 10, 15]"
       responsive-layout="scroll"
       paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
@@ -77,6 +78,9 @@ const generateReport = async(): Promise<void> => {
             />
           </div>
           <div class="ml-4 flex items-center">
+            <Button label="Filtrer" icon="pi pi-filter" />
+          </div>
+          <div class="ml-4 flex items-center ml-auto">
             <Button label="Générer un rapport" icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
@@ -90,13 +94,14 @@ const generateReport = async(): Promise<void> => {
       <Column
         field="name"
         :header="t('investments.reports.name')"
-        :sortable="true"
       />
       <Column
-        field="created_at"
-        :header="t('investments.reports.created_at')"
-        :sortable="true"
-      />
+        header="Période"
+      >
+        <template #body="{ data }">
+          Du {{ format.date(new Date(data.fromDate)) }} au {{ format.date(new Date(data.toDate)) }}
+        </template>
+      </Column>
       <Column
         field="fileLink"
         :header="t('investments.reports.download')"
