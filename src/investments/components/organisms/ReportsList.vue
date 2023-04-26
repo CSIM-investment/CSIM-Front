@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Calendar from 'primevue/calendar'
-import { faCalendarPlus, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
 import { computed } from 'vue'
 import { DataTableRowClickEvent } from 'primevue/datatable'
 import { format } from '~/support/format'
@@ -10,18 +10,16 @@ import {
 } from '~/common/generated/graphql'
 
 const { t } = useI18n()
-const dateFilterRange = ref<Array<Date | null>>()
 const createRange = ref<Array<Date> | null>()
 const pdfPreview = ref<boolean>(false)
 const createModal = ref<boolean>(false)
 const pdfPreviewLink = ref<string>('')
 
 const { result, error, loading, refetch } = useGetReportsListQuery({
-  options: {
-  },
+  options: {},
 })
 
-const { mutate: createInvestmentReport } = useCreateInvestmentReportMutation({})
+const { mutate: createInvestmentReport, loading: generateLoading } = useCreateInvestmentReportMutation({})
 
 const reportsList = computed(() => {
   return result?.value?.reports ?? []
@@ -60,6 +58,7 @@ const generateReport = async(): Promise<void> => {
       :row-hover="true"
       :paginator="true"
       :rows="5"
+      :loading="!!loading"
       :total-records="totalReports"
       :rows-per-page-options="[5, 10, 15]"
       responsive-layout="scroll"
@@ -69,18 +68,7 @@ const generateReport = async(): Promise<void> => {
     >
       <template #header>
         <div class="flex flex-wrap">
-          <div class="m-2">
-            <Calendar
-              v-model="dateFilterRange"
-              :placeholder="t('investments.reports.dates')"
-              selection-mode="range"
-              :manual-input="false"
-            />
-          </div>
-          <div class="ml-4 flex items-center">
-            <Button label="Filtrer" icon="pi pi-filter" />
-          </div>
-          <div class="ml-4 flex items-center ml-auto">
+          <div class="flex items-center">
             <Button label="Générer un rapport" icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
@@ -94,23 +82,15 @@ const generateReport = async(): Promise<void> => {
       <Column
         field="name"
         :header="t('investments.reports.name')"
+        :sortable="true"
       />
       <Column
+        field="fromDate"
         header="Période"
+        :sortable="true"
       >
         <template #body="{ data }">
           Du {{ format.date(new Date(data.fromDate)) }} au {{ format.date(new Date(data.toDate)) }}
-        </template>
-      </Column>
-      <Column
-        field="fileLink"
-        :header="t('investments.reports.download')"
-        header-style="width: 13rem"
-      >
-        <template #body="{ data }">
-          <a :href="data.csvLink" target="_blank">
-            <Button icon="pi pi-download" />
-          </a>
         </template>
       </Column>
     </DataTable>
@@ -128,7 +108,7 @@ const generateReport = async(): Promise<void> => {
       header="Sélectionnez la période"
       :modal="true"
       :dismissable-mask="true"
-      class="w-fit mx-auto bg-white"
+      class="mx-auto bg-white"
     >
       <div class="flex flex-col">
         <div class="m-2">
@@ -144,6 +124,7 @@ const generateReport = async(): Promise<void> => {
           <Button
             label="Générer"
             icon="pi pi-pencil"
+            :loading="!!generateLoading"
             @click="generateReport"
           />
         </div>
