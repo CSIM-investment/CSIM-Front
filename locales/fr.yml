@@ -127,6 +127,11 @@ investments:
     created_at: Date de création
     download: Télécharger le CSV
     preview: Prévisualisation du rapport
+    generateReport: Générer un rapport
+    generate: Générer
+    fromTo: Du {from} au {to}
+    period: Période
+    selectPeriod: Sélectionnez la période
   investments:
     title: Mes investissements
     subtitle: Gérer vos investissements

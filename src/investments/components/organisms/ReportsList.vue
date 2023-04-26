@@ -69,7 +69,7 @@ const generateReport = async(): Promise<void> => {
       <template #header>
         <div class="flex flex-wrap">
           <div class="flex items-center">
-            <Button label="Générer un rapport" icon="pi pi-file" @click="createModal = true" />
+            <Button :label="t('investments.reports.generateReport')" icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
       </template>
@@ -86,11 +86,16 @@ const generateReport = async(): Promise<void> => {
       />
       <Column
         field="fromDate"
-        header="Période"
+        :header="t('investments.reports.period')"
         :sortable="true"
       >
         <template #body="{ data }">
-          Du {{ format.date(new Date(data.fromDate)) }} au {{ format.date(new Date(data.toDate)) }}
+          {{
+            t('investments.reports.fromTo', {
+              from: format.date(new Date(data.fromDate)),
+              to: format.date(new Date(data.toDate))}
+            )
+          }}
         </template>
       </Column>
     </DataTable>
@@ -105,7 +110,7 @@ const generateReport = async(): Promise<void> => {
     </Dialog>
     <Dialog
       v-model:visible="createModal"
-      header="Sélectionnez la période"
+      :header="t('investments.reports.selectPeriod')"
       :modal="true"
       :dismissable-mask="true"
       class="mx-auto bg-white"
@@ -115,14 +120,14 @@ const generateReport = async(): Promise<void> => {
           <Calendar
             v-model="createRange"
             class="w-full"
-            placeholder="Période"
+            :placeholder="t('investments.reports.period')"
             selection-mode="range"
             :manual-input="false"
           />
         </div>
         <div class="m-2 flex justify-end">
           <Button
-            label="Générer"
+            :label="t('investments.reports.generate')"
             icon="pi pi-pencil"
             :loading="!!generateLoading"
             @click="generateReport"
