@@ -1,18 +1,18 @@
 <script lang="ts" setup>import { useSessionStore } from '~/authentication/stores/session';
 
 const { user } = useSessionStore()
-
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="flex card-solde lg:col-span-2 sm:col-span-3 xs:col-span-5 px-8 py-5 text-white flex flex-col">
-    <div class="card-solde__title text-md mb-3 font-bold">
-      Solde
+    <div class="card-solde__title text-xl mb-3 font-bold">
+      {{ t("dashboard.cardSolde.title") }}
     </div>
     <div class="card-solde__content flex font-bold justify-between items-center mb-3">
       <div class="flex align-center items-center">
-        <i class="pi pi-wallet pr-5 !text-2xl" />
-        <span class="!text-base">{{ user?.sold?.newSold }}</span>
+        <i class="pi pi-wallet pr-5 !text-3xl" />
+        <span class="!text-xl">{{ user?.sold?.newSold }} €</span>
       </div>
       <div class="card-solde__content__stat bg-green px-1">
         <i class="pi pi-check card-solde__content__stat__icon !text-sm" />
@@ -20,12 +20,12 @@ const { user } = useSessionStore()
       </div>
     </div>
     <div class="card-solde__price flex mx-auto">
-      <div>
+      <div class="flex justify-center flex-col items-center">
         <div>
           <i class="pi pi-angle-down !text-sm mr-2" />
-          <span class="!text-sm">Dernier solde</span>
+          <span class="!text-md">{{ t("dashboard.cardSolde.lastSolde") }}</span>
         </div>
-        <span class="!text-sm">{{ user?.sold?.lastSold }} </span>
+        <span class="!text-md">{{ user?.sold?.lastSold }} € </span>
       </div>
     </div>
   </div>
@@ -45,6 +45,15 @@ const { user } = useSessionStore()
   border-radius: 30px;
   &__percentage, &__icon {
     color: #40654C;
+  }
+}
+.card-solde__content__stat__danger {
+  display: flex;
+  align-items: center;
+  background: rgba(235, 125, 125, 0.39);
+  border-radius: 30px;
+  &__percentage, &__icon {
+    color: rgba(235, 125, 125, 0.39);
   }
 }
 </style>

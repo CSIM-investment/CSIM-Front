@@ -14,14 +14,14 @@ const crypto = computed(() => result?.value?.cryptos.datas[0])
 
 <template>
   <div>
-    <div class="grid lg:grid-cols-4">
+    <div class="grid lg:grid-cols-2">
       <div class="dashboard bg-grey-lighter col-span-3 flex flex-col">
         <div class="dashboard__container h-full mx-8 my-8 flex flex-col">
           <h1 class="text-3xl font-bold font-medium">
-            Dashboard
+            {{ t("dashboard.title") }}
           </h1>
           <p class="text-grey-dark mt-2 text-md font-medium">
-            Un aperçu de votre compte cryptomonnaie
+            {{ t("dashboard.subtitle") }}
           </p>
           <div class="md:grid md:grid-cols-5 xl:gap-8 mx-8">
             <cardSolde />
@@ -60,48 +60,18 @@ const crypto = computed(() => result?.value?.cryptos.datas[0])
               </div>
             </div>
           </div>
+          <DashboardFavorites />
           <DataTable :value="user?.sold?.topInvestments" responsive-layout="scroll">
             <Column field="quoteCurrency.image" header="Crypto">
-            <template #body="{ data }">
+              <template #body="{ data }">
                 <div class="flex">
                   <Image class="mr-2" :src="data.quoteCurrency.image" width="30" height="30" />
                 </div>
               </template>
             </Column>
-          <Column field="quoteCurrency.symbol" header="symbol" />
-          <Column field="quantity" header="quantity" />
-        </DataTable>
-        </div>
-      </div>
-      <div class="sidebar lg:mt-0 mt-[10rem] flex xs:flex-col w-full">
-        <div class="h-1/2 mt-5">
-          <div class="flex flex-col w-full">
-            <div class="mx-5 flex justify-between">
-              <h2 class="font-bold">
-                Favoris
-              </h2>
-            </div>
-            <div class=" mt-5 flex flex-col justify-evently mx-5">
-              <div
-                v-for="favorites in user.favoritesCrypto" :key="favorites.id"
-                class="py-3 w-full px-5 my-2 rounded-xl justify-evently bg-gradient-to-r from-secondary-light to-pink flex w-full"
-              >
-                <div class="w-3/4 flex">
-                  <img class="max-h-10 mr-5" :src="favorites.image" :alt="favorites.name">
-                  <span class="font-medium name-favorites xl:text-base md:text-base text-white">{{ favorites.name }}</span>
-                </div>
-                <div class="md:w-2/4 xl:w-1/4">
-                  <div class="flex flex-col items-end	justify-end">
-                    <span class="text-xs font-bold text-white"> $ {{ favorites.current_price }} </span>
-                    <div class="card-solde__content__stat w-fit bg-green px-1">
-                      <i class="pi pi-check card-solde__content__stat__icon !text-sm" />
-                      <span class="card-solde__content__stat__percentage text-sm">+ 1,6%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <Column field="quoteCurrency.symbol" header="symbol" />
+            <Column field="quantity" header="quantity" />
+          </DataTable>
         </div>
       </div>
     </div>
@@ -122,5 +92,5 @@ const crypto = computed(() => result?.value?.cryptos.datas[0])
 
 <route lang="yaml">
 meta:
-  auth: true
-</route>
+  layout: admin
+  </route>

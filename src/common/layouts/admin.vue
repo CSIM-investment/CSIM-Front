@@ -22,7 +22,6 @@ const { sidebarItems } = useNavigationStore()
 
   &__container {
     display: grid;
-    padding-top: 4rem;
     height: 100%;
 
     @screen md {

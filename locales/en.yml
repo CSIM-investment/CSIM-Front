@@ -126,6 +126,16 @@ sidebar:
   reports: Reports
   wallet: Wallet
   settings: Settings
+
+dashboard:
+  cardSolde:
+    title: Balance
+    subtitle: Your balance
+    lastSolde: Last balance
+  title: Your dashboard
+  subtitle: Your dashboard is displayed here
+  titleFavorits: Your favorite
+  subtitleFavorits: Your favorite cryptocurrencies are displayed here
 error:
   404:
     title: Page not found

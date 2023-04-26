@@ -399,7 +399,7 @@ export type UpdateAccountMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
 
 export const UserSessionFragmentDoc = gql`
     fragment UserSession on User {
