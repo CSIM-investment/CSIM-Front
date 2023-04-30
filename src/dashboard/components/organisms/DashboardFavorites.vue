@@ -17,10 +17,10 @@ function AmountColor(data: number) {
   <p class="text-grey-dark mb-5 text-md font-medium">
     {{ t("dashboard.subtitleFavorits") }}
   </p>
-  <div class=" md:flex flex-wrap">
+  <div v-if="user?.favoritesCrypto && user?.favoritesCrypto?.length > 0" class=" md:flex flex-wrap">
     <div
       v-for="favorites in user?.favoritesCrypto"
-      :key="favorites.id" class="py-3 px-2 hover:bg-primary hover:cursor-pointer rounded-xl mx-1 my-1 flex-wrap justify-evently bg-gradient-to-r from-secondary-light to-pink flex-col md:w-1/4 xl:w-1/6"
+      :key="favorites.id" class="py-3 px-2 ml-8 hover:bg-primary hover:cursor-pointer rounded-xl my-1 flex-wrap justify-evently bg-gradient-to-r from-secondary-light to-pink flex-col md:w-1/4 xl:w-1/6"
       @click="() => $router.push(`/cryptos/${favorites.symbol}`)"
     >
       <div class="flex">
@@ -37,5 +37,8 @@ function AmountColor(data: number) {
         </div>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <Button class="p-button button" icon="pi pi-plus-circle" @click="$router.push('/market')" :label="t('dashboard.favoritsAdd')" />
   </div>
 </template>

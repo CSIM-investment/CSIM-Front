@@ -159,6 +159,7 @@ dashboard:
     title: Solde
     subtitle: Votre solde
     lastSolde: Dernier solde
+  favoritsAdd: Ajouter favoris
   title: Tableau de bord
   subtitle: Votre tableau de bord
   titleFavorits: Vos favoris

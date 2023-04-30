@@ -132,6 +132,7 @@ dashboard:
     title: Balance
     subtitle: Your balance
     lastSolde: Last balance
+  favoritsAdd: Add favorits
   title: Your dashboard
   subtitle: Your dashboard is displayed here
   titleFavorits: Your favorite
