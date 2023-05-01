@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import ChartjsDoughnutsLabel from 'chartjs-plugin-doughnutlabel-v3'
 import { ref } from 'vue'
+import { useSessionStore } from '~/authentication/stores/session'
 
+const { user } = useSessionStore()
+
+onMounted(() => {
+  chartData.value.datasets[0].data = [
+    user?.value?.sold?.newSold,
+  ]
+})
 const plugins = [ChartjsDoughnutsLabel]
 const chartData = ref({
   datasets: [
@@ -28,7 +36,7 @@ const lightOptions = ref({
           text: 'Total',
         },
         {
-          text: '$ 3000,00',
+          text: `${user?.value?.sold?.newSold} €`,
           color: 'black',
           font: {
             size: 18,
@@ -36,8 +44,8 @@ const lightOptions = ref({
           },
         },
         {
-          text: '+ 1,6%',
-          color: 'green',
+          text: `${user?.value?.sold?.soldRatio}%`,
+          color: `${user?.value?.sold?.soldRatio} > 0 ? 'green' : 'red'`,
           font: {
             size: 15,
             weight: 'bold',

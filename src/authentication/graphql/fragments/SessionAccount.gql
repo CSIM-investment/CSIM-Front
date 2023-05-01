@@ -9,6 +9,7 @@ fragment UserSession on User {
     currentSold
     topInvestments {
       id
+      type
       quantity
       quoteCurrency {
         symbol
@@ -22,6 +23,7 @@ fragment UserSession on User {
       valueBaseCurrency
       valueQuoteCurrency
       creationDate
+      type
       quoteCurrency {
         symbol
         name

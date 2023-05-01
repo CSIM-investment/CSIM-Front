@@ -11,7 +11,7 @@ function AmountColor(data: number) {
 </script>
 
 <template>
-  <div class="mt-5 text-xl font-bold font-medium">
+  <div class="mt-5 text-xl text-secondary-lighter font-bold">
     {{ t("dashboard.titleFavorits") }}
   </div>
   <p class="text-grey-dark mb-5 text-md font-medium">

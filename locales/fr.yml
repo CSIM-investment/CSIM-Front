@@ -162,6 +162,8 @@ dashboard:
   favoritsAdd: Ajouter favoris
   title: Tableau de bord
   subtitle: Votre tableau de bord
+  titleLastInvests: Vos derniers investissements
+  subtitleLastInvests: Vos derniers investissements sont affichés ici
   titleFavorits: Vos favoris
   subtitleFavorits: Vos cryptomonnaies favorites sont affichées ici
 profile:

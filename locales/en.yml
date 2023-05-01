@@ -136,6 +136,8 @@ dashboard:
   title: Your dashboard
   subtitle: Your dashboard is displayed here
   titleFavorits: Your favorite
+  titleLastInvests: Your last investments
+  subtitleLastInvests: Your last investments are displayed here
   subtitleFavorits: Your favorite cryptocurrencies are displayed here
 error:
   404:

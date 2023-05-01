@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     Settings: typeof import('./profile/components/organisms/Settings.vue')['default']
     SidebarItem: typeof import('./investments/components/molecules/SidebarItem.vue')['default']
     Spinner: typeof import('./common/components/molecules/Spinner.vue')['default']
+    TableLastInvestissement: typeof import('./dashboard/components/molecules/tableLastInvestissement.vue')['default']
     TextInput: typeof import('./common/components/molecules/TextInput.vue')['default']
   }
 }

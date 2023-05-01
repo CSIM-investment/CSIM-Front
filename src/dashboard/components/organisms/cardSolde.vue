@@ -1,4 +1,5 @@
-<script lang="ts" setup>import { useSessionStore } from '~/authentication/stores/session';
+<script lang="ts" setup>
+import { useSessionStore } from '~/authentication/stores/session';
 
 const { user } = useSessionStore()
 const { t } = useI18n()
