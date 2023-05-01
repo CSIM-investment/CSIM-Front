@@ -40,19 +40,9 @@ export const useNavigationStore = createGlobalState(() => {
 
   const sidebarItems: NavItem[] = [
     {
-      label: 'sidebar.profile',
-      icon: faUser,
-      to: '/profile',
-    },
-    {
       label: 'sidebar.dashboard',
       icon: faChartPie,
       to: '/dashboard',
-    },
-    {
-      label: 'sidebar.favorites',
-      icon: faTicket,
-      to: '/favorites',
     },
     {
       label: 'sidebar.investments',
@@ -65,14 +55,9 @@ export const useNavigationStore = createGlobalState(() => {
       to: '/reports',
     },
     {
-      label: 'sidebar.wallet',
-      icon: faWallet,
-      to: '/wallet',
-    },
-    {
-      label: 'sidebar.settings',
-      icon: faCog,
-      to: '/settings',
+      label: 'sidebar.profile',
+      icon: faUser,
+      to: '/profile',
     },
   ]
 
