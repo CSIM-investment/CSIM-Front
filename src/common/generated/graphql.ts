@@ -324,7 +324,7 @@ export type GetArticlesQueryVariables = Exact<{
 
 export type GetArticlesQuery = { __typename?: 'Query', articles: Array<{ __typename?: 'Article', author?: string | null, description: string, title: string, url: string, publishedDate: any, source?: string | null, symbol?: string | null, picture?: string | null }> };
 
-export type UserSessionFragment = { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> };
+export type UserSessionFragment = { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, type: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, type: string, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> };
 
 export type ConfirmEmailMutationVariables = Exact<{
   emailCode: Scalars['Float'];
@@ -332,14 +332,14 @@ export type ConfirmEmailMutationVariables = Exact<{
 }>;
 
 
-export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmEmail: { __typename?: 'LoginResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } } };
+export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmEmail: { __typename?: 'LoginResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, type: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, type: string, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } } };
 
 export type LoginMutationVariables = Exact<{
   loginUserInput: LoginUserInput;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', refreshToken: string, accessToken: string, user: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', refreshToken: string, accessToken: string, user: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, type: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, type: string, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } } };
 
 export type RefreshTokensMutationVariables = Exact<{
   refreshToken: Scalars['String'];
@@ -358,7 +358,7 @@ export type RegisterMutation = { __typename?: 'Mutation', register: { __typename
 export type AccountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AccountQuery = { __typename?: 'Query', account: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
+export type AccountQuery = { __typename?: 'Query', account: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, type: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, type: string, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
 
 export type ToggleFavoriteCryptoMutationVariables = Exact<{
   input: ToggleFavoriteInput;
@@ -399,7 +399,7 @@ export type UpdateAccountMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: { __typename?: 'User', status: UserStatus, id: string, role: UserRoles, email: string, firstName: string, lastName: string, sold: { __typename?: 'UserSold', currentSold: number, soldRatio: number, lastSold: number, newSold: number, topInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, type: string, quantity: number, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, image: string, name: string } }>, lastInvestments: Array<{ __typename?: 'InvestmentEntity', id: string, quantity: number, valueBaseCurrency: number, valueQuoteCurrency: number, creationDate: any, type: string, quoteCurrency: { __typename?: 'CryptoCurrencyMarket', symbol: string, name: string, image: string } }> }, favoritesCrypto: Array<{ __typename?: 'CryptoCurrencyMarket', id: string, name: string, image: string, symbol: string, current_price: number, market_cap: number, price_change_percentage_24h: number }> } };
 
 export const UserSessionFragmentDoc = gql`
     fragment UserSession on User {
@@ -413,6 +413,7 @@ export const UserSessionFragmentDoc = gql`
     currentSold
     topInvestments {
       id
+      type
       quantity
       quoteCurrency {
         symbol
@@ -426,6 +427,7 @@ export const UserSessionFragmentDoc = gql`
       valueBaseCurrency
       valueQuoteCurrency
       creationDate
+      type
       quoteCurrency {
         symbol
         name
