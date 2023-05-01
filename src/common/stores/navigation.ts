@@ -27,9 +27,9 @@ export const useNavigationStore = createGlobalState(() => {
       icon: faMoneyBillTrendUp,
     },
     {
-      label: 'header.exchange',
-      to: '/exchange',
-      icon: faArrowRightArrowLeft,
+      label: 'header.dashboard',
+      to: '/dashboard',
+      icon: faChartPie,
     },
     {
       label: 'header.news',

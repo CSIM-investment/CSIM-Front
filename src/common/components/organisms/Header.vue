@@ -7,6 +7,14 @@ const { t } = useI18n()
 const { headerItems, mobileSidebarItems, isSidebarOpen } = useNavigationStore()
 
 const { user } = useSessionStore()
+
+const filteredLinks = computed(() => {
+  if (!user.value)
+    return headerItems.filter(item => item.label !== 'header.dashboard')
+
+  else
+    return headerItems
+})
 </script>
 
 <template>
@@ -16,14 +24,13 @@ const { user } = useSessionStore()
     </RouterLink>
     <div class="flex justify-center items-center p-2 md:mr-8">
       <div class="hidden md:flex mr-8">
-        <RouterLink
-          v-for="item in headerItems"
-          :key="item.label"
-          class="py-4 px-6 hover:text-secondary hover:font-medium"
-          :to="item.to"
-        >
-          {{ t(item.label) }}
-        </RouterLink>
+        <div v-for="item in filteredLinks" :key="item.label" class="py-4 px-6 hover:text-secondary hover:font-medium">
+          <RouterLink
+            :to="item.to"
+          >
+            {{ t(item.label) }}
+          </RouterLink>
+        </div>
       </div>
       <template v-if="user">
         <RouterLink class="flex items-center" to="/profile">

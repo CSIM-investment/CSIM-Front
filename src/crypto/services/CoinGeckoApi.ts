@@ -15,7 +15,6 @@ export namespace CoinGecko {
   export interface RangeParams {
     dataSize: number
     from: {
-      interval: number
       unit: Moment.unitOfTime.DurationConstructor
     }
   }
@@ -59,7 +58,6 @@ export namespace CoinGecko {
       const { data } = await this.client.get(`/coins/${cryptoName}/market_chart/range`, {
         params: {
           vs_currency: currency,
-          interval: 'daily',
           ...queryParams,
         },
       })
@@ -96,7 +94,6 @@ export namespace CoinGecko {
         params: {
           vs_currency: currency,
           days: 1,
-          interval: 'daily',
         },
       })
 

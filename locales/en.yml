@@ -19,7 +19,7 @@ index:
 header:
   market: Market
   news: News
-  exchange: Exchange
+  dashboard: Dashboard
   wallet: Wallet
   welcome: Welcome
   login: Login
