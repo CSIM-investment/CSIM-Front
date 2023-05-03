@@ -1,3 +1,5 @@
-type,transaction_date,from_value,from_currency,quantity,to_value,to_currency,fees_money
-buy,15/02/22 14:00,1,EUR,1,30,SOL,"0,02"
-sell,16/02/22 14:00,1,EUR,1,"30,05",SOL,"0,02"
+Date,Destination,Destination Amount,Destination Currency,Fee Amount,Fee Currency,Id,Origin,Origin Amount,Origin Currency,Status,Type
+Thu Sep 29 2022 20:33:10 GMT+0000,,0.006691505111644948,btc,,,eff55ef3-621f-4ada-b328-9aacd6b31b9,staking-reward,0.006691505111644948,eur,completed,in
+Thu Sep 29 2022 20:33:09 GMT+0000,,0.109374588573160675,eth,,,8bd2377c-7c38-4bb9-a30e-fd0agher919c,staking-reward,0.109374588573160675,eur,completed,in
+Thu Sep 29 2022 20:33:10 GMT+0000,,0.006691505111644948,btc,,,eff55ef3-621f-4ada-b328-9aacd6b31b9,staking-reward,0.006691505111644948,eur,completed,in
+Thu Sep 29 2022 20:33:09 GMT+0000,,0.109374588573160675,btc,,,8bd2377c-7c38-4bb9-a30e-fd0agher919c,staking-reward,0.109374588573160675,eur,completed,in

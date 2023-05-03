@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { useAccountInvestmentsQuery } from '~/common/generated/graphql'
+
 const { t } = useI18n()
+
+const { result: investmentsList, refetch: refetchInvestements } = useAccountInvestmentsQuery()
+
 const templateLink = ref<HTMLAnchorElement>()
+
 function onClickTemplateDownload() {
   templateLink.value?.click()
 }
@@ -14,9 +20,12 @@ function onClickTemplateDownload() {
     <h2 class="text-md text-grey-dark">
       {{ t('investments.investments.subtitle') }}
     </h2>
-    <InvestmentFilesDrop @template-download="onClickTemplateDownload" />
-    <a ref="templateLink" href="investment-template.csv" download />
-    <InvestmentList />
+    <InvestmentFilesDrop
+      @template-download="onClickTemplateDownload"
+      @files-imported="refetchInvestements"
+    />
+    <a ref="templateLink" href="/investment-template.csv" download />
+    <InvestmentList :list="investmentsList?.account?.investments ?? []" />
   </div>
 </template>
 

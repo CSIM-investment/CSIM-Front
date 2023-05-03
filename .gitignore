@@ -10,3 +10,8 @@ node_modules
 *.env*
 .graphqlconfig
 schema.graphql
+
+# cypress
+cypress/videos
+cypress/screenshots
+
