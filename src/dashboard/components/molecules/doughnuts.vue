@@ -7,7 +7,7 @@ const { user } = useSessionStore()
 
 onMounted(() => {
   chartData.value.datasets[0].data = [
-    user?.value?.sold?.newSold,
+    user?.value?.sold?.newSold ?? 0,
   ]
 })
 const plugins = [ChartjsDoughnutsLabel]
@@ -36,15 +36,15 @@ const lightOptions = ref({
           text: 'Total',
         },
         {
-          text: `${user?.value?.sold?.newSold} €`,
+          text: `${user?.value?.sold?.newSold.toFixed(2) ?? 0} €`,
           color: 'black',
           font: {
-            size: 18,
+            size: 15,
             weight: 'bold',
           },
         },
         {
-          text: `${user?.value?.sold?.soldRatio}%`,
+          text: `${user?.value?.sold?.soldRatio ?? 0}%`,
           color: `${user?.value?.sold?.soldRatio} > 0 ? 'green' : 'red'`,
           font: {
             size: 15,

@@ -18,16 +18,16 @@ fragment UserSession on User {
       }
     }
     lastInvestments {
-      id
-      quantity
-      valueBaseCurrency
-      valueQuoteCurrency
-      creationDate
       type
+      creationDate
+
+      valueQuoteCurrency
       quoteCurrency {
         symbol
-        name
-        image
+      }
+      valueBaseCurrency
+      baseCurrency {
+        symbol
       }
     }
     currentSold

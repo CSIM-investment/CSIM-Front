@@ -10,15 +10,15 @@ const { user } = useSessionStore()
     </h1>
     <div class="flex">
       <doughnuts class="max-h-32 w-1/3" />
-      <div v-if="user?.sold?.topInvestments && user?.sold?.topInvestments?.length > 0" class="flex w-2/3 justify-evenly flex-col">
+      <div v-if="user?.sold?.topInvestments && user?.sold?.topInvestments?.length > 0" class="flex w-1/3 justify-between flex-wrap">
         <div
           v-for="investment in user?.sold?.topInvestments"
-          :key="investment.id" class="flex justify-evenly items-center"
+          :key="investment.id" class=""
         >
           <div class="flex items-center">
             <span class="w-3 h-3 rounded-xl bg-primary" />
             <p class="text-grey-dark ml-2 text-md font-medium">
-              {{ investment.quoteCurrency.name }}
+              {{ investment?.quoteCurrency?.name }}
             </p>
           </div>
         </div>

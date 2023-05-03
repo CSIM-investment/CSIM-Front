@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useSessionStore } from '~/authentication/stores/session';
+import { useSessionStore } from '~/authentication/stores/session'
 
 const { user } = useSessionStore()
 const { t } = useI18n()
@@ -13,11 +13,11 @@ const { t } = useI18n()
     <div class="card-solde__content flex font-bold justify-between items-center mb-3">
       <div class="flex align-center items-center">
         <i class="pi pi-wallet pr-5 !text-3xl" />
-        <span class="!text-xl">{{ user?.sold?.newSold }} €</span>
+        <span class="!text-xl">{{ user?.sold?.newSold.toFixed(2) ?? 0 }} €</span>
       </div>
       <div class="card-solde__content__stat bg-green px-1">
         <i class="pi pi-check card-solde__content__stat__icon !text-sm" />
-        <span class="card-solde__content__stat__percentage !text-xs">{{ user?.sold?.soldRatio }}</span>
+        <span class="card-solde__content__stat__percentage !text-xs">{{ user?.sold?.soldRatio ?? 0 }}</span>
       </div>
     </div>
     <div class="card-solde__price flex mx-auto">
@@ -26,7 +26,7 @@ const { t } = useI18n()
           <i class="pi pi-angle-down !text-sm mr-2" />
           <span class="!text-md">{{ t("dashboard.cardSolde.lastSolde") }}</span>
         </div>
-        <span class="!text-md">{{ user?.sold?.lastSold }} € </span>
+        <span class="!text-md">{{ user?.sold?.lastSold ?? 0 }} € </span>
       </div>
     </div>
   </div>
