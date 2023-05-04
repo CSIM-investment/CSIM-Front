@@ -90,17 +90,5 @@ export namespace CoinGecko {
         to: moment().unix(),
       }
     }
-
-    async getCryptoPrice(cryptoName: string, currency: 'usd' | 'eur'): Promise<number> {
-      const { data } = await this.client.get(`/coins/${cryptoName}/market_chart`, {
-        params: {
-          vs_currency: currency,
-          days: 1,
-          interval: 'daily',
-        },
-      })
-
-      return data.prices[0][1]
-    }
   }
 }
