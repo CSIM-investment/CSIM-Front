@@ -161,3 +161,13 @@ profile:
     firstName: Prénom
     lastName: Nom
     update: Modifier
+error:
+  404:
+    title: Page non trouvée
+    subtitle: La page que vous recherchez n'existe pas
+    back: Retour à l'accueil
+  500:
+    title:
+      part1: Oups, une erreur est survenue,
+      part2: veuillez rechargez la page
+      part3: ou réessayer plus tard.
