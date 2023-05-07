@@ -88,7 +88,6 @@ export namespace CoinGecko {
         to: moment().unix(),
       }
     }
-
     async getCryptoPrice(cryptoName: string, currency: 'usd' | 'eur'): Promise<number> {
       const { data } = await this.client.get(`/coins/${cryptoName}/market_chart`, {
         params: {
