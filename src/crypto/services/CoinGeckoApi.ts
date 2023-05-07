@@ -15,7 +15,6 @@ export namespace CoinGecko {
   export interface RangeParams {
     dataSize: number
     from: {
-      interval: number
       unit: Moment.unitOfTime.DurationConstructor
     }
   }
@@ -59,7 +58,6 @@ export namespace CoinGecko {
       const { data } = await this.client.get(`/coins/${cryptoName}/market_chart/range`, {
         params: {
           vs_currency: currency,
-          interval: 'daily',
           ...queryParams,
         },
       })
@@ -89,6 +87,16 @@ export namespace CoinGecko {
         from: fromDate.subtract(rangeParams.from.interval, rangeParams.from.unit).unix(),
         to: moment().unix(),
       }
+    }
+    async getCryptoPrice(cryptoName: string, currency: 'usd' | 'eur'): Promise<number> {
+      const { data } = await this.client.get(`/coins/${cryptoName}/market_chart`, {
+        params: {
+          vs_currency: currency,
+          days: 1,
+        },
+      })
+
+      return data.prices[0][1]
     }
   }
 }

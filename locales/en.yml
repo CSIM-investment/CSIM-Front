@@ -19,7 +19,7 @@ index:
 header:
   market: Market
   news: News
-  exchange: Exchange
+  dashboard: Dashboard
   wallet: Wallet
   welcome: Welcome
   login: Login
@@ -126,6 +126,19 @@ sidebar:
   reports: Reports
   wallet: Wallet
   settings: Settings
+
+dashboard:
+  cardSolde:
+    title: Balance
+    subtitle: Your balance
+    lastSolde: Last balance
+  favoritsAdd: Add favorits
+  title: Your dashboard
+  subtitle: Your dashboard is displayed here
+  titleFavorits: Your favorite
+  titleLastInvests: Your last investments
+  subtitleLastInvests: Your last investments are displayed here
+  subtitleFavorits: Your favorite cryptocurrencies are displayed here
 error:
   404:
     title: Page not found

@@ -18,7 +18,7 @@ index:
 header:
   market: Marché
   news: Actualité
-  exchange: Echange
+  dashboard: Dashboard
   wallet: Portefeuille
   welcome: Bienvenue
   login: Se connecter
@@ -159,6 +159,18 @@ sidebar:
   reports: Rapports
   wallet: Portefeuille
   settings: Paramètres
+dashboard:
+  cardSolde:
+    title: Solde
+    subtitle: Votre solde
+    lastSolde: Dernier solde
+  favoritsAdd: Ajouter favoris
+  title: Tableau de bord
+  subtitle: Votre tableau de bord
+  titleLastInvests: Vos derniers investissements
+  subtitleLastInvests: Vos derniers investissements sont affichés ici
+  titleFavorits: Vos favoris
+  subtitleFavorits: Vos cryptomonnaies favorites sont affichées ici
 profile:
     title: Votre profil
     subtitle: Personnalisez votre profil

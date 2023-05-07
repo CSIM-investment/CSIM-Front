@@ -1,17 +1,61 @@
-fragment UserSession  on User {
-    status
-    id
-    role
-    email
-    firstName
-    lastName
-    favoritesCrypto {
-        id
-        name
-        image
+fragment UserSession on User {
+  status
+  id
+  role
+  email
+  firstName
+  lastName
+  sold {
+    currentSold
+    latestBigInvestments {
+       type
+       creationDate
+       valueQuoteCurrency
+        quoteCurrency {
+         symbol
+         image
+        }
+        valueBaseCurrency
+         baseCurrency {
+          symbol
+           image
+          }
+      }
+    topInvestments {
+      id
+      type
+      quantity
+      quoteCurrency {
         symbol
-        current_price
-        market_cap
-        price_change_percentage_24h
+        image
+        name
+      }
     }
+    lastInvestments {
+      type
+      creationDate
+
+      valueQuoteCurrency
+      quoteCurrency {
+        symbol
+      }
+      valueBaseCurrency
+      baseCurrency {
+        symbol
+      }
+    }
+    currentSold
+    soldRatio
+    lastSold
+    newSold
+  }
+  favoritesCrypto {
+    id
+    name
+    image
+    symbol
+    current_price
+    market_cap
+    price_change_percentage_24h
+  }
 }
