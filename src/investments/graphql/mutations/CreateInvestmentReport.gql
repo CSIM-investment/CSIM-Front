@@ -1,0 +1,9 @@
+mutation CreateInvestmentReport($options:InvestmentReportCreate!){
+    createInvestmentReport(options: $options){
+        fromDate,
+        id,
+        reportUri,
+        toDate,
+        mensualReport
+    }
+}

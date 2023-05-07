@@ -1,4 +1,4 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
+# This file was generated. Do not edit manually.
 
 schema {
   query: Query
@@ -18,32 +18,32 @@ type Article {
 }
 
 type CryptoCurrencyMarket {
-  ath: Float!
-  ath_change_percentage: Float!
-  ath_date: DateTime!
-  atl: Float!
-  atl_change_percentage: Float!
-  atl_date: DateTime!
-  circulating_supply: Float!
-  current_price: Float!
-  fully_diluted_valuation: Float
-  high_24h: Float!
-  id: ID!
-  image: String!
-  last_updated: DateTime!
-  low_24h: Float!
-  market_cap: Float!
-  market_cap_change_24h: Float!
-  market_cap_change_percentage_24h: Float!
-  market_cap_rank: Float!
-  max_supply: Float
-  name: String!
-  price_change_24h: Float!
-  price_change_percentage_24h: Float!
-  roi: String
-  symbol: String!
-  total_supply: Float
-  total_volume: Float!
+    ath: Float!
+    ath_change_percentage: Float!
+    ath_date: DateTime!
+    atl: Float!
+    atl_change_percentage: Float!
+    atl_date: DateTime!
+    circulating_supply: Float!
+    current_price: Float!
+    fully_diluted_valuation: Float
+    high_24h: Float!
+    id: ID!
+    image: String!
+    last_updated: DateTime!
+    low_24h: Float!
+    market_cap: Float!
+    market_cap_change_24h: Float!
+    market_cap_change_percentage_24h: Float!
+    market_cap_rank: Float!
+    max_supply: Float
+    name: String!
+    price_change_24h: Float!
+    price_change_percentage_24h: Float!
+    roi: String
+    symbol: String!
+    total_supply: Float
+    total_volume: Float!
 }
 
 type CryptoCurrencyMarketPaginatedResults {
@@ -52,16 +52,26 @@ type CryptoCurrencyMarketPaginatedResults {
 }
 
 type InvestmentEntity {
-  baseCurrency: CryptoCurrencyMarket
-  creationDate: DateTime!
-  id: ID!
-  origin: String!
-  quantity: Float!
-  quoteCurrency: CryptoCurrencyMarket
-  status: String!
-  type: String!
-  valueBaseCurrency: Float!
-  valueQuoteCurrency: Float!
+    baseCurrency: CryptoCurrencyMarket!
+    creationDate: DateTime!
+    dateOfInvestment: DateTime!
+    id: ID!
+    origin: String!
+    quantity: Float!
+    quoteCurrency: CryptoCurrencyMarket!
+    status: String!
+    type: String!
+    valueBaseCurrency: Float!
+    valueQuoteCurrency: Float!
+}
+
+type InvestmentsReportsEntity {
+    fromDate: DateTime!
+    id: ID!
+    mensualReport: Boolean!
+    reportUri: String!
+    toDate: DateTime!
+    user: User!
 }
 
 type LoginResponse {
@@ -71,35 +81,39 @@ type LoginResponse {
 }
 
 type Mutation {
-  confirmEmail(email: String!, emailCode: Float!): LoginResponse!
-  createCryptoMarket: String!
-  importInvestments(link: String!): [InvestmentEntity!]!
-  login(loginUserInput: LoginUserInput!): LoginResponse!
-  refreshTokens(refreshToken: String!): LoginResponse!
-  register(createUserInput: CreateUserInput!): User!
-  resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
-  sendRegisterConfirmation(email: String!): User!
-  sendResetPasswordCode(email: String!): String!
-  toggleFavoriteCrypto(input: ToggleFavoriteInput!): User!
-  updateAccount(updateUserInput: UpdateUserInput!): User!
-  updateArticles: String!
+    confirmEmail(email: String!, emailCode: Float!): LoginResponse!
+    createCryptoMarket: String!
+    createInvestmentReport(options: InvestmentReportCreate!): InvestmentsReportsEntity!
+    importInvestments(link: String!): [InvestmentEntity!]!
+    login(loginUserInput: LoginUserInput!): LoginResponse!
+    refreshTokens(refreshToken: String!): LoginResponse!
+    register(createUserInput: CreateUserInput!): User!
+    resetPassword(email: String!, emailCode: Float!, newPassword: String!): LoginResponse!
+    sendRegisterConfirmation(email: String!): User!
+    sendResetPasswordCode(email: String!): String!
+    toggleFavoriteCrypto(input: ToggleFavoriteInput!): User!
+    updateAccount(updateUserInput: UpdateUserInput!): User!
+    updateArticles: String!
 }
 
 type Query {
-  account: User!
-  articles(options: ArticlesInput!): [Article!]!
-  cryptos(options: CryptoSearchInput!): CryptoCurrencyMarketPaginatedResults!
+    account: User!
+    articles(options: ArticlesInput!): [Article!]!
+    cryptos(options: CryptoSearchInput!): CryptoCurrencyMarketPaginatedResults!
+    reports(options: InvestmentsReportsInput!): [InvestmentsReportsEntity!]!
+    sold: Float!
 }
 
 type User {
-  email: String!
-  favoritesCrypto: [CryptoCurrencyMarket!]!
-  firstName: String!
-  id: ID!
-  investments: [InvestmentEntity!]!
-  lastName: String!
-  role: UserRoles!
-  status: UserStatus!
+    email: String!
+    favoritesCrypto: [CryptoCurrencyMarket!]!
+    firstName: String!
+    id: ID!
+    investments: [InvestmentEntity!]!
+    investmentsReports: [InvestmentsReportsEntity!]!
+    lastName: String!
+    role: UserRoles!
+    status: UserStatus!
 }
 
 enum ArticleOrderBy {
@@ -203,6 +217,26 @@ input CryptoOrderInput {
 input CryptoSearchInput {
   filterBy: CryptoFilterInput = {}
   orderBy: CryptoOrderInput = {}
+}
+
+input InvestmentReportCreate {
+    fromDate: DateTime
+    toDate: DateTime
+}
+
+input InvestmentReportsOrderInput {
+    direction: OrderDirection
+    name: ArticleOrderBy
+}
+
+input InvestmentsReportsFilterInput {
+    pagination: PaginationInput
+    search: String
+}
+
+input InvestmentsReportsInput {
+    filterBy: InvestmentsReportsFilterInput = {}
+    orderBy: InvestmentReportsOrderInput = {}
 }
 
 input LoginUserInput {

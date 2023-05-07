@@ -1,36 +1,53 @@
 <script lang="ts" setup>
 import Calendar from 'primevue/calendar'
 import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons'
-import type { Report } from '~/interfaces/report.interface'
+import { computed } from 'vue'
+import { DataTableRowClickEvent } from 'primevue/datatable'
+import { format } from '~/support/format'
+import {
+  useCreateInvestmentReportMutation,
+  useGetReportsListQuery,
+} from '~/common/generated/graphql'
 
 const { t } = useI18n()
-const dateFilterRange = ref<Array<Date | null>>()
+const createRange = ref<Array<Date> | null>()
 const pdfPreview = ref<boolean>(false)
+const createModal = ref<boolean>(false)
 const pdfPreviewLink = ref<string>('')
-const reportsList = [
-  {
-    id: 1,
-    name: 'rapport-2022-10-06',
-    created_at: '2022-10-06',
-    pdfLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-    csvLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-  },
-  {
-    id: 2,
-    name: 'rapport-2022-11-07',
-    created_at: '2022-10-07',
-    pdfLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-    csvLink:
-      'https://www.ecam.fr/wp-content/uploads/sites/3/2016/06/Exemple-fichier-PDF-1.pdf',
-  },
-] as Report[]
+
+const { result, error, loading, refetch } = useGetReportsListQuery({
+  options: {},
+})
+
+const { mutate: createInvestmentReport, loading: generateLoading } = useCreateInvestmentReportMutation({})
+
+const reportsList = computed(() => {
+  return result?.value?.reports ?? []
+})
+
+const totalReports = computed(() => {
+  return result?.value?.reports.length ?? 0
+})
 
 const displayPDFPreview = (event: any): void => {
-  pdfPreviewLink.value = event.data.pdfLink
+  pdfPreviewLink.value = event.data.reportUri
   pdfPreview.value = true
+}
+
+const generateReport = async(): Promise<void> => {
+  try {
+    await createInvestmentReport({
+      options: {
+        fromDate: createRange.value?.[0],
+        toDate: createRange.value?.[1],
+      },
+    })
+    refetch()
+  }
+  catch (e) {
+    console.error(e)
+  }
+  createModal.value = false
 }
 </script>
 
@@ -41,21 +58,18 @@ const displayPDFPreview = (event: any): void => {
       :row-hover="true"
       :paginator="true"
       :rows="5"
+      :loading="!!loading"
+      :total-records="totalReports"
       :rows-per-page-options="[5, 10, 15]"
       responsive-layout="scroll"
       paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
       :row-style="'cursor: pointer'"
-      @row-click="displayPDFPreview"
+      @row-click="displayPDFPreview as DataTableRowClickEvent"
     >
       <template #header>
         <div class="flex flex-wrap">
-          <div class="m-2">
-            <Calendar
-              v-model="dateFilterRange"
-              :placeholder="t('investments.reports.dates')"
-              selection-mode="range"
-              :manual-input="false"
-            />
+          <div class="flex items-center">
+            <Button :label="t('investments.reports.generateReport')" icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
       </template>
@@ -71,19 +85,17 @@ const displayPDFPreview = (event: any): void => {
         :sortable="true"
       />
       <Column
-        field="created_at"
-        :header="t('investments.reports.created_at')"
+        field="fromDate"
+        :header="t('investments.reports.period')"
         :sortable="true"
-      />
-      <Column
-        field="fileLink"
-        :header="t('investments.reports.download')"
-        header-style="width: 13rem"
       >
         <template #body="{ data }">
-          <a :href="data.csvLink" target="_blank">
-            <Button icon="pi pi-download" />
-          </a>
+          {{
+            t('investments.reports.fromTo', {
+              from: format.date(new Date(data.fromDate)),
+              to: format.date(new Date(data.toDate))}
+            )
+          }}
         </template>
       </Column>
     </DataTable>
@@ -95,6 +107,33 @@ const displayPDFPreview = (event: any): void => {
       class="w-5/6 mx-auto bg-white h-full"
     >
       <iframe title="preview" :src="pdfPreviewLink" class="w-full h-[calc(100vh-13rem)]" />
+    </Dialog>
+    <Dialog
+      v-model:visible="createModal"
+      :header="t('investments.reports.selectPeriod')"
+      :modal="true"
+      :dismissable-mask="true"
+      class="mx-auto bg-white"
+    >
+      <div class="flex flex-col">
+        <div class="m-2">
+          <Calendar
+            v-model="createRange"
+            class="w-full"
+            :placeholder="t('investments.reports.period')"
+            selection-mode="range"
+            :manual-input="false"
+          />
+        </div>
+        <div class="m-2 flex justify-end">
+          <Button
+            :label="t('investments.reports.generate')"
+            icon="pi pi-pencil"
+            :loading="!!generateLoading"
+            @click="generateReport"
+          />
+        </div>
+      </div>
     </Dialog>
   </div>
 </template>
