@@ -4,6 +4,7 @@ query GetReportsList($options: InvestmentsReportsInput!){
         mensualReport,
         reportUri,
         toDate,
+        name,
         user{
             id,
             email,

@@ -30,7 +30,7 @@ const totalReports = computed(() => {
 })
 
 const displayPDFPreview = (event: any): void => {
-  pdfPreviewLink.value = event.data.pdfLink
+  pdfPreviewLink.value = event.data.reportUri
   pdfPreview.value = true
 }
 
