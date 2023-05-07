@@ -7,6 +7,20 @@ fragment UserSession on User {
   lastName
   sold {
     currentSold
+    latestBigInvestments {
+       type
+       creationDate
+       valueQuoteCurrency
+        quoteCurrency {
+         symbol
+         image
+        }
+        valueBaseCurrency
+         baseCurrency {
+          symbol
+           image
+          }
+      }
     topInvestments {
       id
       type
