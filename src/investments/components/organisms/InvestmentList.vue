@@ -1,21 +1,13 @@
 <script setup lang="ts">
+import moment from 'moment-with-locales-es6'
+import type { InvestmentEntity } from '~/common/generated/graphql'
+
 const { t } = useI18n()
 
-const data = [
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Vente', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-  { type: 'Achat', transactionAt: '2021-01-01', from: '1 EUR', to: '0.453 BTC', fees: '0.01' },
-]
+const props = defineProps<{
+  list: InvestmentEntity[]
+}>()
+
 </script>
 
 <template>
@@ -23,11 +15,29 @@ const data = [
     <span>{{ t('investments.investments.list.title1') }}</span>
     <span>{{ t('investments.investments.list.title2') }}</span>
   </div>
-  <DataTable :value="data" responsive-layout="scroll">
-    <Column field="type" :header="t('investments.investments.list.type')" />
-    <Column field="transactionAt" :header="t('investments.investments.list.transactionDate')" />
-    <Column field="from" :header="t('investments.investments.list.from')" />
-    <Column field="to" :header="t('investments.investments.list.to')" />
-    <Column field="fees" :header="t('investments.investments.list.fees')" />
+  <DataTable :value="list" responsive-layout="scroll" sort-field="creationDate" sort-order="-1">
+    <Column field="type" sortable :header="t('investments.investments.list.type')">
+      <template #body="slotProps">
+        {{ slotProps.data.type === "in"
+          ? t('investments.investments.list.purchase')
+          : t('investments.investments.list.sale')
+        }}
+      </template>
+    </Column>
+    <Column field="creationDate" :sortable="true" :header="t('investments.investments.list.transactionDate')">
+      <template #body="slotProps">
+        {{ moment(slotProps.data.creationDate).format('LL') }}
+      </template>
+    </Column>
+    <Column field="valueBaseCurrency" :header="t('investments.investments.list.from')">
+      <template #body="slotProps">
+        {{ slotProps.data.valueBaseCurrency.toFixed(5) }} {{ slotProps.data.baseCurrency.symbol }}
+      </template>
+    </Column>
+    <Column field="valueQuoteCurrency" :header="t('investments.investments.list.to')">
+      <template #body="slotProps">
+        {{ slotProps.data.valueQuoteCurrency.toFixed(5) }} {{ slotProps.data.quoteCurrency.symbol }}
+      </template>
+    </Column>
   </DataTable>
 </template>

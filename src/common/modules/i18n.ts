@@ -1,3 +1,4 @@
+import moment from 'moment-with-locales-es6'
 import { createI18n } from 'vue-i18n'
 import { type UserModule } from '~/types'
 
@@ -15,11 +16,15 @@ const messages = Object.fromEntries(
 )
 
 export const install: UserModule = ({ app }) => {
+  const lang = localStorage.getItem('lang') ?? 'en'
+
   const i18n = createI18n({
     legacy: false,
-    locale: localStorage.getItem('lang') ?? 'en',
+    locale: lang,
     messages,
   })
+
+  moment.locale(lang)
 
   app.use(i18n)
 }

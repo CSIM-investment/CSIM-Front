@@ -1,0 +1,5 @@
+mutation ImportInvestment($link: String!) {
+  importInvestments(link: $link) {
+    id
+  }
+}

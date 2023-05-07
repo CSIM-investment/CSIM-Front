@@ -151,10 +151,15 @@ export type CryptoSearchInput = {
 
 export type InvestmentEntity = {
   __typename?: 'InvestmentEntity';
-  baseCurrency: CryptoCurrencyMarket;
+  baseCurrency?: Maybe<CryptoCurrencyMarket>;
   creationDate: Scalars['DateTime'];
   dateOfInvestment: Scalars['DateTime'];
   id: Scalars['ID'];
+  origin: Scalars['String'];
+  quantity: Scalars['Float'];
+  quoteCurrency?: Maybe<CryptoCurrencyMarket>;
+  status: Scalars['String'];
+  type: Scalars['String'];
   origin: Scalars['String'];
   quantity: Scalars['Float'];
   quoteCurrency: CryptoCurrencyMarket;

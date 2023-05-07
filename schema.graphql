@@ -1,20 +1,20 @@
 # This file was generated. Do not edit manually.
 
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 type Article {
-    author: String
-    description: String!
-    id: ID!
-    picture: String
-    publishedDate: DateTime!
-    source: String
-    symbol: String
-    title: String!
-    url: String!
+  author: String
+  description: String!
+  id: ID!
+  picture: String
+  publishedDate: DateTime!
+  source: String
+  symbol: String
+  title: String!
+  url: String!
 }
 
 type CryptoCurrencyMarket {
@@ -47,8 +47,8 @@ type CryptoCurrencyMarket {
 }
 
 type CryptoCurrencyMarketPaginatedResults {
-    count: Float!
-    datas: [CryptoCurrencyMarket!]!
+  count: Float!
+  datas: [CryptoCurrencyMarket!]!
 }
 
 type InvestmentEntity {
@@ -75,9 +75,9 @@ type InvestmentsReportsEntity {
 }
 
 type LoginResponse {
-    accessToken: String!
-    refreshToken: String!
-    user: User!
+  accessToken: String!
+  refreshToken: String!
+  user: User!
 }
 
 type Mutation {
@@ -117,106 +117,106 @@ type User {
 }
 
 enum ArticleOrderBy {
-    publishedDate
+  publishedDate
 }
 
 enum CryptoOrderBy {
-    current_price
-    high_24h
-    low_24
-    market_cap
+  current_price
+  high_24h
+  low_24
+  market_cap
 }
 
 enum OrderDirection {
-    ASC
-    DESC
+  ASC
+  DESC
 }
 
 enum UserRoles {
-    admin
-    user
-    validator
-    visitor
+  admin
+  user
+  validator
+  visitor
 }
 
 enum UserStatus {
-    isActive
-    isPending
+  isActive
+  isPending
 }
 
 "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
 scalar DateTime
 
 input ArticleFilterInput {
-    pagination: PaginationInput
-    search: String
-    symbol: String
+  pagination: PaginationInput
+  search: String
+  symbol: String
 }
 
 input ArticleOrderInput {
-    direction: OrderDirection!
-    name: ArticleOrderBy!
+  direction: OrderDirection!
+  name: ArticleOrderBy!
 }
 
 input ArticlesInput {
-    filterBy: ArticleFilterInput = {}
-    orderBy: ArticleOrderInput = {}
+  filterBy: ArticleFilterInput = {}
+  orderBy: ArticleOrderInput = {}
 }
 
 input CreateUserInput {
-    email: String!
-    firstName: String!
-    lastName: String!
-    password: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
 }
 
 input CryptoFilterInput {
-    max_cap: Float
-    max_current_price: Float
-    min_cap: Float
-    min_current_price: Float
-    pagination: PaginationInput
-    search: CryptoMarketSearchInput
-    symbol: String
+  max_cap: Float
+  max_current_price: Float
+  min_cap: Float
+  min_current_price: Float
+  pagination: PaginationInput
+  search: CryptoMarketSearchInput
+  symbol: String
 }
 
 input CryptoMarketSearchInput {
-    ath: Float
-    ath_change_percentage: Float
-    ath_date: DateTime
-    atl: Float
-    atl_change_percentage: Float
-    atl_date: DateTime
-    circulating_supply: Float
-    current_price: Float
-    fully_diluted_valuation: Float
-    high_24h: Float
-    id: String
-    image: String
-    last_updated: DateTime
-    low_24h: Float
-    market_cap: Float
-    market_cap_change_24h: Float
-    market_cap_change_percentage_24h: Float
-    market_cap_rank: Float
-    max_supply: Float
-    name: String
-    price_change_24h: Float
-    price_change_percentage_24h: Float
-    roi: String
-    symbol: String
-    total_supply: Float
-    total_volume: Float
+  ath: Float
+  ath_change_percentage: Float
+  ath_date: DateTime
+  atl: Float
+  atl_change_percentage: Float
+  atl_date: DateTime
+  circulating_supply: Float
+  current_price: Float
+  fully_diluted_valuation: Float
+  high_24h: Float
+  id: String
+  image: String
+  last_updated: DateTime
+  low_24h: Float
+  market_cap: Float
+  market_cap_change_24h: Float
+  market_cap_change_percentage_24h: Float
+  market_cap_rank: Float
+  max_supply: Float
+  name: String
+  price_change_24h: Float
+  price_change_percentage_24h: Float
+  roi: String
+  symbol: String
+  total_supply: Float
+  total_volume: Float
 }
 
 input CryptoOrderInput {
-    direction: OrderDirection!
-    name: CryptoOrderBy!
+  direction: OrderDirection!
+  name: CryptoOrderBy!
 }
 
 input CryptoSearchInput {
-    filterBy: CryptoFilterInput = {}
-    orderBy: CryptoOrderInput = {}
+  filterBy: CryptoFilterInput = {}
+  orderBy: CryptoOrderInput = {}
 }
 
 input InvestmentReportCreate {
@@ -240,22 +240,22 @@ input InvestmentsReportsInput {
 }
 
 input LoginUserInput {
-    email: String!
-    password: String!
+  email: String!
+  password: String!
 }
 
 input PaginationInput {
-    end: Int!
-    start: Int!
+  end: Int!
+  start: Int!
 }
 
 input ToggleFavoriteInput {
-    cryptoId: String!
-    hadToFavorite: Boolean!
+  cryptoId: String!
+  hadToFavorite: Boolean!
 }
 
 input UpdateUserInput {
-    firstName: String
-    lastName: String
-    password: String
+  firstName: String
+  lastName: String
+  password: String
 }
