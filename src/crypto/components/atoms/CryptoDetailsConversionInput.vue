@@ -15,6 +15,7 @@ const emit = defineEmits<{
   <div class="w-full bg-grey-light rounded-xl h-12 px-4 flex items-center gap-2">
     <input
       class="w-3/4 font-bold h-full rounded-xl bg-grey-light text-grey-darkest focus:outline-none"
+      aria-label="input"
       :value="props.modelValue"
       type="number"
       @input="emit('update:modelValue', $event.target.value)"

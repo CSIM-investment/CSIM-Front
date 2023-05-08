@@ -20,7 +20,8 @@ const emit = defineEmits<{
   <div class="w-full">
     <label />
     <InputText
-      :class="['text-input', ...props.class.split(' ')]"
+        aria-label="Password"
+        :class="['text-input', ...props.class.split(' ')]"
       :placeholder="props.placeholder"
       :value="props.modelValue"
       type="text"

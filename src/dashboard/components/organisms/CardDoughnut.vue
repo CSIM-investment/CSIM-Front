@@ -19,10 +19,10 @@ const { user } = useSessionStore()
             <p class="text-grey-dark ml-2 text-md font-medium">
               {{ investment.valueBaseCurrency.toFixed(2) }}
             </p>
-            <img class="h-8" :src="investment.baseCurrency.image"/>
+            <img :alt="investment.baseCurrency.symbol" class="h-8" :src="investment.baseCurrency.image"/>
             <p class="text-grey-dark ml-2 text-md font-medium"> ==></p>
             <p class="text-grey-dark ml-2 text-md mr-2 font-medium">{{investment.valueQuoteCurrency.toFixed(2)}} </p>
-            <img class="h-6" :src="investment.quoteCurrency.image"/>
+            <img :alt="investment.quoteCurrency.symbol" class="h-6" :src="investment.quoteCurrency.image"/>
           </div>
         </div>
       </div>

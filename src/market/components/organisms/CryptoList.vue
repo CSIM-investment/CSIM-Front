@@ -394,7 +394,7 @@ const redirect = (event: any): void => {
 }
 
 .icon_list {
-  color: #40BF6A;
+  color: #1b5b2e;
 }
 
 .icon_list_minus {

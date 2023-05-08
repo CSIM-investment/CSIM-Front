@@ -93,12 +93,14 @@ async function filesSave(): Promise<void> {
       </FileInput>
       <Button
         v-if="filesToUpload.length"
+        aria-label="save"
         class="button button-small p-button-success button-icon-only"
         icon="pi pi-save"
         :loading="areFilesUploading"
         @click="filesSave"
       />
       <Button
+        aria-label="remove"
         v-if="filesToUpload.length"
         class="button button-small p-button-danger button-icon-only"
         icon="pi pi-trash"
@@ -106,6 +108,7 @@ async function filesSave(): Promise<void> {
       />
       <Button
         v-tooltip.top="t('investments.investments.drop.template-tooltip')"
+        aria-label="download"
         class="button button-small button-icon-only ml-auto"
         icon="pi pi-file-excel"
         @click="emit('templateDownload')"

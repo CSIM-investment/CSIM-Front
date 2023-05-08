@@ -7,7 +7,7 @@ const { label, stat } = defineProps<{
 
 <template>
   <div class="flex flex-col md:gap-1 gap-0.5">
-    <label class="text-grey-dark text-xs md:text-base">{{ label }}</label>
-    <span class="font-bold text-xs md:text-base">{{ stat }}</span>
+    <label class=" text-grey-darker font-bold text-xs md:text-base">{{ label }}</label>
+    <span class="font-bold text-primary text-xs md:text-base">{{ stat }}</span>
   </div>
 </template>

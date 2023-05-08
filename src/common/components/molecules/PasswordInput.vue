@@ -18,8 +18,8 @@ const emit = defineEmits<{
 
 <template>
   <div class="w-full">
-    <label />
     <Password
+      aria-label="Password"
       v-model="input"
       :placeholder="props.placeholder"
       :class="['password-input', ...props.class.split(' ')]"

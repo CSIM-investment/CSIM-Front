@@ -69,7 +69,9 @@ const generateReport = async(): Promise<void> => {
       <template #header>
         <div class="flex flex-wrap">
           <div class="flex items-center">
-            <Button :label="t('investments.reports.generateReport')" icon="pi pi-file" @click="createModal = true" />
+            <Button  :label="t('investments.reports.generateReport')"
+                     aria-labelledby="basic"
+                     icon="pi pi-file" @click="createModal = true" />
           </div>
         </div>
       </template>

@@ -56,9 +56,7 @@ const toggleFavoriteCrypto = async(hadToFavorite: boolean) => {
         </div>
       </div>
       <div class="flex gap-1 ml-auto lg:hidden">
-        <Button v-if="user" :icon="isFavorite ? 'pi pi-star-fill' : 'pi pi-star'" class="button button-icon-only button-small" @click="toggleFavoriteCrypto(!isFavorite)" />
-        <Button icon="pi pi-shopping-cart" class="button button-icon-only button-small" />
-        <Button icon="pi pi-dollar" class="button button-icon-only button-small" />
+        <Button aria-label="Aria Name" v-if="user" :icon="isFavorite ? 'pi pi-star-fill' : 'pi pi-star'" class="button button-icon-only button-small" @click="toggleFavoriteCrypto(!isFavorite)" />
       </div>
       <div />
     </div>
@@ -67,11 +65,6 @@ const toggleFavoriteCrypto = async(hadToFavorite: boolean) => {
       <CryptoDetailsStat :label="t('crypto.market_cap')" :stat="`$${crypto.market_cap}`" />
       <CryptoDetailsStat :label="t('crypto.high_24h')" :stat="`$${crypto.high_24h}`" />
       <CryptoDetailsStat :label="t('crypto.circulating_supply')" :stat="`${crypto.circulating_supply} ${crypto.symbol.toUpperCase()}`" />
-    </div>
-
-    <div class="gap-8 hidden lg:flex">
-      <Button class="button button-small" :label="t('crypto.sell')" />
-      <Button class="button button-secondary button-small" :label="t('crypto.buy')" />
     </div>
   </section>
 </template>
