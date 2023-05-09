@@ -13,7 +13,7 @@ const { t } = useI18n()
   <p class="text-grey-dark mb-5 text-md font-medium">
     {{ t("dashboard.subtitleLastInvests") }}
   </p>
-  <DataTable :value="user?.sold?.lastInvestments" responsive-layout="scroll" sort-field="creationDate" sort-order="-1">
+  <DataTable :value="user?.sold?.latestBigInvestments" responsive-layout="scroll" sort-field="creationDate" sort-order="-1">
     <Column field="type" sortable :header="t('investments.investments.list.type')">
       <template #body="slotProps">
         {{ slotProps.data.type === "in"
