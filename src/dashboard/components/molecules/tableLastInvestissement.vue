@@ -24,7 +24,7 @@ const { t } = useI18n()
     </Column>
     <Column field="creationDate" :sortable="true" :header="t('investments.investments.list.transactionDate')">
       <template #body="slotProps">
-        {{ moment(slotProps.data.creationDate).format('LL') }}
+        {{ moment(slotProps.data.dateOfInvestment).format('LL') }}
       </template>
     </Column>
     <Column field="valueBaseCurrency" :header="t('investments.investments.list.from')">

@@ -3,7 +3,7 @@ query AccountInvestments {
     investments {
       type
       creationDate
-
+      dateOfInvestment
       valueQuoteCurrency
       quoteCurrency {
         symbol

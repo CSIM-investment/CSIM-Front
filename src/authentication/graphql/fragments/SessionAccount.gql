@@ -10,6 +10,7 @@ fragment UserSession on User {
     latestBigInvestments {
        type
        creationDate
+       dateOfInvestment
        valueQuoteCurrency
         quoteCurrency {
          symbol
