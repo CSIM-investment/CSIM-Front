@@ -24,6 +24,7 @@ function onClickTemplateDownload() {
       @template-download="onClickTemplateDownload"
       @files-imported="refetchInvestements"
     />
+    <a ref="templateLink" href="/investment-template.csv" download />
     <InvestmentList :list="investmentsList?.account?.investments ?? []" />
   </div>
 </template>
