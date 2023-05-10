@@ -35,7 +35,7 @@ fragment UserSession on User {
     lastInvestments {
       type
       creationDate
-
+      dateOfInvestment
       valueQuoteCurrency
       quoteCurrency {
         symbol
